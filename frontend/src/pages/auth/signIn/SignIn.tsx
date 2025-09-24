@@ -1,9 +1,68 @@
+import { signInUser } from '../../../api/authApi';
+import { Button, Form, Input } from 'antd';
+import type { FormProps } from 'antd';
+import { useForm } from 'antd/es/form/Form';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../../routes/routhPath';
 
-export const SignIn = () => {
+type FieldType = {
+  email: string;
+  password: string;
+};
+
+export const SignIn: React.FC = () => {
+  const [form] = useForm();
+  const navigate = useNavigate();
+  const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
+    try {
+      const res = await signInUser(values);
+
+      navigate(ROUTES.HOME_PATH);
+
+      console.log(res);
+    } catch (error) {
+      if (error instanceof Error) console.log(error.message);
+    }
+  };
   return (
-    <div>
-      Sign In
-    </div>
-  )
-}
+    <Form
+      form={form}
+      name="basic"
+      labelCol={{ span: 8 }}
+      wrapperCol={{ span: 16 }}
+      style={{ maxWidth: 600 }}
+      initialValues={{ remember: true }}
+      onFinish={onFinish}
+      autoComplete="off"
+    >
+      <Form.Item<FieldType>
+        label="Email"
+        name="email"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your Email!',
+            type: 'email',
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
 
+      <Form.Item<FieldType>
+        label="Password"
+        name="password"
+        rules={[{ required: true, message: 'Please input your password!' }]}
+      >
+        <Input.Password />
+      </Form.Item>
+
+      <Form.Item label={null}>
+        <Button type="primary" htmlType="submit">
+          Sign In
+        </Button>
+      </Form.Item>
+    </Form>
+  );
+};
