@@ -5,6 +5,7 @@ import type { FormProps } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../../routes/routhPath';
 import { useForm } from 'antd/es/form/Form';
+import { useAppDispatch } from '../../../app/hooks';
 
 type FieldType = {
   email: string;
@@ -17,6 +18,7 @@ export const SignUp: React.FC = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const [form] = useForm();
+  const dispatch = useAppDispatch();
 
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     const { email, password, confirmPassword } = values;
@@ -30,7 +32,9 @@ export const SignUp: React.FC = () => {
     setError('');
 
     try {
-      await createUser({ email, password });
+      const res = await dispatch(createUser({ email, password }));
+
+      // console.log(res, 'res');
       navigate(ROUTES.HOME_PATH);
     } catch (error) {
       form.resetFields();

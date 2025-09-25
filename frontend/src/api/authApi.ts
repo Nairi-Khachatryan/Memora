@@ -1,3 +1,5 @@
+import { createAsyncThunk } from '@reduxjs/toolkit';
+
 type reqParams = {
   email: string;
   password: string;
@@ -12,21 +14,28 @@ type createUserResponce = {
   };
 };
 
-export const createUser = async ({ email, password }: reqParams) => {
-  const res = await fetch('http://localhost:5051/auth/signUp', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password }),
-  });
+export const createUser = createAsyncThunk(
+  'user/createUser',
+  async ({ email, password }: reqParams) => {
+    const res = await fetch('http://localhost:5051/auth/signUp', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
 
-  return (await res.json()) as createUserResponce;
-};
-export const signInUser = async ({ email, password }: reqParams) => {
-  const res = await fetch('http://localhost:5051/auth/signIn', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password }),
-  });
+    return (await res.json()) as createUserResponce;
+  }
+);
 
-  return (await res.json()) as createUserResponce;
-};
+export const signInUser = createAsyncThunk(
+  'user/signIn',
+  async ({ email, password }: reqParams) => {
+    const res = await fetch('http://localhost:5051/auth/signIn', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+
+    return (await res.json()) as createUserResponce;
+  }
+);

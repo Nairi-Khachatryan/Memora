@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { createUser, signInUser } from '../../api/authApi';
 
 interface UserState {
   email: string | null;
@@ -22,6 +23,14 @@ const userSlice = createSlice({
   reducers: {
     setUser: () => {},
     removeUser: () => {},
+  },
+  extraReducers: (builder) => {
+    builder.addCase(createUser.fulfilled, (state, action) => {
+      if (action.payload.data) {
+        state.email = action.payload.data.email;
+        state.id = action.payload.data.id;
+      }
+    });
   },
 });
 
