@@ -22,7 +22,7 @@ export const SignIn: React.FC = () => {
 
       navigate(ROUTES.HOME_PATH);
 
-      console.log(res);
+      console.log(res, 'res');
     } catch (error) {
       if (error instanceof Error) console.log(error.message);
     }

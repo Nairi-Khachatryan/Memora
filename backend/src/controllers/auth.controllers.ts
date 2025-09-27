@@ -57,9 +57,11 @@ export const signIn = async (req: Request, res: Response) => {
 
     return res.status(200).json({
       success: true,
-      id: candidate._id,
-      email: candidate.email,
       message: 'User logged in successfully',
+      data: {
+        id: candidate._id,
+        email: candidate.email,
+      },
     });
   } catch (error) {
     if (error instanceof Error) console.log(error.message);
