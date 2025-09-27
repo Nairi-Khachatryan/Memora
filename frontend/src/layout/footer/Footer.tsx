@@ -1,9 +1,8 @@
 
 export const Footer = () => {
   return (
-    <div>
-      Footer
-    </div>
-  )
-}
-
+    <footer>
+      <p>&copy; 2025 Memora. All rights reserved.</p>
+    </footer>
+  );
+};

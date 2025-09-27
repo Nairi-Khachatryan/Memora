@@ -28,6 +28,10 @@ export const SignIn: React.FC = () => {
   return (
     <>
       <div className={s.formContainer}>
+        <div>
+          <div>nairi.khachatryan357@gmail.com</div>
+          <div>qqqqqq</div>
+        </div>
         <Form
           form={form}
           name="basic"
