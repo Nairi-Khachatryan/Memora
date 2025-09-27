@@ -1,18 +1,32 @@
 .homeContainer {
   display: flex;
-  width: 100vw;
-  height: 90vh;
   flex-direction: column;
-}
-
-.tryContainer {
-  background-color: gold;
   width: 100vw;
-  height: 100vh
+  height: 100vh; /* full screen */
 }
 
 .homeHeader {
   display: flex;
   justify-content: center;
+  align-items: center;
   background-color: aqua;
+  height: 10vh; /* header takes 10% */
+}
+
+.tryContainer {
+  background-color: gold;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 20px;
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.avatarItem {
+  width: 110px;
+  height: 110px;
+  background-color: brown;
+  border-radius: 50%;
+  margin: auto; /* centers inside grid cell */
 }

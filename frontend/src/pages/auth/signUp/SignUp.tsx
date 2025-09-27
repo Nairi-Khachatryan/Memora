@@ -63,7 +63,7 @@ export const SignUp: React.FC = () => {
               },
             ]}
           >
-            <Input />
+            <Input className={s.input} />
           </Form.Item>
 
           <Form.Item<FieldType>
@@ -75,7 +75,7 @@ export const SignUp: React.FC = () => {
               { max: 16, message: 'Password must be at most 16 characters' },
             ]}
           >
-            <Input.Password />
+            <Input.Password className={s.input} />
           </Form.Item>
 
           <Form.Item<FieldType>
@@ -87,7 +87,7 @@ export const SignUp: React.FC = () => {
               { max: 16, message: 'Password must be at most 16 characters' },
             ]}
           >
-            <Input.Password />
+            <Input.Password className={s.input} />
           </Form.Item>
 
           {error && <p style={{ color: 'red' }}>{error}</p>}

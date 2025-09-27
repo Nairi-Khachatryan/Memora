@@ -7,6 +7,33 @@ export const Home = () => {
         <h1>Hire Will Be Your Family Try</h1>
       </div>
       <div className={s.tryContainer}>
+        <div className={s.avatarItem}>+</div>
+        <div className={s.avatarItem}>+</div>
+        <div className={s.avatarItem}>+</div>
+        <div className={s.avatarItem}>+</div>
+        <div className={s.avatarItem}>+</div>
+        <div className={s.avatarItem}>+</div>
+        <div className={s.avatarItem}>+</div>
+        <div className={s.avatarItem}>+</div>
+        <div className={s.avatarItem}>+</div>
+        <div className={s.avatarItem}>+</div>
+        <div className={s.avatarItem}>+</div>
+        <div className={s.avatarItem}>+</div>
+        <div className={s.avatarItem}>+</div>
+        <div className={s.avatarItem}>+</div>
+        <div className={s.avatarItem}>+</div>
+        <div className={s.avatarItem}>+</div>
+        <div className={s.avatarItem}>+</div>
+        <div className={s.avatarItem}>+</div>
+        <div className={s.avatarItem}>+</div>
+        <div className={s.avatarItem}>+</div>
+        <div className={s.avatarItem}>+</div>
+        <div className={s.avatarItem}>+</div>
+        <div className={s.avatarItem}>+</div>
+        <div className={s.avatarItem}>+</div>
+        <div className={s.avatarItem}>+</div>
+        <div className={s.avatarItem}>+</div>
+        <div className={s.avatarItem}>+</div>
       </div>
     </div>
   );

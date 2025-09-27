@@ -53,7 +53,7 @@ export const SignIn: React.FC = () => {
               },
             ]}
           >
-            <Input />
+            <Input className={s.input} />
           </Form.Item>
 
           <Form.Item<FieldType>
@@ -61,7 +61,7 @@ export const SignIn: React.FC = () => {
             name="password"
             rules={[{ required: true, message: 'Please input your password!' }]}
           >
-            <Input.Password />
+            <Input.Password className={s.input} />
           </Form.Item>
           <Form.Item>
             <Button onClick={() => navigate(ROUTES.SIGN_UP)} type="link">
