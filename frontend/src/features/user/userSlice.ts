@@ -25,12 +25,19 @@ const userSlice = createSlice({
     removeUser: () => {},
   },
   extraReducers: (builder) => {
-    builder.addCase(createUser.fulfilled, (state, action) => {
-      if (action.payload.data) {
-        state.email = action.payload.data.email;
-        state.id = action.payload.data.id;
-      }
-    });
+    builder
+      .addCase(createUser.fulfilled, (state, action) => {
+        if (action.payload.data) {
+          state.email = action.payload.data.email;
+          state.id = action.payload.data.id;
+        }
+      })
+      .addCase(signInUser.fulfilled, (state, action) => {
+        if (action.payload.data) {
+          state.email = action.payload.data.email;
+          state.id = action.payload.data.id;
+        }
+      });
   },
 });
 

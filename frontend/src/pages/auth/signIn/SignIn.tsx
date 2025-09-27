@@ -1,3 +1,4 @@
+import { useAppDispatch } from '../../../app/hooks';
 import { ROUTES } from '../../../routes/routhPath';
 import { signInUser } from '../../../api/authApi';
 import { useNavigate } from 'react-router-dom';
@@ -14,9 +15,10 @@ type FieldType = {
 export const SignIn: React.FC = () => {
   const [form] = useForm();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch()
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     try {
-      const res = await signInUser(values);
+      const res = await dispatch(signInUser(values));
 
       navigate(ROUTES.HOME_PATH);
 
