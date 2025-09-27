@@ -1,11 +1,12 @@
 import { Button, Checkbox, Form, Input } from 'antd';
+import { useAppDispatch } from '../../../app/hooks';
+import { ROUTES } from '../../../routes/routhPath';
 import { createUser } from '../../../api/authApi';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'antd/es/form/Form';
 import React, { useState } from 'react';
 import type { FormProps } from 'antd';
-import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '../../../routes/routhPath';
-import { useForm } from 'antd/es/form/Form';
-import { useAppDispatch } from '../../../app/hooks';
+import s from './SignUp.module.scss';
 
 type FieldType = {
   email: string;
@@ -28,13 +29,9 @@ export const SignUp: React.FC = () => {
       form.resetFields(['password', 'confirmPassword']);
       return;
     }
-
     setError('');
-
     try {
-      const res = await dispatch(createUser({ email, password }));
-
-      // console.log(res, 'res');
+      dispatch(createUser({ email, password }));
       navigate(ROUTES.HOME_PATH);
     } catch (error) {
       form.resetFields();
@@ -43,69 +40,79 @@ export const SignUp: React.FC = () => {
   };
 
   return (
-    <Form
-      form={form}
-      name="basic"
-      labelCol={{ span: 8 }}
-      wrapperCol={{ span: 16 }}
-      style={{ maxWidth: 600 }}
-      initialValues={{ remember: true }}
-      onFinish={onFinish}
-      autoComplete="off"
-    >
-      <Form.Item<FieldType>
-        label="Username"
-        name="email"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your Email!',
-            type: 'email',
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
+    <>
+      <div className={s.formContainer}>
+        <Form
+          form={form}
+          name="basic"
+          labelCol={{ span: 8 }}
+          wrapperCol={{ span: 16 }}
+          style={{ maxWidth: 600 }}
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+          autoComplete="off"
+        >
+          <Form.Item<FieldType>
+            label="Username"
+            name="email"
+            rules={[
+              {
+                required: true,
+                message: 'Please input your Email!',
+                type: 'email',
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
 
-      <Form.Item<FieldType>
-        label="Password"
-        name="password"
-        rules={[
-          { required: true, message: 'Please input your password!' },
-          { min: 6, message: 'Password must be at least 6 characters' },
-          { max: 16, message: 'Password must be at most 16 characters' },
-        ]}
-      >
-        <Input.Password />
-      </Form.Item>
+          <Form.Item<FieldType>
+            label="Password"
+            name="password"
+            rules={[
+              { required: true, message: 'Please input your password!' },
+              { min: 6, message: 'Password must be at least 6 characters' },
+              { max: 16, message: 'Password must be at most 16 characters' },
+            ]}
+          >
+            <Input.Password />
+          </Form.Item>
 
-      <Form.Item<FieldType>
-        label="ConfirmPassword"
-        name="confirmPassword"
-        rules={[
-          { required: true, message: 'Please input your password!' },
-          { min: 6, message: 'Password must be at least 6 characters' },
-          { max: 16, message: 'Password must be at most 16 characters' },
-        ]}
-      >
-        <Input.Password />
-      </Form.Item>
+          <Form.Item<FieldType>
+            label="ConfirmPassword"
+            name="confirmPassword"
+            rules={[
+              { required: true, message: 'Please input your password!' },
+              { min: 6, message: 'Password must be at least 6 characters' },
+              { max: 16, message: 'Password must be at most 16 characters' },
+            ]}
+          >
+            <Input.Password />
+          </Form.Item>
 
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+          {error && <p style={{ color: 'red' }}>{error}</p>}
 
-      <Form.Item<FieldType>
-        name="remember"
-        valuePropName="checked"
-        label={null}
-      >
-        <Checkbox>Remember me</Checkbox>
-      </Form.Item>
+          <Form.Item<FieldType>
+            name="remember"
+            valuePropName="checked"
+            label={null}
+          >
+            <Checkbox>Remember me</Checkbox>
+          </Form.Item>
 
-      <Form.Item label={null}>
-        <Button type="primary" htmlType="submit">
-          Sign Up
-        </Button>
-      </Form.Item>
-    </Form>
+          <Form.Item>
+            <Button onClick={() => navigate(ROUTES.SIGN_IN)} type="link">
+              Sign In
+            </Button>
+          </Form.Item>
+
+          <Form.Item label={null}>
+            <Button type="primary" htmlType="submit">
+              Sign Up
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
+    </>
   );
 };

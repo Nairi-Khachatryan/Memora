@@ -21,8 +21,9 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser: () => {},
-    removeUser: () => {},
+    removeUser: () => {
+      return { ...initialState };
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -41,5 +42,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUser, removeUser } = userSlice.actions;
+export const { removeUser } = userSlice.actions;
 export default userSlice.reducer;
