@@ -1,10 +1,12 @@
-import { Button } from 'antd';
-import { TextHoler } from '../../components/TextHoler';
-import s from './Profile.module.scss';
-import { IoCopyOutline } from 'react-icons/io5';
+import { ProfileItem } from '../../components/ProfileItem';
+import { useAppSelector } from '../../app/hooks';
 import { IoCopy } from 'react-icons/io5';
+import s from './Profile.module.scss';
+import { Button } from 'antd';
 
 export const Profile = () => {
+  const { id, email } = useAppSelector((state) => state.user);
+
   return (
     <div className={s.profileContainer}>
       <div className={s.profileInfoSection}>
@@ -12,26 +14,11 @@ export const Profile = () => {
           <span>
             <div className={s.img}>img</div>
           </span>
-          <span className={s.profileItem}>
-            <TextHoler text="firstName" />
-            <IoCopyOutline />
-          </span>
-          <span className={s.profileItem}>
-            <TextHoler text="lastName" />
-            <IoCopyOutline />
-          </span>
-          <span className={s.profileItem}>
-            <TextHoler text="Email" />
-            <IoCopyOutline />
-          </span>
-          <span className={s.profileItem}>
-            <TextHoler text="phone" />
-            <IoCopyOutline />
-          </span>
-          <span className={s.profileItem}>
-            <TextHoler text="ID.  " />
-            <IoCopyOutline />
-          </span>
+          <ProfileItem className={s.profileItem} text="name" />
+          <ProfileItem className={s.profileItem} text="surname" />
+          <ProfileItem className={s.profileItem} text="phone 055107115" />
+          <ProfileItem className={s.profileItem} text={`id ${id}`} />
+          <ProfileItem className={s.profileItem} text={`email ${email}`} />
         </div>
         <div className={s.settngBlock}>
           <Button>Setting</Button>
