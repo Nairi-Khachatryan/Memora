@@ -5,10 +5,26 @@ import { useNavigate } from 'react-router-dom';
 // import { IoCopy } from 'react-icons/io5';
 import s from './Profile.module.scss';
 import { Button } from 'antd';
-
+import { useQuery } from '@tanstack/react-query';
+import { getBlock } from '../../api/getBlock';
 export const Profile = () => {
   const { id, email } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
+
+  type BlockType = {
+    _id: string;
+    lable: string;
+    text: string;
+    ownerId: string;
+  };
+
+  // ID '68d79ae27be1f8e711ebf04c'
+
+  const { data, error, isSuccess } = useQuery<BlockType[]>({
+    queryKey: ['block', id],
+    queryFn: () => getBlock(id as string),
+    enabled: !!id,
+  });
 
   return (
     <div className={s.profileContainer}>
@@ -31,7 +47,20 @@ export const Profile = () => {
         </div>
       </div>
       <div className={s.blocks}>
-        <Button onClick={() => navigate(ROUTES.CREATE_BLOCK)}>+ Add block</Button>
+        {data
+          ? data.map((block) => (
+              <Button
+                onClick={() =>
+                  navigate(ROUTES.DETAIL_INFO, { state: { block } })
+                }
+              >
+                {block.lable}
+              </Button>
+            ))
+          : 'loading...'}
+        <Button onClick={() => navigate(ROUTES.CREATE_BLOCK)}>
+          + Add block
+        </Button>
       </div>
     </div>
   );

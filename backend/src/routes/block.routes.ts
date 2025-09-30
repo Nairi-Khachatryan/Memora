@@ -1,6 +1,7 @@
 import express from 'express';
-import { createBlock } from '../controllers/block.controllers.ts';
+import { createBlock, getBlock } from '../controllers/block.controllers.ts';
 
 export const blockRouter = express.Router();
 
 blockRouter.post('/createBlock', createBlock);
+blockRouter.get('/getBlock/:id', getBlock)

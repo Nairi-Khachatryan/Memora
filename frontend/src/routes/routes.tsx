@@ -9,6 +9,7 @@ import { Home } from '../pages/home/Home';
 import { ROUTES } from './routhPath';
 import { EditProfile } from '../pages/editProfile/EditProfile';
 import { CreateBlock } from '../pages/createBlock/CreateBlock';
+import { BlockDetailInfo } from '../pages/blockDetailInfo/BlockDetailInfo';
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ export const router = createBrowserRouter([
           {
             path: ROUTES.CREATE_BLOCK,
             element: <CreateBlock />,
+          },
+          {
+            path: ROUTES.DETAIL_INFO,
+            element: <BlockDetailInfo />,
           },
         ],
       },

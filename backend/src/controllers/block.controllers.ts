@@ -22,3 +22,31 @@ export const createBlock = async (req: Request, res: Response) => {
     }
   }
 };
+
+export const getBlock = async (req: Request, res: Response) => {
+  try {
+
+    const blocks = await Block.find({ ownerId: req.params.id });
+
+    if (!blocks || blocks.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'No blocks found for this owner',
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: blocks, 
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+      res.status(500).json({
+        success: false,
+        message: 'Server error while fetching blocks',
+      });
+    }
+  }
+};
+

@@ -5,5 +5,6 @@ export const ROUTES = {
   PROFILE: '/profile',
   SETTINGS: '/settings',
   EDIT_PROFILE: '/edit-profile',
-  CREATE_BLOCK: '/create-block'
+  CREATE_BLOCK: '/create-block',
+  DETAIL_INFO: '/detail-info',
 } as const;
