@@ -53,7 +53,7 @@ export const SignUp: React.FC = () => {
           autoComplete="off"
         >
           <Form.Item<FieldType>
-            label="Username"
+            label="Email"
             name="email"
             rules={[
               {

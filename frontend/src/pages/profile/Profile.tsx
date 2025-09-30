@@ -1,11 +1,14 @@
 import { ProfileItem } from '../../components/ProfileItem';
 import { useAppSelector } from '../../app/hooks';
-import { IoCopy } from 'react-icons/io5';
+import { ROUTES } from '../../routes/routhPath';
+import { useNavigate } from 'react-router-dom';
+// import { IoCopy } from 'react-icons/io5';
 import s from './Profile.module.scss';
 import { Button } from 'antd';
 
 export const Profile = () => {
   const { id, email } = useAppSelector((state) => state.user);
+  const navigate = useNavigate();
 
   return (
     <div className={s.profileContainer}>
@@ -21,12 +24,14 @@ export const Profile = () => {
           <ProfileItem className={s.profileItem} text={`email ${email}`} />
         </div>
         <div className={s.settngBlock}>
-          <Button>Setting</Button>
-          <Button>Edit Profile</Button>
+          <Button onClick={() => navigate(ROUTES.SETTINGS)}>Setting</Button>
+          <Button onClick={() => navigate(ROUTES.EDIT_PROFILE)}>
+            Edit Profile
+          </Button>
         </div>
       </div>
       <div className={s.blocks}>
-        <Button>+ Add block</Button>
+        <Button onClick={() => navigate(ROUTES.CREATE_BLOCK)}>+ Add block</Button>
       </div>
     </div>
   );

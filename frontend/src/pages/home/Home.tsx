@@ -31,7 +31,7 @@ export const Home = () => {
     '+',
   ];
 
-  console.log(syrcleArray.length);
+  // console.log(syrcleArray.length);
 
   return (
     <div className={s.homeContainer}>
