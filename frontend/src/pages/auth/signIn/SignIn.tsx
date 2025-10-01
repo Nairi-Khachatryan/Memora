@@ -2,7 +2,7 @@ import { useAppDispatch } from '../../../app/hooks';
 import { ROUTES } from '../../../routes/routhPath';
 import { useToast } from '../../../hooks/useToast';
 import { signInUser } from '../../../api/authApi';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'antd/es/form/Form';
 import { Button, Form, Input } from 'antd';
 import type { FormProps } from 'antd';
@@ -32,10 +32,10 @@ export const SignIn: React.FC = () => {
   return (
     <>
       <div className={s.formContainer}>
-        <div>
+        {/* <div>
           <div>nairi.khachatryan357@gmail.com</div>
           <div>qqqqqq</div>
-        </div>
+        </div> */}
         <Form
           form={form}
           name="basic"
@@ -67,14 +67,16 @@ export const SignIn: React.FC = () => {
           >
             <Input.Password className={s.input} />
           </Form.Item>
-          <Form.Item>
-            <Button onClick={() => navigate(ROUTES.SIGN_UP)} type="link">
-              Sign Up
-            </Button>
-          </Form.Item>
+
+          <div className={s.linkNavigate}>
+            <h1>New to Memora?</h1>
+            <Link className={s.myLink} to={ROUTES.SIGN_UP}>
+              Sign In
+            </Link>
+          </div>
 
           <Form.Item label={null}>
-            <Button type="primary" htmlType="submit">
+            <Button className={s.submitBtn} type="primary" htmlType="submit">
               Sign In
             </Button>
           </Form.Item>

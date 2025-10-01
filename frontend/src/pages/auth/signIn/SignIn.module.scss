@@ -7,6 +7,33 @@
   background-color: white;
 }
 
+.linkNavigate {
+  color: black;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  flex-direction: row;
+  margin-left: 110px;
+  font-size: 0.6rem;
+  padding: 20px;
+  font-family: 'Courier New';
+}
+
+.myLink {
+  color: blue;
+  font-size: 1.5rem;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.submitBtn {
+  margin-left: 89px;
+}
+
 .input {
   width: 300px;
 }

@@ -7,6 +7,41 @@
   background-color: white;
 }
 
+._form_1ljcw_1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 500px;
+}
+
+.linkNavigate {
+  font-size: 0.7rem;
+  color: black;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  margin-left: 82px;
+  font-family: 'Courier New';
+}
+
+.myLink {
+  color: blue;
+  font-size: 1.2rem;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.submitBtn {
+  margin-left: 80px;
+}
+
 .input {
   width: 300px;
 }

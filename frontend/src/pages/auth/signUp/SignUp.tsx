@@ -3,7 +3,7 @@ import { useAppDispatch } from '../../../app/hooks';
 import { ROUTES } from '../../../routes/routhPath';
 import { useToast } from '../../../hooks/useToast';
 import { createUser } from '../../../api/authApi';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'antd/es/form/Form';
 import React, { useState } from 'react';
 import type { FormProps } from 'antd';
@@ -48,79 +48,79 @@ export const SignUp: React.FC = () => {
   };
 
   return (
-    <>
-      <div className={s.formContainer}>
-        <Form
-          form={form}
-          name="basic"
-          labelCol={{ span: 8 }}
-          wrapperCol={{ span: 16 }}
-          style={{ maxWidth: 600 }}
-          initialValues={{ remember: true }}
-          onFinish={onFinish}
-          autoComplete="off"
+    <div className={s.formContainer}>
+      <Form
+        className={s.form}
+        form={form}
+        name="basic"
+        labelCol={{ span: 8 }}
+        wrapperCol={{ span: 16 }}
+        style={{ maxWidth: 600 }}
+        initialValues={{ remember: true }}
+        onFinish={onFinish}
+        autoComplete="off"
+      >
+        <Form.Item<FieldType>
+          label="Email"
+          name="email"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your Email!',
+              type: 'email',
+            },
+          ]}
         >
-          <Form.Item<FieldType>
-            label="Email"
-            name="email"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your Email!',
-                type: 'email',
-              },
-            ]}
-          >
-            <Input className={s.input} />
-          </Form.Item>
+          <Input className={s.input} />
+        </Form.Item>
 
-          <Form.Item<FieldType>
-            label="Password"
-            name="password"
-            rules={[
-              { required: true, message: 'Please input your password!' },
-              { min: 6, message: 'Password must be at least 6 characters' },
-              { max: 16, message: 'Password must be at most 16 characters' },
-            ]}
-          >
-            <Input.Password className={s.input} />
-          </Form.Item>
+        <Form.Item<FieldType>
+          label="Password"
+          name="password"
+          rules={[
+            { required: true, message: 'Please input your password!' },
+            { min: 6, message: 'Password must be at least 6 characters' },
+            { max: 16, message: 'Password must be at most 16 characters' },
+          ]}
+        >
+          <Input.Password className={s.input} />
+        </Form.Item>
 
-          <Form.Item<FieldType>
-            label="ConfirmPassword"
-            name="confirmPassword"
-            rules={[
-              { required: true, message: 'Please input your password!' },
-              { min: 6, message: 'Password must be at least 6 characters' },
-              { max: 16, message: 'Password must be at most 16 characters' },
-            ]}
-          >
-            <Input.Password className={s.input} />
-          </Form.Item>
+        <Form.Item<FieldType>
+          label="ConfirmPassword"
+          name="confirmPassword"
+          rules={[
+            { required: true, message: 'Please input your password!' },
+            { min: 6, message: 'Password must be at least 6 characters' },
+            { max: 16, message: 'Password must be at most 16 characters' },
+          ]}
+        >
+          <Input.Password className={s.input} />
+        </Form.Item>
 
-          {error && <p style={{ color: 'red' }}>{error}</p>}
+        {error && <p style={{ color: 'red' }}>{error}</p>}
 
-          <Form.Item<FieldType>
-            name="remember"
-            valuePropName="checked"
-            label={null}
-          >
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
+        <Form.Item<FieldType>
+          name="remember"
+          valuePropName="checked"
+          label={null}
+        >
+          <Checkbox>Remember me</Checkbox>
+        </Form.Item>
 
-          <Form.Item>
-            <Button onClick={() => navigate(ROUTES.SIGN_IN)} type="link">
-              Sign In
-            </Button>
-          </Form.Item>
+        <div className={s.linkNavigate}>
+          <h1> Already have an account?</h1>
+          <Link className={s.myLink} to={ROUTES.SIGN_IN}>
+            Sign In
+          </Link>
+        </div>
 
-          <Form.Item label={null}>
-            <Button type="primary" htmlType="submit">
-              Sign Up
-            </Button>
-          </Form.Item>
-        </Form>
-      </div>
-    </>
+        <Form.Item label={null}>
+          <Button className={s.submitBtn} type="primary" htmlType="submit">
+            Sign Up
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
   );
 };
