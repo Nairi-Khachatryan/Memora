@@ -24,12 +24,22 @@ export const Header = () => {
       <div>
         {isAuth ? (
           <>
-            <Button onClick={() => navigate(ROUTES.PROFILE)}>Profile</Button>
+            <Button
+              style={{ marginRight: 9 }}
+              onClick={() => navigate(ROUTES.PROFILE)}
+            >
+              Profile
+            </Button>
             <Button onClick={() => dispatch(removeUser())}>Log Out</Button>
           </>
         ) : (
           <>
-            <Button onClick={() => navigate(ROUTES.SIGN_IN)}>Sign In</Button>
+            <Button
+              style={{ marginRight: 9 }}
+              onClick={() => navigate(ROUTES.SIGN_IN)}
+            >
+              Sign In
+            </Button>
             <Button onClick={() => navigate(ROUTES.SIGN_UP)}>Sign Up</Button>
           </>
         )}

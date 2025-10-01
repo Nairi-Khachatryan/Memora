@@ -42,7 +42,7 @@ export const Profile = () => {
 
   return (
     <div className={s.profileContainer}>
-      <Card style={{ borderRadius: 0 }} className={s.profileCard}>
+      <Card style={{ borderRadius: 0, border: 'none' }} className={s.profileCard}>
         <Space align="center" direction="vertical" style={{ width: '100%' }}>
           <Avatar size={96} icon={<UserOutlined />} />
           <Title level={3}>User Profile</Title>
