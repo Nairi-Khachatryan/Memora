@@ -3,18 +3,18 @@ import { createUser, signInUser } from '../../api/authApi';
 
 interface UserState {
   email: string | null;
-  token: string | null;
   id: string | null;
   name: string | null;
   surname: string | null;
+  phone: string | null;
 }
 
 const initialState: UserState = {
   email: null,
-  token: null,
   id: null,
   name: null,
   surname: null,
+  phone: null,
 };
 
 const userSlice = createSlice({

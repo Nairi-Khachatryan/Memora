@@ -1,4 +1,9 @@
-// import { ProfileItem } from '../../components/ProfileItem';
+import { useAppSelector } from '../../app/hooks';
+import { useQuery } from '@tanstack/react-query';
+import { ROUTES } from '../../routes/routhPath';
+import { getBlock } from '../../api/getBlock';
+import { useNavigate } from 'react-router-dom';
+import s from './Profile.module.scss';
 import {
   UserOutlined,
   SettingOutlined,
@@ -14,17 +19,13 @@ import {
   Divider,
   Typography,
 } from 'antd';
-import { useQuery } from '@tanstack/react-query';
-import { useAppSelector } from '../../app/hooks';
-import { ROUTES } from '../../routes/routhPath';
-import { useNavigate } from 'react-router-dom';
-import { getBlock } from '../../api/getBlock';
-import s from './Profile.module.scss';
 
 const { Title } = Typography;
 
 export const Profile = () => {
-  const { id, email } = useAppSelector((state) => state.user);
+  const { id, email, name, surname, phone } = useAppSelector(
+    (state) => state.user
+  );
   const navigate = useNavigate();
 
   type BlockType = {
@@ -34,26 +35,41 @@ export const Profile = () => {
     ownerId: string;
   };
 
+  type UserType = {
+    name: string;
+    surname: string;
+    phone: string;
+    id: string;
+    email: string;
+  };
+
   const { data = [], isLoading } = useQuery<BlockType[]>({
     queryKey: ['block', id],
     queryFn: () => getBlock(id as string),
     enabled: !!id,
   });
 
+  const { data: user, isLoading: userLoading } = useQuery<UserType>({
+    queryKey: ['user', id],
+    queryFn: () => getUser(id),
+    enabled: !!id,
+  });
+
   return (
     <div className={s.profileContainer}>
-      <Card style={{ borderRadius: 0, border: 'none' }} className={s.profileCard}>
+      <Card
+        style={{ borderRadius: 0, border: 'none' }}
+        className={s.profileCard}
+      >
         <Space align="center" direction="vertical" style={{ width: '100%' }}>
           <Avatar size={96} icon={<UserOutlined />} />
           <Title level={3}>User Profile</Title>
         </Space>
-
         <Divider />
-
         <Descriptions column={1} bordered size="middle">
-          <Descriptions.Item label="Name">Name</Descriptions.Item>
-          <Descriptions.Item label="Surname">Surname</Descriptions.Item>
-          <Descriptions.Item label="Phone">055107115</Descriptions.Item>
+          <Descriptions.Item label="Name">{name}</Descriptions.Item>
+          <Descriptions.Item label="Surname">{surname}</Descriptions.Item>
+          <Descriptions.Item label="Phone">{phone}</Descriptions.Item>
           <Descriptions.Item label="User ID">{id}</Descriptions.Item>
           <Descriptions.Item label="Email">{email}</Descriptions.Item>
         </Descriptions>

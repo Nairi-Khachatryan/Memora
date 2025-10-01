@@ -16,7 +16,12 @@ export const signUp = async (req: Request, res: Response) => {
 
   try {
     const passwordHash = await bcrypt.hash(password, 10);
-    const user = new User({ email, passwordHash });
+    const user = new User({
+      email,
+      passwordHash,
+      name: 'name',
+      surname: 'surname',
+    });
     await user.save();
 
     res.status(201).json({
@@ -25,6 +30,7 @@ export const signUp = async (req: Request, res: Response) => {
       data: {
         email: user.email,
         id: user._id,
+        
       },
     });
   } catch (error) {

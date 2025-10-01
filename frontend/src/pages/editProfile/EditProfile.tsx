@@ -1,17 +1,39 @@
 import { Card, Form, Input, Button, message } from 'antd';
+import { updateUserInfo } from '../../api/updateUserInfo';
 import { useAppSelector } from '../../app/hooks';
 import { useNavigate } from 'react-router-dom';
 import s from './Edit.module.scss';
 
-export const EditProfile = () => {
-  const { email } = useAppSelector((state) => state.user);
-  const navigate = useNavigate();
+function cleanValues(values: valuesProp) {
+  return Object.fromEntries(
+    Object.entries(values).filter((_, v) => v !== undefined)
+  );
+}
 
+interface valuesProp {
+  name?: string;
+  surname?: string;
+  phone?: string;
+}
+
+export const EditProfile = () => {
+  const userId = useAppSelector((state) => state.user.id);
+  const navigate = useNavigate();
   const [form] = Form.useForm();
 
-  const onFinish = (values) => {
-    console.log('Updated info:', values);
-    message.success('Профиль обновлён!');
+  const onFinish = async (values: valuesProp) => {
+    if (!userId) {
+      message.error('User ID is not defined!');
+      return;
+    }
+
+    const res = await updateUserInfo(cleanValues(values), userId);
+
+    if (!res.success) {
+      message.error('Error Updating User Profile!');
+    }
+
+    message.success('Profile Updated Successfuly!');
     navigate(-1);
   };
 
@@ -26,41 +48,29 @@ export const EditProfile = () => {
           margin: '0 auto',
         }}
       >
-        <Form
-          form={form}
-          layout="vertical"
-          initialValues={{
-            name: 'Name',
-            surname: 'Surname',
-            phone: '055107115',
-            email: email,
-          }}
-          onFinish={onFinish}
-        >
+        <Form form={form} layout="vertical" onFinish={onFinish}>
           <Form.Item
-            label="Имя"
+            label="Name"
             name="name"
-            rules={[{ required: true, message: 'Please Enter Your Name' }]}
+            rules={[{ message: 'Please Enter Your Name' }]}
           >
             <Input placeholder="Enter name" />
           </Form.Item>
 
           <Form.Item
-            label="Фамилия"
+            label="Surname"
             name="surname"
-            rules={[{ required: true, message: 'Пожалуйста, введите фамилию' }]}
+            rules={[{ message: 'Please enter your surname' }]}
           >
-            <Input placeholder="Введите фамилию" />
+            <Input placeholder="Enter Surname" />
           </Form.Item>
 
           <Form.Item
-            label="Телефон"
+            label="Phone"
             name="phone"
-            rules={[
-              { required: true, message: 'Пожалуйста, введите номер телефона' },
-            ]}
+            rules={[{ message: 'Please enter your phone' }]}
           >
-            <Input placeholder="Введите номер телефона" />
+            <Input placeholder="Enter phone" />
           </Form.Item>
 
           <Form.Item>
