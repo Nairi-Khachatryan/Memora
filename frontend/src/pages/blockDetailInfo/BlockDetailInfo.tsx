@@ -7,25 +7,28 @@ import { useState } from 'react';
 export const BlockDetailInfo = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [inputValue, setInputValue] = useState(location.state.block.text);
+  const [updatedValue, setUpdatedValue] = useState(location.state.block.text);
   const [loading, setLoading] = useState(false);
-
   const header = location.state.block.lable;
+  const inputValue = location.state.block.text;
   const blockId = location.state.block._id;
+
+  console.log(header);
 
   const handleUpdate = async () => {
     setLoading(true);
     try {
-      const data = await updateBlock(blockId, { text: inputValue });
+      if (updatedValue === inputValue) {
+        return message.success('Nothing to Update');
+      }
 
-      console.log(data);
+      const data = await updateBlock(blockId, updatedValue);
+      if (!data.success) {
+        message.error(data.message || 'Update failed');
+        return;
+      }
 
-      // if (!data.success) {
-      //   message.error(data.message || 'Update failed');
-      //   return;
-      // }
-
-      message.success('Block updated successfully');
+      message.success('Block has been updated successfully.');
       navigate(-1);
     } catch (err) {
       if (err instanceof Error) message.error('Error updating block');
@@ -46,14 +49,20 @@ export const BlockDetailInfo = () => {
         }}
       >
         <Input.TextArea
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          value={updatedValue}
+          onChange={(e) => setUpdatedValue(e.target.value)}
           rows={8}
           placeholder="Edit block text"
         />
         <div style={{ marginTop: 16, textAlign: 'right' }}>
+          <Button type="primary" danger>
+            Delete
+          </Button>
           <Button type="primary" onClick={handleUpdate} loading={loading}>
             Update
+          </Button>
+          <Button onClick={() => navigate(-1)} type="dashed" danger>
+            Exit
           </Button>
         </div>
       </Card>

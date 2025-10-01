@@ -32,10 +32,8 @@ export const SignIn: React.FC = () => {
   return (
     <>
       <div className={s.formContainer}>
-        {/* <div>
-          <div>nairi.khachatryan357@gmail.com</div>
-          <div>qqqqqq</div>
-        </div> */}
+        <div>l@gmail.com</div>
+
         <Form
           form={form}
           name="basic"
@@ -71,7 +69,7 @@ export const SignIn: React.FC = () => {
           <div className={s.linkNavigate}>
             <h1>New to Memora?</h1>
             <Link className={s.myLink} to={ROUTES.SIGN_UP}>
-              Sign In
+              Sign Up
             </Link>
           </div>
 

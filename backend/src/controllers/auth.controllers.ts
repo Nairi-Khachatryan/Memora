@@ -42,7 +42,7 @@ export const signIn = async (req: Request, res: Response) => {
     if (!candidate) {
       return res.status(401).json({
         success: false,
-        message: `Wrong Email${email} or Password${password}`,
+        message: `Wrong Email: ${email} or Password: ${password}`,
       });
     }
 

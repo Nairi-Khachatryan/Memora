@@ -1,11 +1,8 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-
 interface reqParams {
   lable: string;
   text: string;
   ownerId: string | null;
 }
-
 
 export const createBlock = async ({ lable, text, ownerId }: reqParams) => {
   const res = await fetch('http://localhost:5051/user/createBlock', {
@@ -14,5 +11,5 @@ export const createBlock = async ({ lable, text, ownerId }: reqParams) => {
     body: JSON.stringify({ lable, text, ownerId }),
   });
 
-  return (await res.json());
+  return await res.json();
 };

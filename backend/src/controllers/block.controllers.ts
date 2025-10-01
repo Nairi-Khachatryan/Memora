@@ -49,3 +49,31 @@ export const getBlock = async (req: Request, res: Response) => {
     }
   }
 };
+
+export const updateBlock = async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const text = req.body.updatedValue;
+
+  console.log('ID:', id);
+  console.log('Text:', text);
+
+  try {
+    const updatedBlock = await Block.findByIdAndUpdate(
+      id,
+      { $set: { text } },
+      { new: true }
+    );
+
+    if (!updatedBlock) {
+      return res
+        .status(404)
+        .json({ success: false, message: 'Block not found' });
+    }
+
+    res.status(200).json({ success: true, data: updatedBlock });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ success: false, message: 'Error updating block', error });
+  }
+};

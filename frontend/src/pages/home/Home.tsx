@@ -31,8 +31,6 @@ export const Home = () => {
     '+',
   ];
 
-
-
   return (
     <div className={s.homeContainer}>
       <div className={s.homeHeader}>
