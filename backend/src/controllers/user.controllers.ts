@@ -27,4 +27,35 @@ export const updateUserInfo = async (req: Request, res: Response) => {
   }
 };
 
-export const getMe = async () => {};
+export const getMe = async (req: Request, res: Response) => {
+  const USER_ID = req.params.id;
+
+  try {
+    const findUser = await User.findById(USER_ID);
+
+    if (!findUser) {
+      return res.status(404).json({
+        success: false,
+        message: `Cannot find User with id ${USER_ID}`,
+      });
+    }
+
+    res.json({
+      success: true,
+      message: 'User found!',
+      data: {
+        id: findUser._id,
+        name: findUser.name,
+        surname: findUser.surname,
+        email: findUser.email,
+        phone: findUser.phone,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error',
+    });
+  }
+};

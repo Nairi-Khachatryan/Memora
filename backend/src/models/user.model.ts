@@ -10,16 +10,16 @@ const userSchema = new mongoose.Schema(
       required: false,
       type: String,
     },
+    phone: {
+      required: false,
+      type: String,
+    },
     email: {
       required: true,
       unique: true,
       type: String,
     },
     passwordHash: {
-      required: true,
-      type: String,
-    },
-    phone: {
       required: true,
       type: String,
     },
