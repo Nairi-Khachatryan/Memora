@@ -1,5 +1,27 @@
+// header {
+//   display: flex;
+//   justify-content: space-between;
+//   min-height: 50px;
+// }
+
 header {
+  top: 0;
+  color: black;
+  z-index: 1000;
+  height: 100px;
   display: flex;
+  position: sticky;
+  align-items: center;
   justify-content: space-between;
-  min-height: 50px;
+  padding: 0 clamp(16px, 3vw, 32px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  // background: linear-gradient(135deg, #2a5298, #1e3c72);
+}
+
+.logo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  cursor: pointer;
+  user-select: none;
 }

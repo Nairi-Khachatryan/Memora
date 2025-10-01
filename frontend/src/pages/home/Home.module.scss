@@ -9,12 +9,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: aqua;
+  // background-color: aqua;
   height: 10vh; /* header takes 10% */
 }
 
 .tryContainer {
-  background-color: gold;
+  // background-color: gold;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 20px;

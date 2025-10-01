@@ -1,6 +1,7 @@
 import { Button, Checkbox, Form, Input } from 'antd';
 import { useAppDispatch } from '../../../app/hooks';
 import { ROUTES } from '../../../routes/routhPath';
+import { useToast } from '../../../hooks/useToast';
 import { createUser } from '../../../api/authApi';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'antd/es/form/Form';
@@ -17,22 +18,29 @@ type FieldType = {
 
 export const SignUp: React.FC = () => {
   const [error, setError] = useState('');
+  const dispatch = useAppDispatch();
+  const { showToast } = useToast();
   const navigate = useNavigate();
   const [form] = useForm();
-  const dispatch = useAppDispatch();
 
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     const { email, password, confirmPassword } = values;
 
     if (password !== confirmPassword) {
-      setError('Passwords do not match');
+      setError('Passwords don’t match.');
+      showToast({ type: 'error', message: 'Passwords don’t match.' });
       form.resetFields(['password', 'confirmPassword']);
       return;
     }
     setError('');
     try {
-      dispatch(createUser({ email, password }));
+      const res = await dispatch(createUser({ email, password })).unwrap();
+
+      if (!res.success) {
+        return showToast({ type: 'error', message: res.message });
+      }
       navigate(ROUTES.HOME_PATH);
+      return showToast({ type: 'success', message: res.message });
     } catch (error) {
       form.resetFields();
       if (error instanceof Error) console.log(error);

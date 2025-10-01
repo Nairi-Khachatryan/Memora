@@ -1,5 +1,6 @@
 import { useAppDispatch } from '../../../app/hooks';
 import { ROUTES } from '../../../routes/routhPath';
+import { useToast } from '../../../hooks/useToast';
 import { signInUser } from '../../../api/authApi';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'antd/es/form/Form';
@@ -14,6 +15,7 @@ type FieldType = {
 };
 
 export const SignIn: React.FC = () => {
+  const { showToast } = useToast();
   const [form] = useForm();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -21,11 +23,11 @@ export const SignIn: React.FC = () => {
     const res = await dispatch(signInUser(values)).unwrap();
 
     if (!res.success) {
-      return alert('aaa');
-      // return showToast({ type: 'error', message: res.message });
+      return showToast({ type: 'error', message: res.message });
     }
 
     navigate(ROUTES.HOME_PATH);
+    showToast({ type: 'success', message: res.message });
   };
   return (
     <>

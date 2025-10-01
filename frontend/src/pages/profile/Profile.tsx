@@ -1,12 +1,15 @@
 import { ProfileItem } from '../../components/ProfileItem';
+import { useQuery } from '@tanstack/react-query';
 import { useAppSelector } from '../../app/hooks';
 import { ROUTES } from '../../routes/routhPath';
 import { useNavigate } from 'react-router-dom';
+import { getBlock } from '../../api/getBlock';
 // import { IoCopy } from 'react-icons/io5';
 import s from './Profile.module.scss';
 import { Button } from 'antd';
-import { useQuery } from '@tanstack/react-query';
-import { getBlock } from '../../api/getBlock';
+
+
+
 export const Profile = () => {
   const { id, email } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
@@ -18,9 +21,7 @@ export const Profile = () => {
     ownerId: string;
   };
 
-  // ID '68d79ae27be1f8e711ebf04c'
-
-  const { data, error, isSuccess } = useQuery<BlockType[]>({
+  const { data = [], isLoading } = useQuery<BlockType[]>({
     queryKey: ['block', id],
     queryFn: () => getBlock(id as string),
     enabled: !!id,
@@ -47,18 +48,16 @@ export const Profile = () => {
         </div>
       </div>
       <div className={s.blocks}>
-        {data
-          ? data.map((block) => (
-              <Button
-                key={block._id}
-                onClick={() =>
-                  navigate(ROUTES.DETAIL_INFO, { state: { block } })
-                }
-              >
-                {block.lable}
-              </Button>
-            ))
-          : 'loading...'}
+        {isLoading && 'Loading...'}
+        {!isLoading && data.length === 0 && 'No blocks yet'}
+        {data?.map((block) => (
+          <Button
+            key={block._id}
+            onClick={() => navigate(ROUTES.DETAIL_INFO, { state: { block } })}
+          >
+            {block.lable}
+          </Button>
+        ))}
         <Button onClick={() => navigate(ROUTES.CREATE_BLOCK)}>
           + Add block
         </Button>

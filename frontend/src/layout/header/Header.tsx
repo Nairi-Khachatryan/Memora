@@ -1,9 +1,10 @@
 import { removeUser } from '../../features/user/userSlice';
+import logoLight from '../../assets/logo-light2.png'
 import { useAppDispatch } from '../../app/hooks';
 import { ROUTES } from '../../routes/routhPath';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
-import './Header.module.scss';
+import s from './Header.module.scss';
 import { Button } from 'antd';
 
 export const Header = () => {
@@ -12,7 +13,9 @@ export const Header = () => {
   const navigate = useNavigate();
   return (
     <header>
-      <div>logo</div>
+      <div>
+        <img className={s.logo} src={logoLight} alt="logo" />
+      </div>
       <div>
         {isAuth ? (
           <>

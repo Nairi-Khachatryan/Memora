@@ -10,6 +10,11 @@ export const getBlock = async (id: string): Promise<BlockType[]> => {
     method: 'GET',
   });
 
-  const json = await res.json();
-  return json.data;
+  const data = await res.json();
+
+  if (!data.success) {
+    return data.data;
+  }
+
+  return data.data ?? [];
 };
