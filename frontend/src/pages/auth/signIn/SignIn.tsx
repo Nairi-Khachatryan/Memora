@@ -18,12 +18,14 @@ export const SignIn: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
-    try {
-      dispatch(signInUser(values));
-      navigate(ROUTES.HOME_PATH);
-    } catch (error) {
-      if (error instanceof Error) console.log(error.message);
+    const res = await dispatch(signInUser(values)).unwrap();
+
+    if (!res.success) {
+      return alert('aaa');
+      // return showToast({ type: 'error', message: res.message });
     }
+
+    navigate(ROUTES.HOME_PATH);
   };
   return (
     <>

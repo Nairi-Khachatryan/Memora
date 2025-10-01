@@ -50,6 +50,7 @@ export const Profile = () => {
         {data
           ? data.map((block) => (
               <Button
+                key={block._id}
                 onClick={() =>
                   navigate(ROUTES.DETAIL_INFO, { state: { block } })
                 }

@@ -22,12 +22,11 @@ interface reqParams {
 // );
 
 export const createBlock = async ({ lable, text, ownerId }: reqParams) => {
-
   const res = await fetch('http://localhost:5051/user/createBlock', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ lable, text, ownerId }),
   });
 
-  // console.log(res, 'res');
+  return (await res.json());
 };
