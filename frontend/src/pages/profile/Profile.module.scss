@@ -1,20 +1,19 @@
 .profileContainer {
   display: flex;
-  background-color: gray;
   width: 100vw;
   height: 90vh;
   flex-direction: column;
   
 }
 .profileInfoSection {
-  background-color: rgb(160, 167, 167);
+  // background-color: rgb(160, 167, 167);
   width: 100vw;
   height: 500px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
+  // padding: 15px;
 }
 .img {
   width: 150px;
@@ -35,16 +34,16 @@
   background-color: aquamarine;
 }
 
-.profileItem {
-  display: flex;
-  margin: 10px;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 2rem;
-  width: max-content;
-  margin-right: 5px;
+// .profileItem {
+//   display: flex;
+//   margin: 10px;
+//   justify-content: space-between;
+//   align-items: center;
+//   font-size: 2rem;
+//   width: max-content;
+//   margin-right: 5px;
   
-}
+// }
 
 
 .blocks{

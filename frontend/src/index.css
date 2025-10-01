@@ -13,4 +13,5 @@
 #root {
   overflow: hidden;
   min-height: 320px;
+  background-color: rgb(255, 255, 255);
 }

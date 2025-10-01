@@ -1,5 +1,5 @@
 import { removeUser } from '../../features/user/userSlice';
-import logoLight from '../../assets/logo-light2.png'
+import logoLight from '../../assets/logo-light2.png';
 import { useAppDispatch } from '../../app/hooks';
 import { ROUTES } from '../../routes/routhPath';
 import { useNavigate } from 'react-router-dom';
@@ -9,12 +9,17 @@ import { Button } from 'antd';
 
 export const Header = () => {
   const dispatch = useAppDispatch();
-  const isAuth = useAuth();
   const navigate = useNavigate();
+  const isAuth = useAuth();
   return (
     <header>
       <div>
-        <img className={s.logo} src={logoLight} alt="logo" />
+        <img
+          onClick={() => navigate(ROUTES.HOME_PATH)}
+          className={s.logo}
+          src={logoLight}
+          alt="logo"
+        />
       </div>
       <div>
         {isAuth ? (

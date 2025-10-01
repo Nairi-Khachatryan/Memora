@@ -1,14 +1,27 @@
-import { ProfileItem } from '../../components/ProfileItem';
+// import { ProfileItem } from '../../components/ProfileItem';
+import {
+  UserOutlined,
+  SettingOutlined,
+  EditOutlined,
+  PlusOutlined,
+} from '@ant-design/icons';
+import {
+  Card,
+  Avatar,
+  Button,
+  Descriptions,
+  Space,
+  Divider,
+  Typography,
+} from 'antd';
 import { useQuery } from '@tanstack/react-query';
 import { useAppSelector } from '../../app/hooks';
 import { ROUTES } from '../../routes/routhPath';
 import { useNavigate } from 'react-router-dom';
 import { getBlock } from '../../api/getBlock';
-// import { IoCopy } from 'react-icons/io5';
 import s from './Profile.module.scss';
-import { Button } from 'antd';
 
-
+const { Title } = Typography;
 
 export const Profile = () => {
   const { id, email } = useAppSelector((state) => state.user);
@@ -29,39 +42,66 @@ export const Profile = () => {
 
   return (
     <div className={s.profileContainer}>
-      <div className={s.profileInfoSection}>
-        <div>
-          <span>
-            <div className={s.img}>img</div>
-          </span>
-          <ProfileItem className={s.profileItem} text="name" />
-          <ProfileItem className={s.profileItem} text="surname" />
-          <ProfileItem className={s.profileItem} text="phone 055107115" />
-          <ProfileItem className={s.profileItem} text={`id ${id}`} />
-          <ProfileItem className={s.profileItem} text={`email ${email}`} />
-        </div>
-        <div className={s.settngBlock}>
-          <Button onClick={() => navigate(ROUTES.SETTINGS)}>Setting</Button>
-          <Button onClick={() => navigate(ROUTES.EDIT_PROFILE)}>
+      <Card style={{ borderRadius: 0 }} className={s.profileCard}>
+        <Space align="center" direction="vertical" style={{ width: '100%' }}>
+          <Avatar size={96} icon={<UserOutlined />} />
+          <Title level={3}>User Profile</Title>
+        </Space>
+
+        <Divider />
+
+        <Descriptions column={1} bordered size="middle">
+          <Descriptions.Item label="Name">Name</Descriptions.Item>
+          <Descriptions.Item label="Surname">Surname</Descriptions.Item>
+          <Descriptions.Item label="Phone">055107115</Descriptions.Item>
+          <Descriptions.Item label="User ID">{id}</Descriptions.Item>
+          <Descriptions.Item label="Email">{email}</Descriptions.Item>
+        </Descriptions>
+
+        <Divider />
+
+        <Space style={{ display: 'flex', justifyContent: 'center' }}>
+          <Button
+            icon={<SettingOutlined />}
+            onClick={() => navigate(ROUTES.SETTINGS)}
+          >
+            Settings
+          </Button>
+          <Button
+            type="primary"
+            icon={<EditOutlined />}
+            onClick={() => navigate(ROUTES.EDIT_PROFILE)}
+          >
             Edit Profile
           </Button>
-        </div>
-      </div>
-      <div className={s.blocks}>
+        </Space>
+      </Card>
+
+      <Card
+        title="My Blocks"
+        className={s.blocksCard}
+        style={{ marginTop: 20 }}
+      >
         {isLoading && 'Loading...'}
-        {!isLoading && data.length === 0 && 'No blocks yet'}
-        {data?.map((block) => (
+        {!isLoading && data.length === 0 && <p>No blocks yet</p>}
+        <Space wrap>
+          {data?.map((block) => (
+            <Button
+              key={block._id}
+              onClick={() => navigate(ROUTES.DETAIL_INFO, { state: { block } })}
+            >
+              {block.lable}
+            </Button>
+          ))}
           <Button
-            key={block._id}
-            onClick={() => navigate(ROUTES.DETAIL_INFO, { state: { block } })}
+            type="dashed"
+            icon={<PlusOutlined />}
+            onClick={() => navigate(ROUTES.CREATE_BLOCK)}
           >
-            {block.lable}
+            Add block
           </Button>
-        ))}
-        <Button onClick={() => navigate(ROUTES.CREATE_BLOCK)}>
-          + Add block
-        </Button>
-      </div>
+        </Space>
+      </Card>
     </div>
   );
 };
