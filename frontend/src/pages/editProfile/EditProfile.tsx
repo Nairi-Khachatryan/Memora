@@ -3,6 +3,8 @@ import { updateUserInfo } from '../../api/updateUserInfo';
 import { useAppSelector } from '../../app/hooks';
 import { useNavigate } from 'react-router-dom';
 import s from './Edit.module.scss';
+import { useContext } from 'react';
+import { ThemeContext } from '../../context/theme/themeContext';
 
 function cleanValues(values: valuesProp) {
   return Object.fromEntries(
@@ -20,6 +22,7 @@ export const EditProfile = () => {
   const userId = useAppSelector((state) => state.user.id);
   const navigate = useNavigate();
   const [form] = Form.useForm();
+  const { theme } = useContext(ThemeContext);
 
   const onFinish = async (values: valuesProp) => {
     if (!userId) {
@@ -38,7 +41,7 @@ export const EditProfile = () => {
   };
 
   return (
-    <div className={s.editProfileContainer}>
+    <div className={`${s[`editProfileContainer-${theme}`]}`}>
       <Card
         title="Edit Profile"
         style={{

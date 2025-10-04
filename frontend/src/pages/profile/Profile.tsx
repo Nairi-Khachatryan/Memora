@@ -2,8 +2,8 @@ import { useAppSelector } from '../../app/hooks';
 import { useQuery } from '@tanstack/react-query';
 import { ROUTES } from '../../routes/routhPath';
 import { getBlock } from '../../api/getBlock';
-import { getUser } from '../../api/getUser';
 import { useNavigate } from 'react-router-dom';
+import { getUser } from '../../api/getUser';
 import s from './Profile.module.scss';
 import {
   UserOutlined,
@@ -20,6 +20,8 @@ import {
   Divider,
   Typography,
 } from 'antd';
+import { useContext } from 'react';
+import { ThemeContext } from '../../context/theme/themeContext';
 
 const { Title } = Typography;
 
@@ -39,6 +41,7 @@ type UserType = {
 };
 
 export const Profile = () => {
+  const { theme } = useContext(ThemeContext);
   const { id } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
 
@@ -50,7 +53,6 @@ export const Profile = () => {
     enabled: !!id,
   });
 
-
   const { data: blocks = [], isLoading: blocksLoading } = useQuery<BlockType[]>(
     {
       queryKey: ['block', id],
@@ -60,14 +62,20 @@ export const Profile = () => {
   );
 
   return (
-    <div className={s.profileContainer}>
+    <div
+      className={`${s.ProfileDescriptions}${
+        theme === 'dark' ? 'Dark' : 'Light'
+      }`}
+    >
       <Card
         style={{ borderRadius: 0, border: 'none' }}
-        className={s.profileCard}
+        className={`${s[`profileCard-${theme}`]}`}
       >
         <Space align="center" direction="vertical" style={{ width: '100%' }}>
           <Avatar size={96} icon={<UserOutlined />} />
-          <Title level={3}>User Profile</Title>
+          <Title style={{ color: 'white' }} level={3}>
+            User Profile
+          </Title>
         </Space>
 
         <Divider />
@@ -75,19 +83,45 @@ export const Profile = () => {
         {userLoading ? (
           <p>Загрузка профиля...</p>
         ) : (
-          <Descriptions column={1} bordered size="middle">
-            <Descriptions.Item label="Name">{user?.name}</Descriptions.Item>
-            <Descriptions.Item label="Surname">
+          <Descriptions
+            className={s[`profileDescriptions-${theme}`]}
+            column={1}
+            bordered
+            size="middle"
+          >
+            <Descriptions.Item
+              style={{ color: theme === 'dark' ? 'white' : 'black' }}
+              label="Name"
+            >
+              {user?.name}
+            </Descriptions.Item>
+            <Descriptions.Item
+              style={{ color: theme === 'dark' ? 'white' : 'black' }}
+              label="Surname"
+            >
               {user?.surname}
             </Descriptions.Item>
-            <Descriptions.Item label="Phone">{user?.phone}</Descriptions.Item>
-            <Descriptions.Item label="User ID">{user?.id}</Descriptions.Item>
-            <Descriptions.Item label="Email">{user?.email}</Descriptions.Item>
+            <Descriptions.Item
+              style={{ color: theme === 'dark' ? 'white' : 'black' }}
+              label="Phone"
+            >
+              {user?.phone}
+            </Descriptions.Item>
+            <Descriptions.Item
+              style={{ color: theme === 'dark' ? 'white' : 'black' }}
+              label="User ID"
+            >
+              {user?.id}
+            </Descriptions.Item>
+            <Descriptions.Item
+              style={{ color: theme === 'dark' ? 'white' : 'black' }}
+              label="Email"
+            >
+              {user?.email}
+            </Descriptions.Item>
           </Descriptions>
         )}
-
         <Divider />
-
         <Space style={{ display: 'flex', justifyContent: 'center' }}>
           <Button
             icon={<SettingOutlined />}
@@ -107,7 +141,8 @@ export const Profile = () => {
 
       <Card
         title="My Blocks"
-        className={s.blocksCard}
+        // className={`${s[`blocksCard-${theme}`]}`}
+        className={`${s[`blocksCard-${theme}`]} ${theme}`}
         style={{ marginTop: 20 }}
       >
         {blocksLoading && <p>Загрузка блоков...</p>}

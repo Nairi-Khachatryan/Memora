@@ -1,13 +1,16 @@
+import { ThemeContext } from '../context/theme/themeContext';
+import { Outlet } from 'react-router-dom';
 import { Footer } from './footer/Footer';
 import { Header } from './header/Header';
-import { Outlet } from 'react-router-dom';
-import './AppLayout.moudule.scss'
+import s from './AppLayout.module.scss';
+import { useContext } from 'react';
 
 export const AppLayout = () => {
+  const { theme } = useContext(ThemeContext);
   return (
     <>
       <Header />
-      <main>
+      <main className={`${s[`main-${theme}`]}`}>
         <Outlet />
       </main>
       <Footer />

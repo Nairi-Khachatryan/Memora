@@ -1,9 +1,17 @@
-.homeContainer {
+.homeContainer-light {
   display: flex;
   flex-direction: column;
   width: 100vw;
   height: 100vh;
   background-color: white;
+}
+
+.homeContainer-dark {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #2a5298, black);
 }
 
 .homeHeader {

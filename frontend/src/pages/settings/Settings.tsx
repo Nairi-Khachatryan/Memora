@@ -17,7 +17,7 @@ export const Settings = () => {
           <Switch
             checkedChildren="Dark"
             unCheckedChildren="Light"
-            checked={theme === 'Dark'}
+            checked={theme === 'dark'}
             onChange={handleChangeTheme}
           />
         </Card>
@@ -58,7 +58,7 @@ export const Settings = () => {
   ];
 
   return (
-    <div className={s.settingsContainer}>
+    <div className={`${s[`settingsContainer-${theme}`]}`}>
       <Card title="Settings" style={{ borderRadius: 0 }}>
         <Tabs defaultActiveKey="1" items={items} />
       </Card>

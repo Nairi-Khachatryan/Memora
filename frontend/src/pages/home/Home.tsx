@@ -1,6 +1,9 @@
+import { useContext } from 'react';
 import s from './Home.module.scss';
+import { ThemeContext } from '../../context/theme/themeContext';
 
 export const Home = () => {
+  const { theme } = useContext(ThemeContext);
   const syrcleArray = [
     '+',
     '+',
@@ -32,7 +35,7 @@ export const Home = () => {
   ];
 
   return (
-    <div className={s.homeContainer}>
+    <div className={`${s[`homeContainer-${theme}`]}`}>
       <div className={s.homeHeader}>
         <h1>Family Try</h1>
       </div>

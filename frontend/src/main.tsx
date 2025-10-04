@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ThemeProvider } from './context/theme/themeProvider.tsx';
+import { ThemeProvider } from './context/theme/ThemeProvider.tsx';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from './app/store.ts';

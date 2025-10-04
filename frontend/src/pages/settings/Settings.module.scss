@@ -1,8 +1,17 @@
-.settingsContainer {
+.settingsContainer-light {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 24px;
   height: max-content;
   background-color: white;
+}
+
+.settingsContainer-dark {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+  height: max-content;
+  background-color: rgb(183, 121, 27);
 }

@@ -1,19 +1,39 @@
-.profileContainer {
+.profileContainer-light {
   display: flex;
   width: 100vw;
   height: 90vh;
   flex-direction: column;
-  
+  background-color: white;
 }
+
+.profileCard-light {
+  background-color: white;
+}
+
+.profileCard-dark {
+  background: linear-gradient(135deg, #2a5298, black);
+  color: white;
+}
+
+.profileDescription-dark {
+  color: white;
+}
+
+.profileContainer-dark {
+  display: flex;
+  width: 100vw;
+  height: 90vh;
+  flex-direction: column;
+  background: linear-gradient(135deg, #2a5298, black);
+}
+
 .profileInfoSection {
-  // background-color: rgb(160, 167, 167);
   width: 100vw;
   height: 500px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  // padding: 15px;
 }
 .img {
   width: 150px;
@@ -26,6 +46,11 @@
   margin-bottom: 10px;
 }
 
+.blocksCard-dark {
+  background: linear-gradient(135deg, #2a5298, black);
+  color: white;
+}
+
 .settngBlock {
   width: 105px;
   height: 100px;
@@ -34,18 +59,20 @@
   background-color: aquamarine;
 }
 
-// .profileItem {
-//   display: flex;
-//   margin: 10px;
-//   justify-content: space-between;
-//   align-items: center;
-//   font-size: 2rem;
-//   width: max-content;
-//   margin-right: 5px;
-  
+.blocks {
+  padding: 10px;
+}
+
+// :global(.ant-card-head-title) {
+//   color: white;
 // }
 
 
-.blocks{
-  padding: 10px;
+:global(.ant-card-head-title) {
+  &.dark {
+    color: white;
+  }
+  &.light {
+    color: black;
+  }
 }
