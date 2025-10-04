@@ -59,7 +59,7 @@ export const EditProfile = () => {
           <Form.Item
             label="Name"
             name="name"
-            rules={[{ message: 'Please Enter Your Name', required: true }]}
+            rules={[{ message: 'Please Enter Your Name' }]}
           >
             <Input placeholder="Enter name" />
           </Form.Item>
@@ -67,7 +67,7 @@ export const EditProfile = () => {
           <Form.Item
             label="Surname"
             name="surname"
-            rules={[{ message: 'Please enter your surname', required: true }]}
+            rules={[{ message: 'Please enter your surname' }]}
           >
             <Input placeholder="Enter Surname" />
           </Form.Item>
@@ -75,7 +75,7 @@ export const EditProfile = () => {
           <Form.Item
             label="Phone"
             name="phone"
-            rules={[{ message: 'Please enter your phone', required: true }]}
+            rules={[{ message: 'Please enter your phone'}]}
           >
             <Input placeholder="Enter phone" />
           </Form.Item>
