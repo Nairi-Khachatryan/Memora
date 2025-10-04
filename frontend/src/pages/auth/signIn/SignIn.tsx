@@ -32,7 +32,7 @@ export const SignIn: React.FC = () => {
   return (
     <>
       <div className={s.formContainer}>
-        <div>l@gmail.com</div>
+        <div>nairi.khachatryan357@gmail.com</div>
 
         <Form
           form={form}

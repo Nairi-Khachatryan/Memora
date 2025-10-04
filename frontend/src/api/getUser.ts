@@ -7,5 +7,5 @@ export const getUser = async (USER_ID: string) => {
 
   if (!data.success) throw new Error(data.message);
 
-  return data.data; // возвращаем только объект пользователя
+  return data.data; 
 };

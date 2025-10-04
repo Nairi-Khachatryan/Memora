@@ -1,10 +1,11 @@
 import { Card, Tabs, Switch, Form, Input, Button } from 'antd';
-import type { TabsProps } from 'antd';
-import { useState } from 'react';
+import { ThemeContext } from '../../context/theme/themeContext';
 import s from './Settings.module.scss';
+import type { TabsProps } from 'antd';
+import { useContext } from 'react';
 
 export const Settings = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  const { theme, handleChangeTheme } = useContext(ThemeContext);
 
   const items: TabsProps['items'] = [
     {
@@ -16,8 +17,8 @@ export const Settings = () => {
           <Switch
             checkedChildren="Dark"
             unCheckedChildren="Light"
-            checked={darkMode}
-            onChange={setDarkMode}
+            checked={theme === 'Dark'}
+            onChange={handleChangeTheme}
           />
         </Card>
       ),
