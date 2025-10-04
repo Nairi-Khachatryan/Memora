@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
+import { deleteBlock } from '../../api/deleteBlock';
 import { updateBlock } from '../../api/updateBlock';
 import { Card, Input, Button, message } from 'antd';
 import s from './BlockDetail.module.scss';
@@ -12,8 +13,6 @@ export const BlockDetailInfo = () => {
   const header = location.state.block.lable;
   const inputValue = location.state.block.text;
   const blockId = location.state.block._id;
-
-  console.log(header);
 
   const handleUpdate = async () => {
     setLoading(true);
@@ -37,6 +36,29 @@ export const BlockDetailInfo = () => {
     }
   };
 
+  const handleDelete = async () => {
+    setLoading(true);
+    try {
+      // if (updatedValue === inputValue) {
+      //   return message.success('Nothing to Update');
+      // }
+
+      const data = await deleteBlock(blockId);
+
+      if (!data.success) {
+        message.error(data.message || 'Delete failed');
+        return;
+      }
+
+      message.success('Block has been Deleted successfully.');
+      navigate(-1);
+    } catch (err) {
+      if (err instanceof Error) message.error('Error Deleting block');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className={s.blockDetailContainer}>
       <Card
@@ -55,7 +77,7 @@ export const BlockDetailInfo = () => {
           placeholder="Edit block text"
         />
         <div style={{ marginTop: 16, textAlign: 'right' }}>
-          <Button type="primary" danger>
+          <Button onClick={handleDelete} type="primary" danger>
             Delete
           </Button>
           <Button type="primary" onClick={handleUpdate} loading={loading}>

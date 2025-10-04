@@ -74,3 +74,25 @@ export const updateBlock = async (req: Request, res: Response) => {
       .json({ success: false, message: 'Error updating block', error });
   }
 };
+
+export const deleteBlock = async (req: Request, res: Response) => {
+  const BLOCK_ID = req.params.id;
+
+  try {
+    const foundBlock = await Block.findByIdAndDelete(BLOCK_ID);
+
+    if (!foundBlock) {
+      return res
+        .status(404)
+        .json({ success: false, message: 'Block not found' });
+    }
+
+    res
+      .status(200)
+      .json({ success: true, message: 'Block deleting successfuly' });
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+    }
+  }
+};
