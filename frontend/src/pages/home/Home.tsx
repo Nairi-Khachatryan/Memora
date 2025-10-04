@@ -1,6 +1,6 @@
+import { ThemeContext } from '../../context/theme/themeContext';
 import { useContext } from 'react';
 import s from './Home.module.scss';
-import { ThemeContext } from '../../context/theme/themeContext';
 
 export const Home = () => {
   const { theme } = useContext(ThemeContext);

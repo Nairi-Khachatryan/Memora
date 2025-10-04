@@ -1,3 +1,4 @@
+import { ThemeContext } from '../../context/theme/themeContext';
 import { useAppSelector } from '../../app/hooks';
 import { useQuery } from '@tanstack/react-query';
 import { ROUTES } from '../../routes/routhPath';
@@ -5,6 +6,7 @@ import { getBlock } from '../../api/getBlock';
 import { useNavigate } from 'react-router-dom';
 import { getUser } from '../../api/getUser';
 import s from './Profile.module.scss';
+import { useContext } from 'react';
 import {
   UserOutlined,
   SettingOutlined,
@@ -20,9 +22,6 @@ import {
   Divider,
   Typography,
 } from 'antd';
-import { useContext } from 'react';
-import { ThemeContext } from '../../context/theme/themeContext';
-
 const { Title } = Typography;
 
 type BlockType = {
@@ -73,7 +72,10 @@ export const Profile = () => {
       >
         <Space align="center" direction="vertical" style={{ width: '100%' }}>
           <Avatar size={96} icon={<UserOutlined />} />
-          <Title style={{ color: 'white' }} level={3}>
+          <Title
+            style={{ color: theme === 'dark' ? 'white' : 'black' }}
+            level={3}
+          >
             User Profile
           </Title>
         </Space>
@@ -81,7 +83,7 @@ export const Profile = () => {
         <Divider />
 
         {userLoading ? (
-          <p>Загрузка профиля...</p>
+          <p>Loading...</p>
         ) : (
           <Descriptions
             className={s[`profileDescriptions-${theme}`]}
@@ -141,7 +143,6 @@ export const Profile = () => {
 
       <Card
         title="My Blocks"
-        // className={`${s[`blocksCard-${theme}`]}`}
         className={`${s[`blocksCard-${theme}`]} ${theme}`}
         style={{ marginTop: 20 }}
       >

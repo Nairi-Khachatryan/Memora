@@ -1,10 +1,10 @@
+import { ThemeContext } from '../../context/theme/themeContext';
 import { Card, Form, Input, Button, message } from 'antd';
 import { updateUserInfo } from '../../api/updateUserInfo';
 import { useAppSelector } from '../../app/hooks';
 import { useNavigate } from 'react-router-dom';
 import s from './Edit.module.scss';
 import { useContext } from 'react';
-import { ThemeContext } from '../../context/theme/themeContext';
 
 function cleanValues(values: valuesProp) {
   return Object.fromEntries(
