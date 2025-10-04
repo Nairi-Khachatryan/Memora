@@ -1,18 +1,34 @@
-interface valuesProp {
+import { createAsyncThunk } from '@reduxjs/toolkit';
+
+interface ValuesProp {
   name?: string;
   surname?: string;
   phone?: string;
 }
 
-export const updateUserInfo = async (values: valuesProp, userId: string) => {
-  const res = await fetch(
-    `http://localhost:5051/user/updateUserInfo/${userId}`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ values }),
-    }
-  );
+export const updateUserInfo = createAsyncThunk(
+  'user/updateInfo',
+  async (
+    { values, userId }: { values: ValuesProp; userId: string },
+    { rejectWithValue }
+  ) => {
+    try {
+      const res = await fetch(
+        `http://localhost:5051/user/updateUserInfo/${userId}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ values }),
+        }
+      );
 
-  return await res.json();
-};
+      if (!res.ok) {
+        return rejectWithValue(await res.text());
+      }
+
+      return await res.json();
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);

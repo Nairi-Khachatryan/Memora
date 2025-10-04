@@ -10,6 +10,7 @@ import { ROUTES } from './routhPath';
 import { EditProfile } from '../pages/editProfile/EditProfile';
 import { CreateBlock } from '../pages/createBlock/CreateBlock';
 import { BlockDetailInfo } from '../pages/blockDetailInfo/BlockDetailInfo';
+import { CreateAvatar } from '../pages/createAvatar/CreateAvatar';
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ export const router = createBrowserRouter([
           {
             path: ROUTES.DETAIL_INFO,
             element: <BlockDetailInfo />,
+          },
+          {
+            path: ROUTES.CREATE_AVATAR,
+            element: <CreateAvatar />,
           },
         ],
       },

@@ -7,4 +7,5 @@ export const ROUTES = {
   EDIT_PROFILE: '/edit-profile',
   CREATE_BLOCK: '/create-block',
   DETAIL_INFO: '/detail-info',
+  CREATE_AVATAR: '/crate-avatar',
 } as const;

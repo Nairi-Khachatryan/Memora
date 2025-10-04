@@ -2,9 +2,12 @@ import { ThemeContext } from '../../context/theme/themeContext';
 import { Class } from '../../utils/createShortClassname';
 import { useContext } from 'react';
 import s from './Home.module.scss';
+import { ROUTES } from '../../routes/routhPath';
+import { useNavigate } from 'react-router-dom';
 
 export const Home = () => {
   const { theme } = useContext(ThemeContext);
+  const navigate = useNavigate();
   const syrcleArray = [
     '+',
     '+',
@@ -42,7 +45,11 @@ export const Home = () => {
       </div>
       <div className={s.tryContainer}>
         {syrcleArray.map((item, idx) => (
-          <div key={idx} className={s.avatarItem}>
+          <div
+            onClick={() => navigate(ROUTES.CREATE_AVATAR)}
+            key={idx}
+            className={s.avatarItem}
+          >
             {item}
           </div>
         ))}

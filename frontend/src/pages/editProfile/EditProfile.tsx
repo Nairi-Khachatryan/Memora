@@ -2,7 +2,7 @@ import { ThemeContext } from '../../context/theme/themeContext';
 import { Card, Form, Input, Button, message } from 'antd';
 import { updateUserInfo } from '../../api/updateUserInfo';
 import { Class } from '../../utils/createShortClassname';
-import { useAppSelector } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { useNavigate } from 'react-router-dom';
 import s from './Edit.module.scss';
 import { useContext } from 'react';
@@ -24,6 +24,7 @@ export const EditProfile = () => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const { theme } = useContext(ThemeContext);
+  const dispatch = useAppDispatch();
 
   const onFinish = async (values: valuesProp) => {
     if (!userId) {
@@ -31,7 +32,9 @@ export const EditProfile = () => {
       return;
     }
 
-    const res = await updateUserInfo(cleanValues(values), userId);
+    const res = await dispatch(
+      updateUserInfo({ values: cleanValues(values), userId })
+    ).unwrap();
 
     if (!res.success) {
       message.error('Error Updating User Profile!');

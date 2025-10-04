@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createUser, signInUser } from '../../api/authApi';
+import { updateUserInfo } from '../../api/updateUserInfo';
 
 interface UserState {
   email: string | null;
@@ -38,6 +39,11 @@ const userSlice = createSlice({
           state.email = action.payload.data.email;
           state.id = action.payload.data.id;
         }
+      })
+      .addCase(updateUserInfo.fulfilled, (state, action) => {
+        state.name = action.payload.data.name;
+        state.surname = action.payload.data.surname;
+        state.phone = action.payload.data.phone;
       });
   },
 });
