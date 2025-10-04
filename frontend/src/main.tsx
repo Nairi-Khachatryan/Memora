@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { store } from './app/store.ts';
 import { StrictMode } from 'react';
 import { App } from './App.tsx';
-import './index.css';
+import './styles/global.scss';
 
 const querryClient = new QueryClient();
 

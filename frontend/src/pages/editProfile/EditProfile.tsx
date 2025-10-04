@@ -1,8 +1,8 @@
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { ThemeContext } from '../../context/theme/themeContext';
 import { Card, Form, Input, Button, message } from 'antd';
 import { updateUserInfo } from '../../api/updateUserInfo';
 import { Class } from '../../utils/createShortClassname';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { useNavigate } from 'react-router-dom';
 import s from './Edit.module.scss';
 import { useContext } from 'react';
@@ -20,11 +20,11 @@ interface valuesProp {
 }
 
 export const EditProfile = () => {
-  const userId = useAppSelector((state) => state.user.id);
-  const navigate = useNavigate();
   const [form] = Form.useForm();
-  const { theme } = useContext(ThemeContext);
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { theme } = useContext(ThemeContext);
+  const userId = useAppSelector((state) => state.user.id);
 
   const onFinish = async (values: valuesProp) => {
     if (!userId) {
@@ -59,7 +59,7 @@ export const EditProfile = () => {
           <Form.Item
             label="Name"
             name="name"
-            rules={[{ message: 'Please Enter Your Name' }]}
+            rules={[{ message: 'Please Enter Your Name', required: true }]}
           >
             <Input placeholder="Enter name" />
           </Form.Item>
@@ -67,7 +67,7 @@ export const EditProfile = () => {
           <Form.Item
             label="Surname"
             name="surname"
-            rules={[{ message: 'Please enter your surname' }]}
+            rules={[{ message: 'Please enter your surname', required: true }]}
           >
             <Input placeholder="Enter Surname" />
           </Form.Item>
@@ -75,7 +75,7 @@ export const EditProfile = () => {
           <Form.Item
             label="Phone"
             name="phone"
-            rules={[{ message: 'Please enter your phone' }]}
+            rules={[{ message: 'Please enter your phone', required: true }]}
           >
             <Input placeholder="Enter phone" />
           </Form.Item>
