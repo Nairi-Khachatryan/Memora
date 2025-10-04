@@ -3,6 +3,7 @@ import { ThemeContext } from '../../context/theme/themeContext';
 import s from './Settings.module.scss';
 import type { TabsProps } from 'antd';
 import { useContext } from 'react';
+import { Class } from '../../utils/createShortClassname';
 
 export const Settings = () => {
   const { theme, handleChangeTheme } = useContext(ThemeContext);
@@ -58,7 +59,7 @@ export const Settings = () => {
   ];
 
   return (
-    <div className={`${s[`settingsContainer-${theme}`]}`}>
+    <div className={Class(s, 'settingsContainer', theme)}>
       <Card title="Settings" style={{ borderRadius: 0 }}>
         <Tabs defaultActiveKey="1" items={items} />
       </Card>

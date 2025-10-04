@@ -13,6 +13,7 @@
 .profileCard-dark {
   background: linear-gradient(135deg, #2a5298, black);
   color: white;
+  user-select: none;
 }
 
 .profileDescription-dark {
@@ -67,12 +68,11 @@
 //   color: white;
 // }
 
-
-:global(.ant-card-head-title) {
-  &.dark {
-    color: white;
-  }
-  &.light {
-    color: black;
-  }
-}
+// :global(.ant-card-head-title) {
+//   &.dark {
+//     color: white;
+//   }
+//   &.light {
+//     color: black;
+//   }
+// }

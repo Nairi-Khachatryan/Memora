@@ -1,4 +1,5 @@
 import { ThemeContext } from '../../context/theme/themeContext';
+import { Class } from '../../utils/createShortClassname';
 import { useContext } from 'react';
 import s from './Home.module.scss';
 
@@ -35,7 +36,7 @@ export const Home = () => {
   ];
 
   return (
-    <div className={`${s[`homeContainer-${theme}`]}`}>
+    <div className={Class(s, 'homeContainer', theme)}>
       <div className={s.homeHeader}>
         <h1>Family Try</h1>
       </div>

@@ -1,6 +1,7 @@
 import { ThemeContext } from '../../context/theme/themeContext';
 import { Card, Form, Input, Button, message } from 'antd';
 import { updateUserInfo } from '../../api/updateUserInfo';
+import { Class } from '../../utils/createShortClassname';
 import { useAppSelector } from '../../app/hooks';
 import { useNavigate } from 'react-router-dom';
 import s from './Edit.module.scss';
@@ -41,7 +42,7 @@ export const EditProfile = () => {
   };
 
   return (
-    <div className={`${s[`editProfileContainer-${theme}`]}`}>
+    <div className={Class(s, 'editProfileContainer', theme)}>
       <Card
         title="Edit Profile"
         style={{

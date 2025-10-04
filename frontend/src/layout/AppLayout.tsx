@@ -1,4 +1,5 @@
 import { ThemeContext } from '../context/theme/themeContext';
+import { Class } from '../utils/createShortClassname';
 import { Outlet } from 'react-router-dom';
 import { Footer } from './footer/Footer';
 import { Header } from './header/Header';
@@ -10,7 +11,7 @@ export const AppLayout = () => {
   return (
     <>
       <Header />
-      <main className={`${s[`main-${theme}`]}`}>
+      <main className={Class(s, 'main', theme)}>
         <Outlet />
       </main>
       <Footer />

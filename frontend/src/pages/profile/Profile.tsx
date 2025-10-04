@@ -22,6 +22,7 @@ import {
   Divider,
   Typography,
 } from 'antd';
+import { Class } from '../../utils/createShortClassname';
 const { Title } = Typography;
 
 type BlockType = {
@@ -62,13 +63,15 @@ export const Profile = () => {
 
   return (
     <div
-      className={`${s.ProfileDescriptions}${
-        theme === 'dark' ? 'Dark' : 'Light'
-      }`}
+      className={Class(
+        s,
+        'ProfileDescriptions',
+        theme === 'dark' ? 'dark' : 'light'
+      )}
     >
       <Card
         style={{ borderRadius: 0, border: 'none' }}
-        className={`${s[`profileCard-${theme}`]}`}
+        className={Class(s, 'profileCard', theme)}
       >
         <Space align="center" direction="vertical" style={{ width: '100%' }}>
           <Avatar size={96} icon={<UserOutlined />} />
@@ -86,7 +89,7 @@ export const Profile = () => {
           <p>Loading...</p>
         ) : (
           <Descriptions
-            className={s[`profileDescriptions-${theme}`]}
+            className={Class(s, 'profileDescriptions', theme)}
             column={1}
             bordered
             size="middle"
@@ -143,7 +146,7 @@ export const Profile = () => {
 
       <Card
         title="My Blocks"
-        className={`${s[`blocksCard-${theme}`]} ${theme}`}
+        className={Class(s, 'blocksCard', theme)}
         style={{ marginTop: 20 }}
       >
         {blocksLoading && <p>Загрузка блоков...</p>}
