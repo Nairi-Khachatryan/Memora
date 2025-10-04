@@ -21,6 +21,7 @@ export const signUp = async (req: Request, res: Response) => {
       passwordHash,
       name: 'name',
       surname: 'surname',
+      phone: 'phone',
     });
     await user.save();
 
@@ -30,7 +31,6 @@ export const signUp = async (req: Request, res: Response) => {
       data: {
         email: user.email,
         id: user._id,
-        
       },
     });
   } catch (error) {
