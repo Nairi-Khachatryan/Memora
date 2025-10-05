@@ -1,18 +1,14 @@
+import { UserOutlined, SettingOutlined, EditOutlined } from '@ant-design/icons';
 import { ThemeContext } from '../../context/theme/themeContext';
+import { Class } from '../../utils/createShortClassname';
 import { useAppSelector } from '../../app/hooks';
 import { useQuery } from '@tanstack/react-query';
 import { ROUTES } from '../../routes/routhPath';
-import { getBlock } from '../../api/getBlock';
 import { useNavigate } from 'react-router-dom';
 import { getUser } from '../../api/getUser';
 import s from './Profile.module.scss';
+import { Block } from './block/Block';
 import { useContext } from 'react';
-import {
-  UserOutlined,
-  SettingOutlined,
-  EditOutlined,
-  PlusOutlined,
-} from '@ant-design/icons';
 import {
   Card,
   Avatar,
@@ -22,15 +18,6 @@ import {
   Divider,
   Typography,
 } from 'antd';
-import { Class } from '../../utils/createShortClassname';
-const { Title } = Typography;
-
-type BlockType = {
-  _id: string;
-  lable: string;
-  text: string;
-  ownerId: string;
-};
 
 type UserType = {
   name: string;
@@ -40,26 +27,17 @@ type UserType = {
   email: string;
 };
 
+const { Title } = Typography;
 export const Profile = () => {
   const { theme } = useContext(ThemeContext);
   const { id } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
-
-  if (!id) return null;
 
   const { data: user, isLoading: userLoading } = useQuery<UserType>({
     queryKey: ['user', id],
     queryFn: () => getUser(id),
     enabled: !!id,
   });
-
-  const { data: blocks = [], isLoading: blocksLoading } = useQuery<BlockType[]>(
-    {
-      queryKey: ['block', id],
-      queryFn: () => getBlock(id),
-      enabled: !!id,
-    }
-  );
 
   return (
     <div
@@ -82,9 +60,7 @@ export const Profile = () => {
             User Profile
           </Title>
         </Space>
-
         <Divider />
-
         {userLoading ? (
           <p>Loading...</p>
         ) : (
@@ -143,33 +119,7 @@ export const Profile = () => {
           </Button>
         </Space>
       </Card>
-
-      <Card
-        title="My Blocks"
-        className={Class(s, 'blocksCard', theme)}
-        style={{ marginTop: 20 }}
-      >
-        {blocksLoading && <p>Загрузка блоков...</p>}
-        {!blocksLoading && blocks.length === 0 && <p>No blocks yet</p>}
-
-        <Space wrap>
-          {blocks?.map((block) => (
-            <Button
-              key={block._id}
-              onClick={() => navigate(ROUTES.DETAIL_INFO, { state: { block } })}
-            >
-              {block.lable}
-            </Button>
-          ))}
-          <Button
-            type="dashed"
-            icon={<PlusOutlined />}
-            onClick={() => navigate(ROUTES.CREATE_BLOCK)}
-          >
-            Add block
-          </Button>
-        </Space>
-      </Card>
+      <Block />
     </div>
   );
 };

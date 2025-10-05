@@ -5,7 +5,7 @@ type BlockType = {
   ownerId: string;
 };
 
-export const getBlock = async (id: string): Promise<BlockType[]> => {
+export const getBlock = async (id: string | null): Promise<BlockType[]> => {
   const res = await fetch(`http://localhost:5051/user/getBlock/${id}`, {
     method: 'GET',
   });

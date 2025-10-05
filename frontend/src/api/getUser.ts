@@ -1,4 +1,4 @@
-export const getUser = async (USER_ID: string) => {
+export const getUser = async (USER_ID: string | null ) => {
   const res = await fetch(`http://localhost:5051/user/getMe/${USER_ID}`, {
     method: 'GET',
   });
