@@ -78,7 +78,6 @@ export const changePassword = async (req: Request, res: Response) => {
   const OLD_PASSWORD = req.body.oldPassword;
   const NEW_PASSWORD = req.body.newPassword;
 
-
   try {
     const USER = await User.findById(USER_ID);
 
@@ -105,5 +104,12 @@ export const changePassword = async (req: Request, res: Response) => {
       .json({ success: true, message: 'Password changed successfully' });
   } catch (error) {
     if (error instanceof Error) console.log(error.message);
+
+    return res
+      .status(500)
+      .json({
+        success: false,
+        message: 'Server error while changing password',
+      });
   }
 };

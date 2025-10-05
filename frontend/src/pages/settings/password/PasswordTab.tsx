@@ -2,12 +2,14 @@ import { changePassword } from '../../../api/changePassword';
 import { useAppSelector } from '../../../app/hooks';
 import { Card, Form, Input, Button } from 'antd';
 import { useState } from 'react';
+import { useToast } from '../../../hooks/useToast';
 
 export const PasswordTab = () => {
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const { showToast } = useToast();
 
   const USER_ID = useAppSelector((state) => state.user.id);
 
@@ -23,7 +25,17 @@ export const PasswordTab = () => {
       return setError('Invalid User ID');
     }
 
+    if (!oldPassword || !newPassword || !confirmPassword) {
+      return setError('All fields are required');
+    }
+
     const res = await changePassword(USER_ID, oldPassword, newPassword);
+
+    if (!res.success) {
+      return showToast({ type: 'error', message: res.message });
+    }
+
+    showToast({ type: 'success', message: res.message });
 
     console.log(res, 'res on component');
   };
@@ -36,7 +48,7 @@ export const PasswordTab = () => {
               value={oldPassword}
               onChange={(e) => setOldPassword(e.target.value)}
               placeholder="Enter Old Password"
-              required={true}
+              required
             />
           </Form.Item>
           <Form.Item label="New Password">
@@ -44,7 +56,7 @@ export const PasswordTab = () => {
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               placeholder="Enter New Password"
-              required={true}
+              required
             />
           </Form.Item>
           <Form.Item label="Confirm Password">
@@ -52,8 +64,10 @@ export const PasswordTab = () => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Confirm Password"
+              required
             />
           </Form.Item>
+          {error && <div style={{ color: 'red' }}>{error}</div>}
           <Button onClick={handleChangePassword} type="primary">
             Save
           </Button>
