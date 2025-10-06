@@ -7,7 +7,7 @@ import { getBlock } from '../../../api/getBlock';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { Card, Button, Space } from 'antd';
-import  { useContext } from 'react';
+import { useContext } from 'react';
 import s from './Block.module.scss';
 
 type BlockType = {
@@ -17,7 +17,7 @@ type BlockType = {
   ownerId: string;
 };
 
-export const Block = () => {
+export const BlockContainer = () => {
   const navigate = useNavigate();
   const id = useAppSelector((state) => state.user.id);
   const { theme } = useContext(ThemeContext);
@@ -36,7 +36,7 @@ export const Block = () => {
         className={Class(s, 'blocksCard', theme)}
         style={{ marginTop: 20 }}
       >
-        {blocksLoading && <p>Загрузка блоков...</p>}
+        {blocksLoading && <p>Loading Blocks...</p>}
         {!blocksLoading && blocks.length === 0 && <p>No blocks yet</p>}
 
         <Space wrap>

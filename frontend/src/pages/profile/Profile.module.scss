@@ -1,76 +1,63 @@
-.profileContainer-light {
-  display: flex;
-  width: 100vw;
-  height: 90vh;
-  flex-direction: column;
-  background-color: white;
-}
+// .profileContainer-light {
+//   display: flex;
+//   width: 100vw;
+//   height: 90vh;
+//   flex-direction: column;
+//   background-color: white;
+// }
 
-.profileCard-light {
-  background-color: white;
-  user-select: none;
-}
+// .profileCard-light {
+//   background-color: white;
+//   user-select: none;
+// }
 
-.profileCard-dark {
-  background: linear-gradient(135deg, #2a5298, black);
-  color: white;
-  user-select: none;
-}
+// .profileCard-dark {
+//   background: linear-gradient(135deg, #2a5298, black);
+//   color: white;
+//   user-select: none;
+// }
 
-.profileDescription-dark {
-  color: white;
-}
-
-.profileContainer-dark {
-  display: flex;
-  width: 100vw;
-  height: 90vh;
-  flex-direction: column;
-  background: linear-gradient(135deg, #2a5298, black);
-}
-
-.profileInfoSection {
-  width: 100vw;
-  height: 500px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-.img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  background-color: gainsboro;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-
-
-.settngBlock {
-  width: 105px;
-  height: 100px;
-  display: flex;
-  flex-direction: column;
-  background-color: aquamarine;
-}
-
-.blocks {
-  padding: 10px;
-}
-
-// :global(.ant-card-head-title) {
+// .profileDescription-dark {
 //   color: white;
 // }
 
-// :global(.ant-card-head-title) {
-//   &.dark {
-//     color: white;
-//   }
-//   &.light {
-//     color: black;
-//   }
+// .profileContainer-dark {
+//   display: flex;
+//   width: 100vw;
+//   height: 90vh;
+//   flex-direction: column;
+//   background: linear-gradient(135deg, #2a5298, black);
+// }
+
+// .profileInfoSection {
+//   width: 100vw;
+//   height: 500px;
+//   display: flex;
+//   flex-direction: row;
+//   justify-content: space-between;
+//   align-items: center;
+// }
+// .img {
+//   width: 150px;
+//   height: 150px;
+//   border-radius: 50%;
+//   background-color: gainsboro;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   margin-bottom: 10px;
+// }
+
+
+
+// .settngBlock {
+//   width: 105px;
+//   height: 100px;
+//   display: flex;
+//   flex-direction: column;
+//   background-color: aquamarine;
+// }
+
+// .blocks {
+//   padding: 10px;
 // }
