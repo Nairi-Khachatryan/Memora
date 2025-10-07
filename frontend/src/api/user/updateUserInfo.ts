@@ -12,6 +12,7 @@ export const updateUserInfo = createAsyncThunk(
     { values, userId }: { values: ValuesProp; userId: string },
     { rejectWithValue }
   ) => {
+
     try {
       const res = await fetch(
         `http://localhost:5051/user/updateUserInfo/${userId}`,

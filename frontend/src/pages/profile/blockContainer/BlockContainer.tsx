@@ -3,7 +3,7 @@ import { Class } from '../../../utils/createShortClassname';
 import { useAppSelector } from '../../../app/hooks';
 import { ROUTES } from '../../../routes/routhPath';
 import { PlusOutlined } from '@ant-design/icons';
-import { getBlock } from '../../../api/getBlock';
+import { getBlock } from '../../../api/block/getBlock';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { Card, Button, Space } from 'antd';

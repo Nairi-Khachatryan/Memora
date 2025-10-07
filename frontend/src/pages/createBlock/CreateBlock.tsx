@@ -1,4 +1,4 @@
-import { createBlock } from '../../api/createBlock';
+import { createBlock } from '../../api/block/createBlock';
 import { Card, Form, Input, Button } from 'antd';
 import { useAppSelector } from '../../app/hooks';
 import { useToast } from '../../hooks/useToast';

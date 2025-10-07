@@ -2,7 +2,7 @@ import { Button, Checkbox, Form, Input } from 'antd';
 import { useAppDispatch } from '../../../app/hooks';
 import { ROUTES } from '../../../routes/routhPath';
 import { useToast } from '../../../hooks/useToast';
-import { createUser } from '../../../api/authApi';
+import { createUser } from '../../../api/auth/authApi';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'antd/es/form/Form';
 import React, { useState } from 'react';

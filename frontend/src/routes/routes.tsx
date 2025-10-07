@@ -1,5 +1,9 @@
-import { Settings } from '../pages/settings/Settings';
+import { BlockDetailInfo } from '../pages/blockDetailInfo/BlockDetailInfo';
+import { CreateAvatar } from '../pages/createAvatar/CreateAvatar';
+import { EditProfile } from '../pages/editProfile/EditProfile';
+import { CreateBlock } from '../pages/createBlock/CreateBlock';
 import { createBrowserRouter } from 'react-router-dom';
+import { Settings } from '../pages/settings/Settings';
 import { SignIn } from '../pages/auth/signIn/SignIn';
 import { SignUp } from '../pages/auth/signUp/SignUp';
 import { Profile } from '../pages/profile/Profile';
@@ -7,10 +11,6 @@ import { AppLayout } from '../layout/AppLayout';
 import ProtectedRoute from './ProtectedRoute';
 import { Home } from '../pages/home/Home';
 import { ROUTES } from './routhPath';
-import { EditProfile } from '../pages/editProfile/EditProfile';
-import { CreateBlock } from '../pages/createBlock/CreateBlock';
-import { BlockDetailInfo } from '../pages/blockDetailInfo/BlockDetailInfo';
-import { CreateAvatar } from '../pages/createAvatar/CreateAvatar';
 
 export const router = createBrowserRouter([
   {

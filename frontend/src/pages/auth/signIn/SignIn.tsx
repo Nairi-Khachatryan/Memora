@@ -1,7 +1,7 @@
 import { useAppDispatch } from '../../../app/hooks';
 import { ROUTES } from '../../../routes/routhPath';
 import { useToast } from '../../../hooks/useToast';
-import { signInUser } from '../../../api/authApi';
+import { signInUser } from '../../../api/auth/authApi';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'antd/es/form/Form';
 import { Button, Form, Input } from 'antd';

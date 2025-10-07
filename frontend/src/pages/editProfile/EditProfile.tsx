@@ -1,23 +1,14 @@
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { ThemeContext } from '../../context/theme/themeContext';
 import { Card, Form, Input, Button, message } from 'antd';
-import { updateUserInfo } from '../../api/updateUserInfo';
+import { updateUserInfo } from '../../api/user/updateUserInfo';
+import { cleanValues } from '../../utils/cleanFuncValues';
 import { Class } from '../../utils/createShortClassname';
+import { useToast } from '../../hooks/useToast';
 import { useNavigate } from 'react-router-dom';
+import type { valuesProp } from './types';
 import s from './Edit.module.scss';
 import { useContext } from 'react';
-
-function cleanValues(values: valuesProp) {
-  return Object.fromEntries(
-    Object.entries(values).filter((_, v) => v !== undefined)
-  );
-}
-
-interface valuesProp {
-  name?: string;
-  surname?: string;
-  phone?: string;
-}
 
 export const EditProfile = () => {
   const [form] = Form.useForm();
@@ -25,6 +16,7 @@ export const EditProfile = () => {
   const dispatch = useAppDispatch();
   const { theme } = useContext(ThemeContext);
   const userId = useAppSelector((state) => state.user.id);
+  const { showToast } = useToast();
 
   const onFinish = async (values: valuesProp) => {
     if (!userId) {
@@ -32,8 +24,14 @@ export const EditProfile = () => {
       return;
     }
 
+    const { name, surname, phone } = cleanValues(values);
+
+    if (!name && !surname && !phone) {
+      return showToast({ type: 'error', message: 'Nothing to Update' });
+    }
+
     const res = await dispatch(
-      updateUserInfo({ values: cleanValues(values), userId })
+      updateUserInfo({ values: { name, surname, phone }, userId })
     ).unwrap();
 
     if (!res.success) {
@@ -75,7 +73,7 @@ export const EditProfile = () => {
           <Form.Item
             label="Phone"
             name="phone"
-            rules={[{ message: 'Please enter your phone'}]}
+            rules={[{ message: 'Please enter your phone' }]}
           >
             <Input placeholder="Enter phone" />
           </Form.Item>

@@ -1,4 +1,4 @@
-import { changePassword } from '../../../api/changePassword';
+import { changePassword } from '../../../api/auth/changePassword';
 import { useAppSelector } from '../../../app/hooks';
 import { Card, Form, Input, Button } from 'antd';
 import { useState } from 'react';

@@ -4,7 +4,7 @@ import { Class } from '../../../utils/createShortClassname';
 import { useAppSelector } from '../../../app/hooks';
 import { UserOutlined } from '@ant-design/icons';
 import { useQuery } from '@tanstack/react-query';
-import { getUser } from '../../../api/getUser';
+import { getUser } from '../../../api/user/getUser';
 import { useContext } from 'react';
 import s from './User.module.scss';
 

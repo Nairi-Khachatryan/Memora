@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { deleteBlock } from '../../api/deleteBlock';
-import { updateBlock } from '../../api/updateBlock';
+import { deleteBlock } from '../../api/block/deleteBlock';
+import { updateBlock } from '../../api/block/updateBlock';
 import { Card, Input, Button, message } from 'antd';
 import s from './BlockDetail.module.scss';
 import { useState } from 'react';
@@ -8,11 +8,11 @@ import { useState } from 'react';
 export const BlockDetailInfo = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [updatedValue, setUpdatedValue] = useState(location.state.block.text);
-  const [loading, setLoading] = useState(false);
+  const blockId = location.state.block._id;
   const header = location.state.block.lable;
   const inputValue = location.state.block.text;
-  const blockId = location.state.block._id;
+  const [loading, setLoading] = useState(false);
+  const [updatedValue, setUpdatedValue] = useState(location.state.block.text);
 
   const handleUpdate = async () => {
     setLoading(true);
@@ -39,9 +39,6 @@ export const BlockDetailInfo = () => {
   const handleDelete = async () => {
     setLoading(true);
     try {
-      // if (updatedValue === inputValue) {
-      //   return message.success('Nothing to Update');
-      // }
 
       const data = await deleteBlock(blockId);
 
