@@ -1,14 +1,14 @@
 import { ThemeContext } from '../../../context/theme/themeContext';
 import { Class } from '../../../utils/createShortClassname';
+import { getBlock } from '../../../api/block/getBlock';
 import { useAppSelector } from '../../../app/hooks';
 import { ROUTES } from '../../../routes/routhPath';
 import { PlusOutlined } from '@ant-design/icons';
-import { getBlock } from '../../../api/block/getBlock';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { Card, Button, Space } from 'antd';
-import { useContext } from 'react';
 import s from './Block.module.scss';
+import { useContext } from 'react';
 
 type BlockType = {
   _id: string;
@@ -21,6 +21,7 @@ export const BlockContainer = () => {
   const navigate = useNavigate();
   const id = useAppSelector((state) => state.user.id);
   const { theme } = useContext(ThemeContext);
+
   const { data: blocks = [], isLoading: blocksLoading } = useQuery<BlockType[]>(
     {
       queryKey: ['block', id],

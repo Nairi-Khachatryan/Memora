@@ -1,11 +1,11 @@
-import { authRouter } from './routes/auth.routes.ts';
+import { avatarRouter } from './routes/avatar.routes.ts';
 import { blockRouter } from './routes/block.routes.ts';
+import { authRouter } from './routes/auth.routes.ts';
 import { userRouter } from './routes/user.routes.ts';
 import { connectDb } from './config/db.ts';
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import { avatarRouter } from './routes/avatar.routes.ts';
 
 dotenv.config();
 

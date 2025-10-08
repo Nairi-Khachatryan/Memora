@@ -1,42 +1,30 @@
 import { ThemeContext } from '../../context/theme/themeContext';
 import { Class } from '../../utils/createShortClassname';
-import { useContext } from 'react';
-import s from './Home.module.scss';
+import type { AvatarType } from '../../types/avatarType';
+import { getAvatars } from '../../api/avatar/getAvatar';
+import { useQuery } from '@tanstack/react-query';
+import { useAppSelector } from '../../app/hooks';
 import { ROUTES } from '../../routes/routhPath';
 import { useNavigate } from 'react-router-dom';
+import { syrcleArray } from './helper';
+import { useContext } from 'react';
+import s from './Home.module.scss';
 
 export const Home = () => {
   const { theme } = useContext(ThemeContext);
   const navigate = useNavigate();
-  const syrcleArray = [
-    '+',
-    '+',
-    '+',
-    '+',
-    '+',
-    '+',
-    '+',
-    '+',
-    '+',
-    '+',
-    '+',
-    '+',
-    '+',
-    '+',
-    '+',
-    '+',
-    '+',
-    '+',
-    '+',
-    '+',
-    '+',
-    '+',
-    '+',
-    '+',
-    '+',
-    '+',
-    '+',
-  ];
+  const id = useAppSelector((state) => state.user.id);
+
+  const { data: avatars = [], isLoading: avatarLoading } = useQuery<
+    AvatarType[]
+  >({
+    queryKey: ['avatar', id],
+    queryFn: () => getAvatars(id),
+    enabled: !!id,
+  });
+
+  console.log(avatars, 'avatars');
+  console.log(avatarLoading, 'loading');
 
   return (
     <div className={Class(s, 'homeContainer', theme)}>
