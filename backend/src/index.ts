@@ -5,6 +5,7 @@ import { connectDb } from './config/db.ts';
 import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import { avatarRouter } from './routes/avatar.routes.ts';
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use('/auth', authRouter);
 app.use('/user', blockRouter);
 app.use('/user', userRouter);
+app.use('/avatar', avatarRouter);
 
 app.listen(PORT, () => {
   console.log(`Server listening at Port ${PORT}`);
