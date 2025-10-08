@@ -10,7 +10,7 @@ import { syrcleArray } from './helper';
 import { useContext } from 'react';
 import s from './Home.module.scss';
 
-export const Home = () => {
+export const Home: React.FC = () => {
   const { theme } = useContext(ThemeContext);
   const id = useAppSelector((state) => state.user.id);
 
@@ -22,8 +22,6 @@ export const Home = () => {
     enabled: !!id,
   });
 
-  // console.log(avatars, 'avatars');
-  // console.log(avatarLoading, 'loading');
 
   return (
     <div className={Class(s, 'homeContainer', theme)}>
@@ -38,7 +36,7 @@ export const Home = () => {
         {syrcleArray.map((item, idx) => {
           const foundAvatar = avatars.find((avatar) => avatar.idx === idx);
           return foundAvatar ? (
-            <AvatarItem key={idx} label={foundAvatar.name} />
+            <AvatarItem key={idx} {...foundAvatar} />
           ) : (
             <SyrcleItem key={idx} idx={idx} item={item} />
           );

@@ -1,4 +1,4 @@
-import { Space, Avatar, Typography, Divider, Descriptions } from 'antd';
+import { Space, Avatar, Divider, Descriptions } from 'antd';
 import { ThemeContext } from '../../../context/theme/themeContext';
 import { Class } from '../../../utils/createShortClassname';
 import { useAppSelector } from '../../../app/hooks';
@@ -15,7 +15,7 @@ type UserType = {
   id: string;
   email: string;
 };
-const { Title } = Typography;
+// const { Title } = Typography;
 
 export const UserProfileInfo = () => {
   const id = useAppSelector((state) => state.user.id);
@@ -30,12 +30,12 @@ export const UserProfileInfo = () => {
     <>
       <Space align="center" direction="vertical" style={{ width: '100%' }}>
         <Avatar size={96} icon={<UserOutlined />} />
-        <Title
+        {/* <Title
           style={{ color: theme === 'dark' ? 'white' : 'black' }}
           level={3}
         >
-          User Profile
-        </Title>
+  
+        </Title> */}
       </Space>
       <Divider />
       {userLoading ? (

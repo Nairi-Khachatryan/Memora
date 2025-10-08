@@ -1,0 +1,46 @@
+.wrapper {
+  width: 100vw;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #2a5298, black);
+}
+
+.card {
+  user-select: none;
+  padding: 10px;
+  width: 500px;
+  height: 300px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.name {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tag {
+  width: fit-content;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  margin: 16px 0;
+  gap: 8px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}

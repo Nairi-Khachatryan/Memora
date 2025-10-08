@@ -3,24 +3,23 @@ import s from './AvatarItem.module.scss';
 import { UserOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../routes/routhPath';
+import type { AvatarType } from '../../types/avatarType';
 
-type Props = {
-  label: string;
-};
-
-export const AvatarItem: React.FC<Props> = ({ label }) => {
+export const AvatarItem: React.FC<AvatarType> = (foundAvatar) => {
   const navigate = useNavigate();
 
+  const { name } = foundAvatar;
+
   function avatarMoreInfo() {
-    navigate(ROUTES.AVATAR_ITEM_MORE_INFO);
+    navigate(ROUTES.AVATAR_ITEM_MORE_INFO, { state: { foundAvatar } });
   }
   return (
     <div className={s.avatarItemContainer}>
       <div onClick={avatarMoreInfo} className={s.avatarItem}>
-        <UserOutlined style={{ marginBottom: 5 }} />
+        <UserOutlined />
       </div>
       <div>
-        <h3>{label}</h3>
+        <h3>{name}</h3>
       </div>
     </div>
   );
