@@ -3,28 +3,22 @@ import { UploadOutlined } from '@ant-design/icons';
 import { createAvatar } from '../../api/avatar/createAvatar';
 import { useToast } from '../../hooks/useToast';
 import { useAppSelector } from '../../app/hooks';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import type { AvatarType } from '../../types/avatarType';
 
 export const CreateAvatar = () => {
   const [form] = Form.useForm();
   const { showToast } = useToast();
   const navigate = useNavigate();
+  const location = useLocation();
   const ownerId = useAppSelector((state) => state.user.id);
 
-  type FormValues = {
-    ownerId: string;
-    name: string;
-    surname: string;
-    email?: string;
-    phone?: string;
-    role?: string;
-  };
-
-  const handleSubmit = async (values: FormValues) => {
+  const handleSubmit = async (values: AvatarType) => {
     if (!ownerId) {
       return;
     }
-    const finalValues = { ...values, ownerId };
+
+    const finalValues = { ...values, ownerId, idx: location.state.idx };
     const res = await createAvatar(finalValues);
 
     if (!res.success) {

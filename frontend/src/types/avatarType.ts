@@ -5,4 +5,5 @@ export type AvatarType = {
   phone?: string;
   role?: string;
   email?: string;
+  idx: number;
 };

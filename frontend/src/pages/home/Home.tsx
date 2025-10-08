@@ -31,16 +31,51 @@ export const Home = () => {
       <div className={s.homeHeader}>
         <h1>Family Try</h1>
       </div>
+
+      {avatarLoading && <p>Loading Avatars...</p>}
+      {!avatarLoading && avatars.length === 0 && <p>Avatars</p>}
+
+      {/* <div className={s.tryContainer}>
+        {syrcleArray.map((item, idx) => {
+          return (
+            <>
+              {avatars[idx]?.idx == idx ? (
+                <div key={idx}>{avatars[idx]?.name}</div>
+              ) : (
+                <div
+                  key={idx}
+                  className={s.avatarItem}
+                  onClick={() =>
+                    navigate(ROUTES.CREATE_AVATAR, { state: { idx } })
+                  }
+                >
+                  {item}
+                </div>
+              )}
+            </>
+          );
+        })}
+      </div> */}
+
       <div className={s.tryContainer}>
-        {syrcleArray.map((item, idx) => (
-          <div
-            onClick={() => navigate(ROUTES.CREATE_AVATAR)}
-            key={idx}
-            className={s.avatarItem}
-          >
-            {item}
-          </div>
-        ))}
+        {syrcleArray.map((item, idx) => {
+          // ищем аватар, у которого index совпадает с текущим idx
+          const foundAvatar = avatars.find((avatar) => avatar.idx === idx);
+
+          return foundAvatar ? (
+            <div key={idx} className={s.avatarItem}>
+              {foundAvatar.name}
+            </div>
+          ) : (
+            <div
+              key={idx}
+              className={s.avatarItem}
+              onClick={() => navigate(ROUTES.CREATE_AVATAR, { state: { idx } })}
+            >
+              {item}
+            </div>
+          );
+        })}
       </div>
     </div>
   );

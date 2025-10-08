@@ -4,7 +4,6 @@ import { Avatar } from '../models/avatar.model.ts';
 export const createAvatar = async (req: Request, res: Response) => {
   const { values } = req.body;
 
-
   try {
     const avatar = new Avatar(values);
     await avatar.save();
@@ -27,12 +26,8 @@ export const createAvatar = async (req: Request, res: Response) => {
 export const getAvatar = async (req: Request, res: Response) => {
   const { id } = req.params;
 
-  console.log(id, 'owner id');
-
   try {
     const avatars = await Avatar.find({ ownerId: id });
-
-    console.log(avatars, 'avatars');
 
     if (!avatars || avatars.length === 0) {
       return res.status(404).json({

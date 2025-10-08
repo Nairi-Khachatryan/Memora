@@ -25,6 +25,10 @@ const avatarSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  idx: {
+    type: Number,
+    required: true,
+  },
 });
 
 export const Avatar = mongoose.model('Avatar', avatarSchema);

@@ -7,8 +7,8 @@ import { PlusOutlined } from '@ant-design/icons';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { Card, Button, Space } from 'antd';
-import s from './Block.module.scss';
 import { useContext } from 'react';
+import s from './Block.module.scss';
 
 type BlockType = {
   _id: string;

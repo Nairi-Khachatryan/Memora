@@ -1,12 +1,8 @@
-type Values = {
-  name: string;
-  surname: string;
-  email?: string;
-  role?: string;
-  ownerId: string;
-};
+import type { AvatarType } from '../../types/avatarType';
 
-export const createAvatar = async (values: Values) => {
+
+
+export const createAvatar = async (values: AvatarType) => {
   const res = await fetch('http://localhost:5051/avatar/createAvatar', {
     method: 'Post',
     headers: { 'Content-Type': 'application/json' },
