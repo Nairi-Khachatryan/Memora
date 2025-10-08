@@ -11,6 +11,7 @@ import { AppLayout } from '../layout/AppLayout';
 import ProtectedRoute from './ProtectedRoute';
 import { Home } from '../pages/home/Home';
 import { ROUTES } from './routhPath';
+import { AvatarDetailInfo } from '../pages/avatarDetailInfo/AvatarDetailInfo';
 
 export const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ export const router = createBrowserRouter([
           {
             path: ROUTES.CREATE_AVATAR,
             element: <CreateAvatar />,
+          },
+          {
+            path: ROUTES.AVATAR_ITEM_MORE_INFO,
+            element: <AvatarDetailInfo />,
           },
         ],
       },

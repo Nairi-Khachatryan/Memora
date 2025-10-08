@@ -1,0 +1,22 @@
+.syrcleItem {
+  width: 110px;
+  height: 110px;
+  background-color: rgb(219, 59, 197);
+  border-radius: 50%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  color: white;
+  user-select: none;
+
+  &:hover {
+    background-color: rgb(236, 229, 13);
+    border: solid 0.5px white;
+  }
+
+  &:active {
+    background-color: rgb(255, 0, 195);
+  }
+}

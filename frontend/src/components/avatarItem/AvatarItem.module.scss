@@ -1,0 +1,36 @@
+.avatarItemContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatarItem {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  border: solid 1px black;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  color: white;
+  user-select: none;
+  color: black;
+  flex-direction: column;
+  padding-bottom: 5px;
+
+  &:hover {
+    background-color: rgb(236, 229, 13);
+  }
+
+  &:active {
+    background-color: rgb(5, 31, 146);
+    border: none;
+  }
+}
+
+h3 {
+  font-size: 1.2rem;
+  margin-top: -45px;
+}
