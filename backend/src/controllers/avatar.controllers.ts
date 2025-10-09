@@ -51,3 +51,25 @@ export const getAvatar = async (req: Request, res: Response) => {
     }
   }
 };
+
+export const deleteAvatar = async (req: Request, res: Response) => {
+  const ownerId = req.params.id;
+
+  try {
+    const deletedAvatar = await Avatar.findOneAndDelete({ ownerId });
+
+    if (!deletedAvatar) {
+      res.send(404).json({ success: false, message: 'Avatar not Found' });
+    }
+
+    res
+      .status(200)
+      .json({ success: true, message: 'Avatar deleted successfuly' });
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+    }
+  }
+};
+
+export const updateAvatar = async (req: Request, res: Response) => {};

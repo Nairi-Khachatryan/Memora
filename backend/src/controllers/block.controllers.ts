@@ -89,7 +89,7 @@ export const deleteBlock = async (req: Request, res: Response) => {
 
     res
       .status(200)
-      .json({ success: true, message: 'Block deleting successfuly' });
+      .json({ success: true, message: 'Block deleted successfuly' });
   } catch (error) {
     if (error instanceof Error) {
       console.log(error.message);
