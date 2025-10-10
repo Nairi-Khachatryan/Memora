@@ -19,9 +19,12 @@
   flex-direction: column;
   padding-bottom: 5px;
   cursor: pointer;
+  transition: all 0.3s ease;
 
   &:hover {
     background-color: rgb(236, 229, 13);
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
   }
 
   &:active {
@@ -45,9 +48,12 @@
   flex-direction: column;
   padding-bottom: 5px;
   cursor: pointer;
+  transition: all 0.3s ease;
 
   &:hover {
     background-color: rgb(236, 229, 13);
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 10px 20px rgba(255, 254, 254, 0.15);
   }
 
   &:active {
@@ -63,10 +69,6 @@
   color: white;
 }
 
-// h3 {
-//   font-size: 1.2rem;
-//   margin: auto;
-// }
 
 .nameTag-dark {
   color: white;

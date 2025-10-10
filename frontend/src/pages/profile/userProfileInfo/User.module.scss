@@ -1,0 +1,12 @@
+.copy {
+  font-size: medium;
+  margin-left: 22px;
+
+  &:hover {
+    color: rgb(255, 200, 0);
+  }
+
+  &:active {
+    color: red;
+  }
+}

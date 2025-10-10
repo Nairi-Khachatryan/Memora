@@ -1,7 +1,7 @@
-import React from 'react';
-import s from './Syrcle.module.scss';
-import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../routes/routhPath';
+import { useNavigate } from 'react-router-dom';
+import s from './Syrcle.module.scss';
+import React from 'react';
 
 type Props = {
   item: string;

@@ -2,7 +2,7 @@ import { Space, Avatar, Divider, Descriptions } from 'antd';
 import { ThemeContext } from '../../../context/theme/themeContext';
 import { Class } from '../../../utils/createShortClassname';
 import { useAppSelector } from '../../../app/hooks';
-import { UserOutlined } from '@ant-design/icons';
+import { CopyOutlined, UserOutlined } from '@ant-design/icons';
 import { useQuery } from '@tanstack/react-query';
 import { getUser } from '../../../api/user/getUser';
 import { useContext } from 'react';
@@ -15,7 +15,6 @@ type UserType = {
   id: string;
   email: string;
 };
-// const { Title } = Typography;
 
 export const UserProfileInfo = () => {
   const id = useAppSelector((state) => state.user.id);
@@ -30,12 +29,6 @@ export const UserProfileInfo = () => {
     <>
       <Space align="center" direction="vertical" style={{ width: '100%' }}>
         <Avatar size={96} icon={<UserOutlined />} />
-        {/* <Title
-          style={{ color: theme === 'dark' ? 'white' : 'black' }}
-          level={3}
-        >
-  
-        </Title> */}
       </Space>
       <Divider />
       {userLoading ? (
@@ -52,30 +45,35 @@ export const UserProfileInfo = () => {
             label="Name"
           >
             {user?.name}
+            <CopyOutlined className={s.copy} />
           </Descriptions.Item>
           <Descriptions.Item
             style={{ color: theme === 'dark' ? 'white' : 'black' }}
             label="Surname"
           >
             {user?.surname}
+            <CopyOutlined className={s.copy} />
           </Descriptions.Item>
           <Descriptions.Item
             style={{ color: theme === 'dark' ? 'white' : 'black' }}
             label="Phone"
           >
             {user?.phone}
+            <CopyOutlined className={s.copy} />
           </Descriptions.Item>
           <Descriptions.Item
             style={{ color: theme === 'dark' ? 'white' : 'black' }}
             label="User ID"
           >
             {user?.id}
+            <CopyOutlined className={s.copy} />
           </Descriptions.Item>
           <Descriptions.Item
             style={{ color: theme === 'dark' ? 'white' : 'black' }}
             label="Email"
           >
             {user?.email}
+            <CopyOutlined className={s.copy} />
           </Descriptions.Item>
         </Descriptions>
       )}

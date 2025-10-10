@@ -4,8 +4,8 @@ import { Class } from '../../utils/createShortClassname';
 import { UserOutlined } from '@ant-design/icons';
 import { ROUTES } from '../../routes/routhPath';
 import { useNavigate } from 'react-router-dom';
-import s from './AvatarItem.module.scss';
 import React, { useContext } from 'react';
+import s from './AvatarItem.module.scss';
 
 export const AvatarItem: React.FC<AvatarType> = (foundAvatar) => {
   const navigate = useNavigate();
