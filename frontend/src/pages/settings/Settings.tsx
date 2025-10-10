@@ -7,6 +7,7 @@ import s from './Settings.module.scss';
 import type { TabsProps } from 'antd';
 import { useContext } from 'react';
 import { Card, Tabs } from 'antd';
+import { Account } from './account/Account';
 
 export const Settings = () => {
   const { theme, handleChangeTheme } = useContext(ThemeContext);
@@ -28,6 +29,11 @@ export const Settings = () => {
       key: '3',
       label: 'Notifications',
       children: <NotificationTab />,
+    },
+    {
+      key: '4',
+      label: 'Account',
+      children: <Account />,
     },
   ];
 
