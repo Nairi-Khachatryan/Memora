@@ -47,7 +47,18 @@ export const AvatarDetailInfo: React.FC = () => {
               <Text strong>{`${avatar.name} ${avatar.surname}`}</Text>
               {avatar.role && (
                 <Tag color="blue" className={s.tag}>
-                  {avatar.role}
+                  <div className={s.tagContent}>
+                    <span className={s.tagLabel}>Role:</span>
+                    <span className={s.tagValue}>{avatar.role}</span>
+                  </div>
+                </Tag>
+              )}
+              {avatar.gender && (
+                <Tag color="blue" className={s.tag}>
+                  <div className={s.tagContent}>
+                    <span className={s.tagLabel}>Gender:</span>
+                    <span className={s.tagValue}>{avatar.gender}</span>
+                  </div>
                 </Tag>
               )}
             </div>

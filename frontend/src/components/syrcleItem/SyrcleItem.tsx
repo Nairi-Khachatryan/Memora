@@ -12,6 +12,7 @@ export const SyrcleItem: React.FC<Props> = ({ item, idx }) => {
   const navigate = useNavigate();
   return (
     <div
+      draggable
       className={s.syrcleItem}
       onClick={() => navigate(ROUTES.CREATE_AVATAR, { state: { idx } })}
     >

@@ -1,10 +1,10 @@
-import { Form, Input, Button, Upload, Card } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
 import { createAvatar } from '../../api/avatar/createAvatar';
-import { useToast } from '../../hooks/useToast';
-import { useAppSelector } from '../../app/hooks';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { Form, Input, Button, Upload, Card } from 'antd';
 import type { AvatarType } from '../../types/avatarType';
+import { UploadOutlined } from '@ant-design/icons';
+import { useAppSelector } from '../../app/hooks';
+import { useToast } from '../../hooks/useToast';
 
 export const CreateAvatar = () => {
   const [form] = Form.useForm();
@@ -85,9 +85,17 @@ export const CreateAvatar = () => {
         <Form.Item
           label="Role"
           name="role"
-          rules={[{ message: 'Please select a role!' }]}
+          rules={[{ message: 'Please enter a role!' }]}
         >
           <Input placeholder="Enter Role" />
+        </Form.Item>
+
+        <Form.Item
+          label="Gender"
+          name="gender"
+          rules={[{ message: 'Please enter a Gender!' }]}
+        >
+          <Input placeholder="Enter Gender" />
         </Form.Item>
 
         <Form.Item>
