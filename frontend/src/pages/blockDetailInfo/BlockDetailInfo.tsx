@@ -1,7 +1,7 @@
+import { Card, Input, Button, message, Popconfirm } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { deleteBlock } from '../../api/block/deleteBlock';
 import { updateBlock } from '../../api/block/updateBlock';
-import { Card, Input, Button, message } from 'antd';
 import s from './BlockDetail.module.scss';
 import { useState } from 'react';
 
@@ -39,7 +39,6 @@ export const BlockDetailInfo = () => {
   const handleDelete = async () => {
     setLoading(true);
     try {
-
       const data = await deleteBlock(blockId);
 
       if (!data.success) {
@@ -74,9 +73,17 @@ export const BlockDetailInfo = () => {
           placeholder="Edit block text"
         />
         <div style={{ marginTop: 16, textAlign: 'right' }}>
-          <Button onClick={handleDelete} type="primary" danger>
-            Delete
-          </Button>
+          <Popconfirm
+            title="Are you sure you wont to Delete Block"
+            onConfirm={handleDelete}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Button type="primary" danger>
+              Delete
+            </Button>
+          </Popconfirm>
+
           <Button type="primary" onClick={handleUpdate} loading={loading}>
             Update
           </Button>

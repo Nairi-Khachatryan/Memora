@@ -2,6 +2,7 @@ import { ThemeContext } from '../../context/theme/themeContext';
 import { removeUser } from '../../features/user/userSlice';
 import logoLight from '../../assets/logo-light2.png';
 import logoDark from '../../assets/logo-dark.png';
+import { Button, Popconfirm, message } from 'antd';
 import { Logo } from '../../components/logo/Logo';
 import { useAppDispatch } from '../../app/hooks';
 import { ROUTES } from '../../routes/routhPath';
@@ -9,13 +10,17 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { useContext } from 'react';
 import './Header.module.scss';
-import { Button } from 'antd';
 
 export const Header = () => {
   const isAuth = useAuth();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { theme } = useContext(ThemeContext);
+
+  function confirmLogout() {
+    message.success('Log out');
+    dispatch(removeUser());
+  }
 
   return (
     <header>
@@ -31,7 +36,14 @@ export const Header = () => {
             >
               Profile
             </Button>
-            <Button onClick={() => dispatch(removeUser())}>Log Out</Button>
+            <Popconfirm
+              title="Are you sure you want to log out?"
+              onConfirm={confirmLogout}
+              okText="Yes"
+              cancelText="No"
+            >
+              <Button>Log Out</Button>
+            </Popconfirm>
           </>
         ) : (
           <>

@@ -1,15 +1,14 @@
-import { Card, Tag, Typography, Button, Space, Avatar } from 'antd';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { UserOutlined } from '@ant-design/icons';
-import s from './Avatar.module.scss';
-import React, { useContext } from 'react';
+import { Card, Tag, Typography, Button, Space, Avatar, Popconfirm } from 'antd';
+import { ThemeContext } from '../../context/theme/themeContext';
 import { deleteAvatar } from '../../api/avatar/deleteAvatar';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Class } from '../../utils/createShortClassname';
+import { UserOutlined } from '@ant-design/icons';
 import { useAppSelector } from '../../app/hooks';
 import { useToast } from '../../hooks/useToast';
-import { ThemeContext } from '../../context/theme/themeContext';
-import { Class } from '../../utils/createShortClassname';
-// import { updateAvatar } from '../../api/avatar/updateAvatar';
 import { ROUTES } from '../../routes/routhPath';
+import React, { useContext } from 'react';
+import s from './Avatar.module.scss';
 
 const { Text } = Typography;
 
@@ -33,11 +32,6 @@ export const AvatarDetailInfo: React.FC = () => {
     showToast({ type: 'success', message: res.message });
     navigate(-1);
   };
-
-  // const handleUpdateAvatar = async () => {
-  // navigate(ROUTES.)
-  // const res = await updateAvatar(avatarId, )
-  // };
 
   return (
     <div className={Class(s, 'wrapper', theme)}>
@@ -80,9 +74,14 @@ export const AvatarDetailInfo: React.FC = () => {
           >
             Go to Update
           </Button>
-          <Button onClick={handleDeleteAvatar} danger>
-            Delete
-          </Button>
+          <Popconfirm
+            title="Are you sure you want to Delete Avatar?"
+            onConfirm={handleDeleteAvatar}
+            okText="Yes"
+            cancelText="No"
+          >
+            <Button danger>Delete</Button>
+          </Popconfirm>
         </Space>
       </Card>
     </div>
