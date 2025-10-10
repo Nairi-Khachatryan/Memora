@@ -1,7 +1,8 @@
+import { API_AVATAR } from '../../routes/paths';
 import type { AvatarType } from '../../types/avatarType';
 
 export const getAvatars = async (id: string | null): Promise<AvatarType[]> => {
-  const res = await fetch(`http://localhost:5051/avatar/getAvatar/${id}`);
+  const res = await fetch(`${API_AVATAR}/getAvatar/${id}`);
 
   const data = await res.json();
 

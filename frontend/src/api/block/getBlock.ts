@@ -1,3 +1,5 @@
+import {  API_BLOCK } from '../../routes/paths';
+
 type BlockType = {
   _id: string;
   lable: string;
@@ -6,7 +8,7 @@ type BlockType = {
 };
 
 export const getBlock = async (id: string | null): Promise<BlockType[]> => {
-  const res = await fetch(`http://localhost:5051/user/getBlock/${id}`, {
+  const res = await fetch(`${API_BLOCK}/getBlock/${id}`, {
     method: 'GET',
   });
 

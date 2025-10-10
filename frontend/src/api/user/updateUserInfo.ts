@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { API_USER } from '../../routes/paths';
 
 interface ValuesProp {
   name?: string;
@@ -12,16 +13,12 @@ export const updateUserInfo = createAsyncThunk(
     { values, userId }: { values: ValuesProp; userId: string },
     { rejectWithValue }
   ) => {
-
     try {
-      const res = await fetch(
-        `http://localhost:5051/user/updateUserInfo/${userId}`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ values }),
-        }
-      );
+      const res = await fetch(`${API_USER}/updateUserInfo/${userId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ values }),
+      });
 
       if (!res.ok) {
         return rejectWithValue(await res.text());

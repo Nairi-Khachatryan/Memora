@@ -1,3 +1,5 @@
+import { API_BLOCK } from '../../routes/paths';
+
 interface reqParams {
   lable: string;
   text: string;
@@ -5,7 +7,7 @@ interface reqParams {
 }
 
 export const createBlock = async ({ lable, text, ownerId }: reqParams) => {
-  const res = await fetch('http://localhost:5051/user/createBlock', {
+  const res = await fetch(`${API_BLOCK}/createBlock`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ lable, text, ownerId }),
