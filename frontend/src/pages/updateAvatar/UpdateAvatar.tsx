@@ -12,8 +12,16 @@ export const UpdateAvatar = () => {
 
   const foundAvatar = location.state;
 
+  interface UpdateAvatar {
+    name: string;
+    surname: string;
+    phone: string;
+    role: string;
+    email: string;
+  }
+
   const { name, surname, role, email, phone } = location.state || {};
-  const [updatedValue, setUpdatedValue] = useState({
+  const [updatedValue, setUpdatedValue] = useState<UpdateAvatar>({
     name: name || '',
     surname: surname || '',
     role: role || '',

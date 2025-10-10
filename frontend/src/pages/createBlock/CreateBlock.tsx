@@ -7,7 +7,6 @@ import s from './Create.module.scss';
 import { useState } from 'react';
 
 export const CreateBlock = () => {
-  
   const navigate = useNavigate();
   const { showToast } = useToast();
   const ownerId = useAppSelector((state) => state.user.id);

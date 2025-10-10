@@ -1,16 +1,20 @@
+import { API_AUTH } from '../../routes/paths';
+
+interface ChangePassRes {
+  success: boolean;
+  message: string;
+}
+
 export const changePassword = async (
   userId: string,
   oldPassword: string,
   newPassword: string
-) => {
-  const res = await fetch(
-    `http://localhost:5051/auth/changePassword/${userId}`,
-    {
-      method: 'Post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ oldPassword, newPassword }),
-    }
-  );
+): Promise<ChangePassRes> => {
+  const res = await fetch(`${API_AUTH}/changePassword/${userId}`, {
+    method: 'Post',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ oldPassword, newPassword }),
+  });
 
   return await res.json();
 };

@@ -1,9 +1,16 @@
 import type { Request, Response } from 'express';
 import { User } from '../models/user.model.ts';
+import mongoose from 'mongoose';
 
 export const updateUserInfo = async (req: Request, res: Response) => {
   const id = req.params.id;
   const values = req.body.values;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res
+      .status(400)
+      .json({ success: false, message: 'Invalid ID format' });
+  }
 
   try {
     const updatedUser = await User.findByIdAndUpdate(
@@ -36,7 +43,7 @@ export const getMe = async (req: Request, res: Response) => {
     if (!findUser) {
       return res.status(404).json({
         success: false,
-        message: `Cannot find User with id ${USER_ID}`,
+        message: `Cannot find user with ID ${USER_ID}.`,
       });
     }
 

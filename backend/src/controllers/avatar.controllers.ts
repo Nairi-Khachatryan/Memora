@@ -1,5 +1,6 @@
 import type { Request, Response } from 'express';
 import { Avatar } from '../models/avatar.model.ts';
+import mongoose from 'mongoose';
 
 export const createAvatar = async (req: Request, res: Response) => {
   const { values } = req.body;
@@ -32,7 +33,7 @@ export const getAvatar = async (req: Request, res: Response) => {
     if (!avatars || avatars.length === 0) {
       return res.status(404).json({
         success: false,
-        message: 'No blocks found for this owner',
+        message: 'There are no blocks associated with this owner.',
         data: [],
       });
     }
@@ -59,12 +60,12 @@ export const deleteAvatar = async (req: Request, res: Response) => {
     const deletedAvatar = await Avatar.findOneAndDelete({ ownerId });
 
     if (!deletedAvatar) {
-      res.send(404).json({ success: false, message: 'Avatar not Found' });
+      res.send(404).json({ success: false, message: 'Avatar not found.' });
     }
 
     res
       .status(200)
-      .json({ success: true, message: 'Avatar deleted successfuly' });
+      .json({ success: true, message: 'Avatar deleted successfully.' });
   } catch (error) {
     if (error instanceof Error) {
       console.log(error.message);
@@ -76,7 +77,11 @@ export const updateAvatar = async (req: Request, res: Response) => {
   const AvatarId = req.params.id;
   const updatedValue = req.body;
 
-  console.log(updatedValue, 'updateVal on server');
+  if (!mongoose.Types.ObjectId.isValid(AvatarId)) {
+    return res
+      .status(400)
+      .json({ success: false, message: 'Invalid ID format' });
+  }
 
   try {
     const findAvatar = await Avatar.findByIdAndUpdate(
@@ -88,11 +93,11 @@ export const updateAvatar = async (req: Request, res: Response) => {
     if (!findAvatar) {
       return res
         .send(404)
-        .json({ success: false, message: 'Avatar is not Defined' });
+        .json({ success: false, message: 'Avatar is not defined.' });
     }
     res
       .status(201)
-      .json({ success: true, message: 'Avatar Updated Succesfuly' });
+      .json({ success: true, message: 'Avatar updated successfully.' });
   } catch (error) {
     if (error instanceof Error) {
       console.log(error.message);

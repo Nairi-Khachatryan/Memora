@@ -1,5 +1,6 @@
 import type { Request, Response } from 'express';
 import { Block } from '../models/block.model.ts';
+import mongoose from 'mongoose';
 
 export const createBlock = async (req: Request, res: Response) => {
   const { lable, text, ownerId } = req.body;
@@ -54,8 +55,11 @@ export const updateBlock = async (req: Request, res: Response) => {
   const id = req.params.id;
   const text = req.body.updatedValue;
 
-
-  
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res
+      .status(400)
+      .json({ success: false, message: 'Invalid ID format' });
+  }
 
   try {
     const updatedBlock = await Block.findByIdAndUpdate(
@@ -67,7 +71,7 @@ export const updateBlock = async (req: Request, res: Response) => {
     if (!updatedBlock) {
       return res
         .status(404)
-        .json({ success: false, message: 'Block not found' });
+        .json({ success: false, message: 'Block not found.' });
     }
 
     res.status(200).json({ success: true, data: updatedBlock });

@@ -6,6 +6,10 @@ interface reqParams {
   ownerId: string | null;
 }
 
+interface BlockCreateResponce {
+  success: boolean;
+  message: string;
+}
 export const createBlock = async ({ lable, text, ownerId }: reqParams) => {
   const res = await fetch(`${API_BLOCK}/createBlock`, {
     method: 'POST',
@@ -13,5 +17,5 @@ export const createBlock = async ({ lable, text, ownerId }: reqParams) => {
     body: JSON.stringify({ lable, text, ownerId }),
   });
 
-  return await res.json();
+  return (await res.json()) as BlockCreateResponce;
 };

@@ -3,7 +3,9 @@ import { ThemeContext } from '../../context/theme/themeContext';
 import { deleteAvatar } from '../../api/avatar/deleteAvatar';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Class } from '../../utils/createShortClassname';
+import type { AvatarType } from '../../types/avatarType';
 import { UserOutlined } from '@ant-design/icons';
+import type { Location } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
 import { useToast } from '../../hooks/useToast';
 import { ROUTES } from '../../routes/routhPath';
@@ -13,7 +15,9 @@ import s from './Avatar.module.scss';
 const { Text } = Typography;
 
 export const AvatarDetailInfo: React.FC = () => {
-  const location = useLocation();
+  type LocationState = { foundAvatar: AvatarType };
+
+  const location = useLocation() as Location<LocationState>;
   const avatar = location.state.foundAvatar;
   const navigate = useNavigate();
   const id = useAppSelector((state) => state.user.id);

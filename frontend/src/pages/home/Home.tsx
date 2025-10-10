@@ -22,7 +22,6 @@ export const Home: React.FC = () => {
     enabled: !!id,
   });
 
-
   return (
     <div className={Class(s, 'homeContainer', theme)}>
       <div className={s.homeHeader}>
@@ -30,11 +29,11 @@ export const Home: React.FC = () => {
       </div>
 
       {avatarLoading && <p>Loading Avatars...</p>}
-      {!avatarLoading && avatars.length === 0 && <p>Avatars</p>}
+      {!avatarLoading && avatars.length === 0 && <p>Log in to view Avatars.</p>}
 
       <div className={s.tryContainer}>
         {syrcleArray.map((item, idx) => {
-          const foundAvatar = avatars.find((avatar) => avatar.idx === idx);
+          const foundAvatar = avatars.find((avatar) => avatar.idx === idx)
           return foundAvatar ? (
             <AvatarItem key={idx} {...foundAvatar} />
           ) : (
