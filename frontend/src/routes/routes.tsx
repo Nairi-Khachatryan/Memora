@@ -12,6 +12,7 @@ import ProtectedRoute from './ProtectedRoute';
 import { Home } from '../pages/home/Home';
 import { ROUTES } from './routhPath';
 import { AvatarDetailInfo } from '../pages/avatarDetailInfo/AvatarDetailInfo';
+import { UpdateAvatar } from '../pages/updateAvatar/UpdateAvatar';
 
 export const router = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ export const router = createBrowserRouter([
           {
             path: ROUTES.AVATAR_ITEM_MORE_INFO,
             element: <AvatarDetailInfo />,
+          },
+          {
+            path: ROUTES.UPDATE_AVATAR,
+            element: <UpdateAvatar />,
           },
         ],
       },

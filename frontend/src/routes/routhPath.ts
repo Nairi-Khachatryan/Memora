@@ -9,4 +9,5 @@ export const ROUTES = {
   DETAIL_INFO: '/detail-info',
   CREATE_AVATAR: '/crate-avatar',
   AVATAR_ITEM_MORE_INFO: '/avatar-item-more-info',
+  UPDATE_AVATAR: '/update-avatar',
 } as const;

@@ -2,10 +2,14 @@ import { Card, Tag, Typography, Button, Space, Avatar } from 'antd';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { UserOutlined } from '@ant-design/icons';
 import s from './Avatar.module.scss';
-import React from 'react';
+import React, { useContext } from 'react';
 import { deleteAvatar } from '../../api/avatar/deleteAvatar';
 import { useAppSelector } from '../../app/hooks';
 import { useToast } from '../../hooks/useToast';
+import { ThemeContext } from '../../context/theme/themeContext';
+import { Class } from '../../utils/createShortClassname';
+// import { updateAvatar } from '../../api/avatar/updateAvatar';
+import { ROUTES } from '../../routes/routhPath';
 
 const { Text } = Typography;
 
@@ -15,6 +19,9 @@ export const AvatarDetailInfo: React.FC = () => {
   const navigate = useNavigate();
   const id = useAppSelector((state) => state.user.id);
   const { showToast } = useToast();
+  const { theme } = useContext(ThemeContext);
+
+  const foundAvatar = location.state.foundAvatar;
 
   const handleDeleteAvatar = async () => {
     const res = await deleteAvatar(id);
@@ -27,10 +34,13 @@ export const AvatarDetailInfo: React.FC = () => {
     navigate(-1);
   };
 
-  const handleUpdateAvatar = () => {};
+  // const handleUpdateAvatar = async () => {
+  // navigate(ROUTES.)
+  // const res = await updateAvatar(avatarId, )
+  // };
 
   return (
-    <div className={s.wrapper}>
+    <div className={Class(s, 'wrapper', theme)}>
       <Card
         title={
           <div className={s.header}>
@@ -62,8 +72,13 @@ export const AvatarDetailInfo: React.FC = () => {
 
         <Space className={s.buttons}>
           <Button onClick={() => navigate(-1)}>Back</Button>
-          <Button onClick={handleUpdateAvatar} type="primary">
-            Update
+          <Button
+            onClick={() =>
+              navigate(ROUTES.UPDATE_AVATAR, { state: foundAvatar })
+            }
+            type="primary"
+          >
+            Go to Update
           </Button>
           <Button onClick={handleDeleteAvatar} danger>
             Delete

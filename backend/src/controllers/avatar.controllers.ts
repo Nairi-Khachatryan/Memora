@@ -72,4 +72,30 @@ export const deleteAvatar = async (req: Request, res: Response) => {
   }
 };
 
-export const updateAvatar = async (req: Request, res: Response) => {};
+export const updateAvatar = async (req: Request, res: Response) => {
+  const AvatarId = req.params.id;
+  const updatedValue = req.body;
+
+  console.log(updatedValue, 'updateVal on server');
+
+  try {
+    const findAvatar = await Avatar.findByIdAndUpdate(
+      AvatarId,
+      { $set: updatedValue },
+      { new: true }
+    );
+
+    if (!findAvatar) {
+      return res
+        .send(404)
+        .json({ success: false, message: 'Avatar is not Defined' });
+    }
+    res
+      .status(201)
+      .json({ success: true, message: 'Avatar Updated Succesfuly' });
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+    }
+  }
+};
