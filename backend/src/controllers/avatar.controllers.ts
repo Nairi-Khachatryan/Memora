@@ -55,9 +55,10 @@ export const getAvatar = async (req: Request, res: Response) => {
 
 export const deleteAvatar = async (req: Request, res: Response) => {
   const ownerId = req.params.id;
+  const { idx } = req.body;
 
   try {
-    const deletedAvatar = await Avatar.findOneAndDelete({ ownerId });
+    const deletedAvatar = await Avatar.findOneAndDelete({ ownerId, idx });
 
     if (!deletedAvatar) {
       res.send(404).json({ success: false, message: 'Avatar not found.' });

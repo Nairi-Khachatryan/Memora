@@ -5,10 +5,10 @@ import { copyProfInfo } from '../../../utils/copyProfileInfo';
 import { Class } from '../../../utils/createShortClassname';
 import { useAppSelector } from '../../../app/hooks';
 import { getUser } from '../../../api/user/getUser';
+import type { UserType } from './UserProfile.types';
 import { useQuery } from '@tanstack/react-query';
-import type { UserType } from './User.types';
 import React, { useContext } from 'react';
-import s from './User.module.scss';
+import s from './UserProfile.module.scss';
 
 export const UserProfileInfo: React.FC = () => {
   const id = useAppSelector((state) => state.user.id);
@@ -28,7 +28,9 @@ export const UserProfileInfo: React.FC = () => {
   return (
     <>
       <Space align="center" direction="vertical" style={{ width: '100%' }}>
-        <Avatar size={96} icon={<UserOutlined />} />
+        <div className={s.avatar}>
+          <Avatar size={96} icon={<UserOutlined />} />
+        </div>
       </Space>
       <Divider />
       {userLoading ? (

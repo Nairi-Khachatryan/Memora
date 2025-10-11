@@ -26,13 +26,9 @@ export const BlockContainer: React.FC = () => {
 
   return (
     <>
-      <Card
-        title="My Blocks"
-        className={Class(s, 'blocksCard', theme)}
-        style={{ marginTop: 20 }}
-      >
+      <Card className={Class(s, 'blocksCard', theme)} style={{ marginTop: 20 }}>
+        <h2>My blocks</h2>
         {blocksLoading && <p>Loading Blocks...</p>}
-        {!blocksLoading && blocks.length === 0 && <p>No blocks yet</p>}
 
         <Space wrap>
           {blocks?.map((block) => (

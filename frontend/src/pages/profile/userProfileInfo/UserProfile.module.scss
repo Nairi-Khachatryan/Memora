@@ -15,3 +15,13 @@
 .profileDescriptions {
   user-select: none;
 }
+
+.avatar {
+  transition: all 0.3s ease;
+  border-radius: 50%;
+
+  &:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
+}

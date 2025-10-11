@@ -27,7 +27,8 @@ export const AvatarDetailInfo: React.FC = () => {
   const foundAvatar = location.state.foundAvatar;
 
   const handleDeleteAvatar = async () => {
-    const res = await deleteAvatar(id);
+    const res = await deleteAvatar(id, foundAvatar.idx);
+    
 
     if (!res.success) {
       return showToast({ type: 'error', message: res.message });
