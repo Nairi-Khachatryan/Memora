@@ -32,7 +32,7 @@ export const Header = () => {
         {isAuth ? (
           <>
             <Button
-              style={{ marginRight: 9 }}
+              style={{ marginRight: 9, backgroundColor: 'gold' }}
               onClick={() => navigate(ROUTES.PROFILE)}
             >
               Profile
@@ -43,7 +43,7 @@ export const Header = () => {
               okText="Yes"
               cancelText="No"
             >
-              <Button>Log Out</Button>
+              <Button style={{ backgroundColor: 'gold' }}>Log Out</Button>
             </Popconfirm>
           </>
         ) : (

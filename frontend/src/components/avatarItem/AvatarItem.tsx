@@ -19,7 +19,7 @@ export const AvatarItem: React.FC<AvatarType> = (foundAvatar) => {
   return (
     <div className={s.avatarItemContainer}>
       <div onClick={avatarMoreInfo} className={Class(s, 'avatarItem', theme)}>
-        <UserOutlined style={{ color: theme === 'dark' ? 'white' : 'black' }} />
+        <UserOutlined style={{ color: theme === 'dark' ? 'gold' : 'black' }} />
       </div>
       <div>
         <h3 className={Class(s, 'nameTag', theme)}>{name}</h3>

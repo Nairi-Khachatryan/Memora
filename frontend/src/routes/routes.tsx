@@ -1,5 +1,8 @@
+import { AvatarDetailInfo } from '../pages/avatarDetailInfo/AvatarDetailInfo';
+import { AboutOurProject } from '../pages/aboutOurProject/AboutourProject';
 import { BlockDetailInfo } from '../pages/blockDetailInfo/BlockDetailInfo';
 import { CreateAvatar } from '../pages/createAvatar/CreateAvatar';
+import { UpdateAvatar } from '../pages/updateAvatar/UpdateAvatar';
 import { EditProfile } from '../pages/editProfile/EditProfile';
 import { CreateBlock } from '../pages/createBlock/CreateBlock';
 import { createBrowserRouter } from 'react-router-dom';
@@ -11,8 +14,6 @@ import { AppLayout } from '../layout/AppLayout';
 import ProtectedRoute from './ProtectedRoute';
 import { Home } from '../pages/home/Home';
 import { ROUTES } from './routhPath';
-import { AvatarDetailInfo } from '../pages/avatarDetailInfo/AvatarDetailInfo';
-import { UpdateAvatar } from '../pages/updateAvatar/UpdateAvatar';
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.SIGN_UP,
         element: <SignUp />,
+      },
+      {
+        path: ROUTES.ABOUT_OUR_PROJECT,
+        element: <AboutOurProject />,
       },
       {
         element: <ProtectedRoute />,

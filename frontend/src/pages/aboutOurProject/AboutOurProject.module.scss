@@ -1,0 +1,34 @@
+.aboutPage {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 1.5rem;
+
+  .aboutContainer {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  .aboutCard {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
+    font-size: 2rem;
+  }
+
+  h2 {
+    color: #1890ff;
+    margin-bottom: 30px;
+    text-align: center; /* выравниваем заголовки */
+  }
+
+  p {
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: center; /* выравниваем текст */
+  }
+}

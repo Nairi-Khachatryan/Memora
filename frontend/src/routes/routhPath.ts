@@ -9,5 +9,6 @@ export const ROUTES = {
   CREATE_BLOCK: '/create-block',
   CREATE_AVATAR: '/crate-avatar',
   UPDATE_AVATAR: '/update-avatar',
+  ABOUT_OUR_PROJECT: '/about-our-project',
   AVATAR_ITEM_MORE_INFO: '/avatar-item-more-info',
 } as const;

@@ -10,10 +10,13 @@ import type { AvatarType } from './Home.types';
 import { syrcleArray } from './helper';
 import { useContext } from 'react';
 import s from './Home.module.scss';
+import { ROUTES } from '../../routes/routhPath';
+import { useNavigate } from 'react-router-dom';
 
 export const Home: React.FC = () => {
   const { theme } = useContext(ThemeContext);
   const id = useAppSelector((state) => state.user.id);
+  const navigate = useNavigate();
 
   const { data: avatars = [], isLoading: avatarLoading } = useQuery<
     AvatarType[]
@@ -26,7 +29,7 @@ export const Home: React.FC = () => {
   return (
     <div className={Class(s, 'homeContainer', theme)}>
       <div className={s.homeHeader}>
-        <h1>Family Try</h1>
+        <h1 onClick={() => navigate(ROUTES.ABOUT_OUR_PROJECT)}>Family Try</h1>
       </div>
 
       <div className={s.tryContainer}>

@@ -36,4 +36,14 @@
 
 h1 {
   color: gold;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    border: solid 2px gold;
+    border-radius: 40px;
+    padding: 20px;
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 10px 20px rgba(255, 254, 254, 0.15);
+  }
 }

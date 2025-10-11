@@ -41,7 +41,7 @@
   justify-content: center;
   border-radius: 50%;
   align-items: center;
-  border: solid 1px white;
+  border: solid 1px gold;
   font-size: 3rem;
   user-select: none;
   color: black;
@@ -62,16 +62,12 @@
   }
 }
 
-.userIcon-light {
-}
-
 .userIcon-dark {
-  color: white;
+  color: gold;
 }
-
 
 .nameTag-dark {
-  color: white;
+  color: gold;
 }
 
 .nameTag-light {
