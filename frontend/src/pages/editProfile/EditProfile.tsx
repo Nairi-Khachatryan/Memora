@@ -4,11 +4,11 @@ import { updateUserInfo } from '../../api/user/updateUserInfo';
 import { Card, Form, Input, Button, message } from 'antd';
 import { cleanValues } from '../../utils/cleanFuncValues';
 import { Class } from '../../utils/createShortClassname';
+import type { valuesProp } from './EditProfile.types';
 import { useToast } from '../../hooks/useToast';
 import { useNavigate } from 'react-router-dom';
 import { useContext, useState } from 'react';
-import type { valuesProp } from './types';
-import s from './Edit.module.scss';
+import s from './EditProfile.module.scss';
 
 export const EditProfile = () => {
   const [loading, setloading] = useState(false);

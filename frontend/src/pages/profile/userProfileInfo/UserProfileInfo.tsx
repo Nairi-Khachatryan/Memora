@@ -6,18 +6,11 @@ import { Class } from '../../../utils/createShortClassname';
 import { useAppSelector } from '../../../app/hooks';
 import { getUser } from '../../../api/user/getUser';
 import { useQuery } from '@tanstack/react-query';
-import { useContext } from 'react';
+import type { UserType } from './User.types';
+import React, { useContext } from 'react';
 import s from './User.module.scss';
 
-type UserType = {
-  name: string;
-  surname: string;
-  phone: string;
-  id: string;
-  email: string;
-};
-
-export const UserProfileInfo = () => {
+export const UserProfileInfo: React.FC = () => {
   const id = useAppSelector((state) => state.user.id);
   const { theme } = useContext(ThemeContext);
 
@@ -29,8 +22,9 @@ export const UserProfileInfo = () => {
 
   function handleCopyItem(text: string | undefined) {
     copyProfInfo(text);
-    message.success('Text Copied');
+    return message.success('Text Copied');
   }
+
   return (
     <>
       <Space align="center" direction="vertical" style={{ width: '100%' }}>

@@ -3,7 +3,7 @@ import { ThemeContext } from '../../context/theme/themeContext';
 import { deleteAvatar } from '../../api/avatar/deleteAvatar';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Class } from '../../utils/createShortClassname';
-import type { AvatarType } from '../../types/avatarType';
+import type { AvatarType } from './AvatarDetail.types';
 import { UserOutlined } from '@ant-design/icons';
 import type { Location } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';

@@ -3,16 +3,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../app/hooks';
 import { ROUTES } from '../../../routes/routhPath';
 import { useToast } from '../../../hooks/useToast';
+import type { FieldType } from './SignIn.types';
 import { useForm } from 'antd/es/form/Form';
 import { Button, Form, Input } from 'antd';
 import React, { useState } from 'react';
 import type { FormProps } from 'antd';
 import s from './SignIn.module.scss';
-
-type FieldType = {
-  email: string;
-  password: string;
-};
 
 export const SignIn: React.FC = () => {
   const [loading, setLoading] = useState(false);

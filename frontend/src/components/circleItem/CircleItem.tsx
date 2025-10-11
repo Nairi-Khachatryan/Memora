@@ -1,12 +1,8 @@
 import { ROUTES } from '../../routes/routhPath';
 import { useNavigate } from 'react-router-dom';
+import type { Props } from './Circle.types';
 import s from './Circle.module.scss';
 import React from 'react';
-
-type Props = {
-  item: string;
-  idx: number;
-};
 
 export const CircleItem: React.FC<Props> = ({ item, idx }) => {
   const navigate = useNavigate();

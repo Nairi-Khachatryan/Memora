@@ -2,8 +2,9 @@ import { SettingOutlined, EditOutlined } from '@ant-design/icons';
 import { ROUTES } from '../../../routes/routhPath';
 import { useNavigate } from 'react-router-dom';
 import { Card, Space, Button } from 'antd';
+import type React from 'react';
 
-export const SettingsContainer = () => {
+export const SettingsContainer: React.FC = () => {
   const navigate = useNavigate();
   return (
     <>

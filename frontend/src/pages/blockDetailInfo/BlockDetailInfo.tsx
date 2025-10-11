@@ -3,9 +3,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { deleteBlock } from '../../api/block/deleteBlock';
 import { updateBlock } from '../../api/block/updateBlock';
 import s from './BlockDetail.module.scss';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-export const BlockDetailInfo = () => {
+export const BlockDetailInfo: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const blockId = location.state.block._id;
@@ -23,8 +23,7 @@ export const BlockDetailInfo = () => {
 
       const data = await updateBlock(blockId, updatedValue);
       if (!data.success) {
-        message.error(data.message || 'Update failed');
-        return;
+        return message.error(data.message || 'Update failed');
       }
 
       message.success('Block has been updated successfully.');

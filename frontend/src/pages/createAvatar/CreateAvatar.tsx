@@ -1,13 +1,13 @@
 import { AvatarForm } from '../../components/avatarForm/AvatarForm';
 import { createAvatar } from '../../api/avatar/createAvatar';
 import { useNavigate, useLocation } from 'react-router-dom';
-import type { AvatarType } from '../../types/avatarType';
+import type { AvatarType } from './CreateAvatar.types';
 import { useAppSelector } from '../../app/hooks';
 import { useToast } from '../../hooks/useToast';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Card } from 'antd';
 
-export const CreateAvatar = () => {
+export const CreateAvatar: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { showToast } = useToast();

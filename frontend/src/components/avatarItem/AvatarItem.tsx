@@ -1,6 +1,6 @@
 import { ThemeContext } from '../../context/theme/themeContext';
-import type { AvatarType } from '../../types/avatarType';
 import { Class } from '../../utils/createShortClassname';
+import type { AvatarType } from './AvatarItem.types';
 import { UserOutlined } from '@ant-design/icons';
 import { ROUTES } from '../../routes/routhPath';
 import { useNavigate } from 'react-router-dom';

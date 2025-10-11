@@ -1,12 +1,8 @@
 import { ROUTES } from '../../routes/routhPath';
 import { useNavigate } from 'react-router-dom';
+import type { SrcProps } from './Logo.types';
 import s from './Logo.module.scss';
 import React from 'react';
-
-type SrcProps = {
-  src: string;
-  alt?: string;
-};
 
 export const Logo: React.FC<SrcProps> = ({ src }) => {
   const navigate = useNavigate();

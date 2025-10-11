@@ -6,18 +6,12 @@ import { ROUTES } from '../../../routes/routhPath';
 import { PlusOutlined } from '@ant-design/icons';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
+import type { BlockType } from './Block.types';
 import { Card, Button, Space } from 'antd';
+import React, { useContext } from 'react';
 import s from './Block.module.scss';
-import { useContext } from 'react';
 
-type BlockType = {
-  _id: string;
-  lable: string;
-  text: string;
-  ownerId: string;
-};
-
-export const BlockContainer = () => {
+export const BlockContainer: React.FC = () => {
   const navigate = useNavigate();
   const id = useAppSelector((state) => state.user.id);
   const { theme } = useContext(ThemeContext);

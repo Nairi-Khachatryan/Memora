@@ -1,13 +1,12 @@
-import type { AvatarType } from '../../types/avatarType';
+import type { AvatarFormProps } from './Avatar.types';
 import { Form, Input, Button, Upload } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
+import React from 'react';
 
-interface AvatarFormProps {
-  loading: boolean;
-  onSubmit: (values: AvatarType) => void;
-}
-
-export const AvatarForm = ({ loading, onSubmit }: AvatarFormProps) => {
+export const AvatarForm: React.FC<AvatarFormProps> = ({
+  loading,
+  onSubmit,
+}) => {
   const [form] = Form.useForm();
 
   return (

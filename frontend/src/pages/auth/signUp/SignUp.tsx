@@ -4,17 +4,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../app/hooks';
 import { ROUTES } from '../../../routes/routhPath';
 import { useToast } from '../../../hooks/useToast';
+import type { FieldType } from './SignUp.types';
 import { useForm } from 'antd/es/form/Form';
 import React, { useState } from 'react';
 import type { FormProps } from 'antd';
 import s from './SignUp.module.scss';
-
-type FieldType = {
-  email: string;
-  password: string;
-  confirmPassword: string;
-  remember?: boolean;
-};
 
 export const SignUp: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -71,7 +65,11 @@ export const SignUp: React.FC = () => {
             label="Email"
             name="email"
             rules={[
-              { required: true, message: 'Please input your Email!', type: 'email' },
+              {
+                required: true,
+                message: 'Please input your Email!',
+                type: 'email',
+              },
             ]}
           >
             <Input className={s.input} />

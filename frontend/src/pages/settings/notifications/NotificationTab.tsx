@@ -1,6 +1,7 @@
 import { Card, Switch } from 'antd';
+import type React from 'react';
 
-export const NotificationTab = () => {
+export const NotificationTab: React.FC = () => {
   return (
     <>
       <Card style={{ borderRadius: 0 }}>

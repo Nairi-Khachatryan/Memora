@@ -1,9 +1,9 @@
 import { Button, Card, message, Popconfirm } from 'antd';
+import type React from 'react';
 
-export const Account = () => {
-  function handleDeleteAccount() {
-    message.success('Account Deleted');
-  }
+export const Account: React.FC = () => {
+  const handleDeleteAccount = () => message.success('Account Deleted');
+
   return (
     <Card>
       <Popconfirm
