@@ -1,39 +1,106 @@
-.formContainer {
-  width: 100vw;
-  height: 100vh;
+.page {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  min-height: 80vh;
+  padding: 20px;
+}
+
+.formContainer {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+  padding: 60px;
+  width: 100%;
+  max-width: 500px;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+
+.headTextContainer {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.headText {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.error {
+  color: #ff4d4f;
+  text-align: center;
+  font-weight: 500;
 }
 
 .linkNavigate {
-  color: black;
   display: flex;
-  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
-  align-content: center;
-  flex-direction: row;
-  margin-left: 110px;
-  font-size: 0.6rem;
-  padding: 20px;
-  font-family: 'Courier New';
-}
+  gap: 6px;
+  margin-top: 10px;
 
-.myLink {
-  color: blue;
-  font-size: 1.5rem;
-  text-decoration: none;
+  p {
+    margin: 0;
+    color: #555;
+  }
 
-  &:hover {
-    text-decoration: underline;
+  .myLink {
+    color: #1677ff;
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
 .submitBtn {
-  margin-left: 89px;
+  width: 100%;
+  border-radius: 10px;
+  height: 40px;
+  font-size: 1rem;
+  margin-left: 76px;
+  margin-top: 15px;
 }
 
-.input {
-  width: 300px;
+@media (max-width: 768px) {
+  .formContainer {
+    padding: 30px 20px;
+  }
+
+  .headText {
+    font-size: 1.6rem;
+  }
+
+  .linkNavigate {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 580px) {
+  .formContainer {
+    padding: 20px;
+  }
+
+  .headText {
+    font-size: 1.4rem;
+  }
+
+  .submitBtn {
+    font-size: 0.9rem;
+    margin-left: 0px;
+  }
 }

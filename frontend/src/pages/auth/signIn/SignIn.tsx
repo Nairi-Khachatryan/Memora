@@ -15,11 +15,11 @@ type FieldType = {
 };
 
 export const SignIn: React.FC = () => {
-  const { showToast } = useToast();
   const [loading, setLoading] = useState(false);
-  const [form] = useForm();
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { showToast } = useToast();
+  const navigate = useNavigate();
+  const [form] = useForm();
 
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
     setLoading(true);
@@ -34,19 +34,25 @@ export const SignIn: React.FC = () => {
     showToast({ type: 'success', message: res.message });
     setLoading(false);
   };
+
   return (
-    <>
+    <div className={s.page}>
       <div className={s.formContainer}>
         <Form
           form={form}
           name="basic"
           labelCol={{ span: 8 }}
           wrapperCol={{ span: 16 }}
-          style={{ maxWidth: 600 }}
+          style={{ maxWidth: 600, width: '100%' }}
           initialValues={{ remember: true }}
           onFinish={onFinish}
           autoComplete="off"
+          className={s.form}
         >
+          <div className={s.headTextContainer}>
+            <h1 className={s.headText}>Sign In</h1>
+          </div>
+
           <Form.Item<FieldType>
             label="Email"
             name="email"
@@ -73,13 +79,13 @@ export const SignIn: React.FC = () => {
           </Form.Item>
 
           <div className={s.linkNavigate}>
-            <h1>New to Memora?</h1>
+            <p>New to Memora?</p>
             <Link className={s.myLink} to={ROUTES.SIGN_UP}>
               Sign Up
             </Link>
           </div>
 
-          <Form.Item label={null}>
+          <Form.Item>
             <Button
               loading={loading}
               className={s.submitBtn}
@@ -91,6 +97,6 @@ export const SignIn: React.FC = () => {
           </Form.Item>
         </Form>
       </div>
-    </>
+    </div>
   );
 };

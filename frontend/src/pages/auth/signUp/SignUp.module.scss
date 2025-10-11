@@ -1,47 +1,113 @@
 .formContainer {
-  width: 100vw;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  min-height: 100vh;
+  padding: 20px;
 }
 
-._form_1ljcw_1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 500px;
-  height: 500px;
+.formContainer form {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.1);
+  padding: 80px;
+  width: 100%;
+  max-width: 500px;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+
+.headTextContainer {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.headText {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.error {
+  color: #ff4d4f;
+  text-align: center;
+  font-weight: 500;
 }
 
 .linkNavigate {
-  font-size: 0.7rem;
-  color: black;
-  padding: 10px;
   display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  align-content: center;
+  justify-content: center;
   align-items: center;
-  margin-left: 82px;
-  font-family: 'Courier New';
-}
+  gap: 5px;
+  margin-top: 10px;
 
-.myLink {
-  color: blue;
-  font-size: 1.2rem;
-  text-decoration: none;
+  h1 {
+    margin: 0;
+    color: #555;
+    font-size: 16px;
+  }
 
-  &:hover {
-    text-decoration: underline;
+  .myLink {
+    color: #1677ff;
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
 .submitBtn {
-  margin-left: 80px;
+  width: 100%;
+  border-radius: 10px;
+  height: 40px;
+  font-size: 1rem;
+  margin-left: 90px;
+  margin-top: 27px;
 }
 
-.input {
-  width: 300px;
+
+@media (max-width: 768px) {
+  .formContainer form {
+    padding: 30px 20px;
+  }
+
+  .headText {
+    font-size: 1.6rem;
+  }
+
+  .linkNavigate {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .submitBtn {
+    margin-left: 0;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 540px) {
+  .formContainer form {
+    padding: 20px;
+  }
+
+  .headText {
+    font-size: 1.4rem;
+  }
+
+  .submitBtn {
+    font-size: 0.9rem;
+    margin-left: 0px;
+  }
 }

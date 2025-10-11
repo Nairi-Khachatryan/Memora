@@ -13,20 +13,20 @@ type FieldType = {
   email: string;
   password: string;
   confirmPassword: string;
-  remember?: string;
+  remember?: boolean;
 };
 
 export const SignUp: React.FC = () => {
-  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const dispatch = useAppDispatch();
   const { showToast } = useToast();
   const navigate = useNavigate();
   const [form] = useForm();
 
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
-    setLoading(true);
     const { email, password, confirmPassword } = values;
+    setLoading(true);
 
     if (password !== confirmPassword) {
       setError('Passwords don’t match.');
@@ -35,102 +35,97 @@ export const SignUp: React.FC = () => {
       setLoading(false);
       return;
     }
-    setError('');
-    try {
-      const res = await dispatch(createUser({ email, password })).unwrap();
 
-      if (!res.success) {
-        setLoading(false);
-        return showToast({ type: 'error', message: res.message });
-      }
-      navigate(ROUTES.HOME_PATH);
+    setError('');
+    const res = await dispatch(createUser({ email, password })).unwrap();
+
+    if (!res.success) {
       setLoading(false);
-      return showToast({ type: 'success', message: res.message });
-    } catch (error) {
-      form.resetFields();
-      if (error instanceof Error) console.log(error);
+      return showToast({ type: 'error', message: res.message });
     }
+
+    navigate(ROUTES.HOME_PATH);
+    showToast({ type: 'success', message: res.message });
+    setLoading(false);
   };
 
   return (
-    <div className={s.formContainer}>
-      <Form
-        className={s.form}
-        form={form}
-        name="basic"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-        style={{ maxWidth: 600 }}
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-        autoComplete="off"
-      >
-        <Form.Item<FieldType>
-          label="Email"
-          name="email"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your Email!',
-              type: 'email',
-            },
-          ]}
+    <div className={s.page}>
+      <div className={s.formContainer}>
+        <Form
+          className={s.form}
+          form={form}
+          name="basic"
+          labelCol={{ span: 8 }}
+          wrapperCol={{ span: 16 }}
+          style={{ maxWidth: 600, width: '100%' }}
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+          autoComplete="off"
         >
-          <Input className={s.input} />
-        </Form.Item>
+          <div className={s.headTextContainer}>
+            <h1 className={s.headText}>Create Account</h1>
+          </div>
 
-        <Form.Item<FieldType>
-          label="Password"
-          name="password"
-          rules={[
-            { required: true, message: 'Please input your password!' },
-            { min: 6, message: 'Password must be at least 6 characters' },
-            { max: 16, message: 'Password must be at most 16 characters' },
-          ]}
-        >
-          <Input.Password className={s.input} />
-        </Form.Item>
-
-        <Form.Item<FieldType>
-          label="ConfirmPassword"
-          name="confirmPassword"
-          rules={[
-            { required: true, message: 'Please input your password!' },
-            { min: 6, message: 'Password must be at least 6 characters' },
-            { max: 16, message: 'Password must be at most 16 characters' },
-          ]}
-        >
-          <Input.Password className={s.input} />
-        </Form.Item>
-
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-
-        <Form.Item<FieldType>
-          name="remember"
-          valuePropName="checked"
-          label={null}
-        >
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
-
-        <div className={s.linkNavigate}>
-          <h1> Already have an account?</h1>
-          <Link className={s.myLink} to={ROUTES.SIGN_IN}>
-            Sign In
-          </Link>
-        </div>
-
-        <Form.Item label={null}>
-          <Button
-            loading={loading}
-            className={s.submitBtn}
-            type="primary"
-            htmlType="submit"
+          <Form.Item<FieldType>
+            label="Email"
+            name="email"
+            rules={[
+              { required: true, message: 'Please input your Email!', type: 'email' },
+            ]}
           >
-            Sign Up
-          </Button>
-        </Form.Item>
-      </Form>
+            <Input className={s.input} />
+          </Form.Item>
+
+          <Form.Item<FieldType>
+            label="Password"
+            name="password"
+            rules={[
+              { required: true, message: 'Please input your password!' },
+              { min: 6, message: 'Password must be at least 6 characters' },
+              { max: 16, message: 'Password must be at most 16 characters' },
+            ]}
+          >
+            <Input.Password className={s.input} />
+          </Form.Item>
+
+          <Form.Item<FieldType>
+            label="Confirm Password"
+            name="confirmPassword"
+            rules={[
+              { required: true, message: 'Please confirm your password!' },
+              { min: 6, message: 'Password must be at least 6 characters' },
+              { max: 16, message: 'Password must be at most 16 characters' },
+            ]}
+          >
+            <Input.Password className={s.input} />
+          </Form.Item>
+
+          {error && <p className={s.error}>{error}</p>}
+
+          <Form.Item<FieldType> name="remember" valuePropName="checked">
+            <Checkbox>Remember me</Checkbox>
+          </Form.Item>
+
+          <div className={s.linkNavigate}>
+            <p>Already have an account?</p>
+            <Link className={s.myLink} to={ROUTES.SIGN_IN}>
+              Sign In
+            </Link>
+          </div>
+
+          <Form.Item>
+            <Button
+              loading={loading}
+              className={s.submitBtn}
+              type="primary"
+              htmlType="submit"
+            >
+              Sign Up
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
     </div>
   );
 };
