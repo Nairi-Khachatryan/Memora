@@ -20,6 +20,7 @@ export const Header = () => {
   function confirmLogout() {
     message.success('Log out');
     dispatch(removeUser());
+    navigate(ROUTES.SIGN_IN);
   }
 
   return (

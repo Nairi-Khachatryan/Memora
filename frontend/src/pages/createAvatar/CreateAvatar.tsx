@@ -1,32 +1,36 @@
+import { AvatarForm } from '../../components/avatarForm/AvatarForm';
 import { createAvatar } from '../../api/avatar/createAvatar';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Form, Input, Button, Upload, Card } from 'antd';
+import { useNavigate, useLocation } from 'react-router-dom';
 import type { AvatarType } from '../../types/avatarType';
-import { UploadOutlined } from '@ant-design/icons';
 import { useAppSelector } from '../../app/hooks';
 import { useToast } from '../../hooks/useToast';
+import { useState } from 'react';
+import { Card } from 'antd';
 
 export const CreateAvatar = () => {
-  const [form] = Form.useForm();
-  const { showToast } = useToast();
   const navigate = useNavigate();
   const location = useLocation();
+  const { showToast } = useToast();
+  const [loading, setLoading] = useState(false);
   const ownerId = useAppSelector((state) => state.user.id);
 
   const handleSubmit = async (values: AvatarType) => {
-    if (!ownerId) {
-      return;
-    }
+    if (!ownerId) return;
 
-    const finalValues = { ...values, ownerId, idx: location.state.idx };
-    const res = await createAvatar(finalValues);
+    setLoading(true);
+    const res = await createAvatar({
+      ...values,
+      ownerId,
+      idx: location.state.idx,
+    });
 
-    if (!res.success) {
-      return showToast({ type: 'error', message: res.message });
-    }
+    showToast({
+      type: res.success ? 'success' : 'error',
+      message: res.message,
+    });
 
-    showToast({ type: 'success', message: res.message });
-    navigate(-1);
+    if (res.success) navigate(-1);
+    setLoading(false);
   };
 
   return (
@@ -34,76 +38,7 @@ export const CreateAvatar = () => {
       title="Create Avatar"
       className="max-w-md mx-auto mt-6 rounded-xl shadow"
     >
-      <Form form={form} layout="vertical" onFinish={handleSubmit}>
-        <Form.Item
-          label="Avatar"
-          name="image"
-          valuePropName="fileList"
-          getValueFromEvent={(e) => (Array.isArray(e) ? e : e?.fileList)}
-          rules={[{ message: 'Please upload an image!' }]}
-        >
-          <Upload name="image" listType="picture" beforeUpload={() => false}>
-            <Button icon={<UploadOutlined />}>Upload Image</Button>
-          </Upload>
-        </Form.Item>
-
-        <Form.Item
-          label="Name"
-          name="name"
-          rules={[{ required: true, message: 'Please enter your name!' }]}
-        >
-          <Input placeholder="Enter name" />
-        </Form.Item>
-
-        <Form.Item
-          label="Surname"
-          name="surname"
-          rules={[{ required: true, message: 'Please enter your surname!' }]}
-        >
-          <Input placeholder="Enter surname" />
-        </Form.Item>
-
-        <Form.Item
-          label="Email"
-          name="email"
-          rules={[
-            { message: 'Please enter your email!' },
-            { type: 'email', message: 'Invalid email format!' },
-          ]}
-        >
-          <Input placeholder="Enter email" />
-        </Form.Item>
-
-        <Form.Item
-          label="Phone"
-          name="phone"
-          rules={[{ message: 'Please enter your phone number!' }]}
-        >
-          <Input placeholder="Enter phone" />
-        </Form.Item>
-
-        <Form.Item
-          label="Role"
-          name="role"
-          rules={[{ message: 'Please enter a role!' }]}
-        >
-          <Input placeholder="Enter Role" />
-        </Form.Item>
-
-        <Form.Item
-          label="Gender"
-          name="gender"
-          rules={[{ message: 'Please enter a Gender!' }]}
-        >
-          <Input placeholder="Enter Gender" />
-        </Form.Item>
-
-        <Form.Item>
-          <Button type="primary" htmlType="submit" block>
-            Submit
-          </Button>
-        </Form.Item>
-      </Form>
+      <AvatarForm loading={loading} onSubmit={handleSubmit} />
     </Card>
   );
 };
