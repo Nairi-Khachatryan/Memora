@@ -1,9 +1,9 @@
+import { createUser } from '../../../api/auth/authApi';
 import { Button, Checkbox, Form, Input } from 'antd';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../app/hooks';
 import { ROUTES } from '../../../routes/routhPath';
 import { useToast } from '../../../hooks/useToast';
-import { createUser } from '../../../api/auth/authApi';
-import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'antd/es/form/Form';
 import React, { useState } from 'react';
 import type { FormProps } from 'antd';
@@ -18,18 +18,21 @@ type FieldType = {
 
 export const SignUp: React.FC = () => {
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const dispatch = useAppDispatch();
   const { showToast } = useToast();
   const navigate = useNavigate();
   const [form] = useForm();
 
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
+    setLoading(true);
     const { email, password, confirmPassword } = values;
 
     if (password !== confirmPassword) {
       setError('Passwords don’t match.');
       showToast({ type: 'error', message: 'Passwords don’t match.' });
       form.resetFields(['password', 'confirmPassword']);
+      setLoading(false);
       return;
     }
     setError('');
@@ -37,9 +40,11 @@ export const SignUp: React.FC = () => {
       const res = await dispatch(createUser({ email, password })).unwrap();
 
       if (!res.success) {
+        setLoading(false);
         return showToast({ type: 'error', message: res.message });
       }
       navigate(ROUTES.HOME_PATH);
+      setLoading(false);
       return showToast({ type: 'success', message: res.message });
     } catch (error) {
       form.resetFields();
@@ -116,7 +121,12 @@ export const SignUp: React.FC = () => {
         </div>
 
         <Form.Item label={null}>
-          <Button className={s.submitBtn} type="primary" htmlType="submit">
+          <Button
+            loading={loading}
+            className={s.submitBtn}
+            type="primary"
+            htmlType="submit"
+          >
             Sign Up
           </Button>
         </Form.Item>

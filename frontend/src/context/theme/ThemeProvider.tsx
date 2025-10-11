@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import type { Theme } from './themeContext';
 import { ThemeContext } from './themeContext';
+import type { Theme } from './themeContext';
+import React, { useState } from 'react';
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
   children,

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, Switch } from 'antd';
 
 export const NotificationTab = () => {

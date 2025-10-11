@@ -1,6 +1,6 @@
 import { ROUTES } from '../../routes/routhPath';
 import { useNavigate } from 'react-router-dom';
-import s from './Syrcle.module.scss';
+import s from './Circle.module.scss';
 import React from 'react';
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
   idx: number;
 };
 
-export const SyrcleItem: React.FC<Props> = ({ item, idx }) => {
+export const CircleItem: React.FC<Props> = ({ item, idx }) => {
   const navigate = useNavigate();
   return (
     <div

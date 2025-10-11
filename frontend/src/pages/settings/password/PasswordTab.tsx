@@ -1,43 +1,47 @@
 import { changePassword } from '../../../api/auth/changePassword';
 import { useAppSelector } from '../../../app/hooks';
+import { useToast } from '../../../hooks/useToast';
 import { Card, Form, Input, Button } from 'antd';
 import { useState } from 'react';
-import { useToast } from '../../../hooks/useToast';
 
 export const PasswordTab = () => {
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const { showToast } = useToast();
 
   const USER_ID = useAppSelector((state) => state.user.id);
 
-  console.log(error);
-
   const handleChangePassword = async () => {
+    setLoading(true);
+
     if (confirmPassword !== newPassword) {
       setError('Passwords Didnt Match');
+      setLoading(false);
       return;
     }
 
     if (!USER_ID) {
+      setLoading(false);
       return setError('Invalid User ID');
     }
 
     if (!oldPassword || !newPassword || !confirmPassword) {
+      setLoading(false);
       return setError('All fields are required');
     }
 
     const res = await changePassword(USER_ID, oldPassword, newPassword);
 
     if (!res.success) {
+      setLoading(false);
       return showToast({ type: 'error', message: res.message });
     }
 
     showToast({ type: 'success', message: res.message });
-
-    console.log(res, 'res on component');
+    setLoading(false);
   };
   return (
     <>
@@ -68,7 +72,11 @@ export const PasswordTab = () => {
             />
           </Form.Item>
           {error && <div style={{ color: 'red' }}>{error}</div>}
-          <Button onClick={handleChangePassword} type="primary">
+          <Button
+            loading={loading}
+            onClick={handleChangePassword}
+            type="primary"
+          >
             Save
           </Button>
         </Form>

@@ -1,5 +1,5 @@
 import { AvatarItem } from '../../components/avatarItem/AvatarItem';
-import { SyrcleItem } from '../../components/syrcleItem/SyrcleItem';
+import { CircleItem } from '../../components/circleItem/CircleItem';
 import { ThemeContext } from '../../context/theme/themeContext';
 import { Class } from '../../utils/createShortClassname';
 import type { AvatarType } from '../../types/avatarType';
@@ -29,15 +29,17 @@ export const Home: React.FC = () => {
       </div>
 
       {avatarLoading && <p>Loading Avatars...</p>}
-      {!avatarLoading && avatars.length === 0 && <p>Log in to view Avatars.</p>}
+      {!avatarLoading && avatars.length === 0 && (
+        <p>Click on a circle to create an avatar.</p>
+      )}
 
       <div className={s.tryContainer}>
         {syrcleArray.map((item, idx) => {
-          const foundAvatar = avatars.find((avatar) => avatar.idx === idx)
+          const foundAvatar = avatars.find((avatar) => avatar.idx === idx);
           return foundAvatar ? (
             <AvatarItem key={idx} {...foundAvatar} />
           ) : (
-            <SyrcleItem key={idx} idx={idx} item={item} />
+            <CircleItem key={idx} idx={idx} item={item} />
           );
         })}
       </div>

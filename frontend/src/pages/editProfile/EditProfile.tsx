@@ -1,16 +1,17 @@
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { ThemeContext } from '../../context/theme/themeContext';
-import { Card, Form, Input, Button, message } from 'antd';
 import { updateUserInfo } from '../../api/user/updateUserInfo';
+import { Card, Form, Input, Button, message } from 'antd';
 import { cleanValues } from '../../utils/cleanFuncValues';
 import { Class } from '../../utils/createShortClassname';
 import { useToast } from '../../hooks/useToast';
 import { useNavigate } from 'react-router-dom';
+import { useContext, useState } from 'react';
 import type { valuesProp } from './types';
 import s from './Edit.module.scss';
-import { useContext } from 'react';
 
 export const EditProfile = () => {
+  const [loading, setloading] = useState(false);
   const [form] = Form.useForm();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -19,14 +20,17 @@ export const EditProfile = () => {
   const { showToast } = useToast();
 
   const onFinish = async (values: valuesProp) => {
+    setloading(true);
     if (!userId) {
       message.error('User ID is not defined!');
+      setloading(false);
       return;
     }
 
     const { name, surname, phone } = cleanValues(values);
 
     if (!name && !surname && !phone) {
+      setloading(false);
       return showToast({ type: 'error', message: 'Nothing to Update' });
     }
 
@@ -36,10 +40,12 @@ export const EditProfile = () => {
 
     if (!res.success) {
       message.error('Error Updating User Profile!');
+      return setloading(false);
     }
 
     message.success('Profile Updated Successfuly!');
     navigate(-1);
+    setloading(false);
   };
 
   return (
@@ -79,7 +85,7 @@ export const EditProfile = () => {
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit">
+            <Button loading={loading} type="primary" htmlType="submit">
               Save
             </Button>
             <Button style={{ marginLeft: 8 }} onClick={() => navigate(-1)}>

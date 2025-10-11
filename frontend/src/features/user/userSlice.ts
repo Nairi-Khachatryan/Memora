@@ -1,6 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
 import { createUser, signInUser } from '../../api/auth/authApi';
 import { updateUserInfo } from '../../api/user/updateUserInfo';
+import { createSlice } from '@reduxjs/toolkit';
 
 interface UserState {
   email: string | null;

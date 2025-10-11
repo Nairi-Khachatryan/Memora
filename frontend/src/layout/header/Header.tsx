@@ -1,9 +1,9 @@
 import { ThemeContext } from '../../context/theme/themeContext';
 import { removeUser } from '../../features/user/userSlice';
 import logoLight from '../../assets/logo-light2.png';
-import logoDark from '../../assets/logo-dark.png';
 import { Button, Popconfirm, message } from 'antd';
 import { Logo } from '../../components/logo/Logo';
+import logoDark from '../../assets/logo-dark.png';
 import { useAppDispatch } from '../../app/hooks';
 import { ROUTES } from '../../routes/routhPath';
 import { useNavigate } from 'react-router-dom';

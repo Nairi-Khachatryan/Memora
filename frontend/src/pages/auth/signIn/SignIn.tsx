@@ -1,13 +1,13 @@
+import { signInUser } from '../../../api/auth/authApi';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../app/hooks';
 import { ROUTES } from '../../../routes/routhPath';
 import { useToast } from '../../../hooks/useToast';
-import { signInUser } from '../../../api/auth/authApi';
-import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'antd/es/form/Form';
 import { Button, Form, Input } from 'antd';
+import React, { useState } from 'react';
 import type { FormProps } from 'antd';
 import s from './SignIn.module.scss';
-import React from 'react';
 
 type FieldType = {
   email: string;
@@ -16,24 +16,27 @@ type FieldType = {
 
 export const SignIn: React.FC = () => {
   const { showToast } = useToast();
+  const [loading, setLoading] = useState(false);
   const [form] = useForm();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
   const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
+    setLoading(true);
     const res = await dispatch(signInUser(values)).unwrap();
 
     if (!res.success) {
+      setLoading(false);
       return showToast({ type: 'error', message: res.message });
     }
 
     navigate(ROUTES.HOME_PATH);
     showToast({ type: 'success', message: res.message });
+    setLoading(false);
   };
   return (
     <>
       <div className={s.formContainer}>
-        <div>nairi.khachatryan357@gmail.com</div>
-
         <Form
           form={form}
           name="basic"
@@ -55,7 +58,7 @@ export const SignIn: React.FC = () => {
               },
             ]}
           >
-            <Input className={s.input} />
+            <Input autoComplete="username" className={s.input} />
           </Form.Item>
 
           <Form.Item<FieldType>
@@ -63,7 +66,10 @@ export const SignIn: React.FC = () => {
             name="password"
             rules={[{ required: true, message: 'Please input your password!' }]}
           >
-            <Input.Password className={s.input} />
+            <Input.Password
+              autoComplete="current-password"
+              className={s.input}
+            />
           </Form.Item>
 
           <div className={s.linkNavigate}>
@@ -74,7 +80,12 @@ export const SignIn: React.FC = () => {
           </div>
 
           <Form.Item label={null}>
-            <Button className={s.submitBtn} type="primary" htmlType="submit">
+            <Button
+              loading={loading}
+              className={s.submitBtn}
+              type="primary"
+              htmlType="submit"
+            >
               Sign In
             </Button>
           </Form.Item>

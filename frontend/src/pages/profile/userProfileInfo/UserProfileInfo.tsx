@@ -1,10 +1,10 @@
-import { Space, Avatar, Divider, Descriptions } from 'antd';
 import { ThemeContext } from '../../../context/theme/themeContext';
+import { CopyOutlined, UserOutlined } from '@ant-design/icons';
+import { Space, Avatar, Divider, Descriptions } from 'antd';
 import { Class } from '../../../utils/createShortClassname';
 import { useAppSelector } from '../../../app/hooks';
-import { CopyOutlined, UserOutlined } from '@ant-design/icons';
-import { useQuery } from '@tanstack/react-query';
 import { getUser } from '../../../api/user/getUser';
+import { useQuery } from '@tanstack/react-query';
 import { useContext } from 'react';
 import s from './User.module.scss';
 

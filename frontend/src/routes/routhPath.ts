@@ -4,10 +4,10 @@ export const ROUTES = {
   SIGN_UP: '/sign-up',
   PROFILE: '/profile',
   SETTINGS: '/settings',
+  DETAIL_INFO: '/detail-info',
   EDIT_PROFILE: '/edit-profile',
   CREATE_BLOCK: '/create-block',
-  DETAIL_INFO: '/detail-info',
   CREATE_AVATAR: '/crate-avatar',
-  AVATAR_ITEM_MORE_INFO: '/avatar-item-more-info',
   UPDATE_AVATAR: '/update-avatar',
+  AVATAR_ITEM_MORE_INFO: '/avatar-item-more-info',
 } as const;
