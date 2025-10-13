@@ -1,4 +1,6 @@
+import { Avatar } from '../models/avatar.model.ts';
 import type { Request, Response } from 'express';
+import { Block } from '../models/block.model.ts';
 import { User } from '../models/user.model.ts';
 import mongoose from 'mongoose';
 
@@ -64,5 +66,44 @@ export const getMe = async (req: Request, res: Response) => {
       success: false,
       message: 'Server error',
     });
+  }
+};
+
+export const deleteAccount = async (req: Request, res: Response) => {
+  const userID = req.params.id;
+
+  try {
+    const foundUser = await User.findOneAndDelete({ _id: userID });
+
+    if (!foundUser) {
+      return res.status(404).json({ success: false, message: 'Bad request' });
+    }
+
+    const userBlock = await Block.deleteMany({
+      ownerId: foundUser?._id,
+    });
+
+    if (!userBlock) {
+      return res
+        .send(404)
+        .json({ success: false, message: 'User block not found' });
+    }
+
+    const userAvatar = await Avatar.deleteMany({
+      ownerId: foundUser?._id,
+    });
+
+    if (!userAvatar) {
+      return res
+        .send(404)
+        .json({ success: false, message: 'User avatar not found' });
+    }
+
+    return res
+      .status(200)
+      .json({ success: true, message: 'User deleted ssuccessfuly!' });
+  } catch (error) {
+    if (error instanceof Error) console.log(error.message);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 };

@@ -1,8 +1,31 @@
+import { deleteAccount } from '../../../api/user/deleteAccount';
 import { Button, Card, message, Popconfirm } from 'antd';
+import { useAppSelector } from '../../../app/hooks';
+import { ROUTES } from '../../../routes/routhPath';
+import { useToast } from '../../../hooks/useToast';
+import { useNavigate } from 'react-router-dom';
 import type React from 'react';
+import { useState } from 'react';
 
 export const Account: React.FC = () => {
-  const handleDeleteAccount = () => message.success('Account Deleted');
+  const userId = useAppSelector((state) => state.user.id);
+  const [loading, setLoading] = useState(false);
+  const { showToast } = useToast();
+  const navigate = useNavigate();
+
+  const handleDeleteAccount = async () => {
+    setLoading(true);
+    const res = await deleteAccount(userId);
+
+    if (!res.success) {
+      setLoading(false);
+      return showToast({ type: 'error', message: res.message });
+    }
+
+    message.success('Account Deleted');
+    navigate(ROUTES.SIGN_IN);
+    setLoading(false);
+  };
 
   return (
     <Card>
@@ -12,7 +35,7 @@ export const Account: React.FC = () => {
         okText="Yes"
         cancelText="No"
       >
-        <Button type="primary" danger>
+        <Button loading={loading} type="primary" danger>
           Delete My Account
         </Button>
       </Popconfirm>

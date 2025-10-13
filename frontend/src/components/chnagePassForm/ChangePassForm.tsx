@@ -19,6 +19,7 @@ export const ChangePassForm: React.FC<Props> = ({
         <Form layout="vertical" style={{ maxWidth: 400 }}>
           <Form.Item label="Old Password">
             <Input.Password
+              autoComplete="old-password"
               value={oldPassword}
               onChange={(e) => setOldPassword(e.target.value)}
               placeholder="Enter Old Password"
@@ -27,6 +28,7 @@ export const ChangePassForm: React.FC<Props> = ({
           </Form.Item>
           <Form.Item label="New Password">
             <Input.Password
+              autoComplete="new-password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               placeholder="Enter New Password"
@@ -35,6 +37,7 @@ export const ChangePassForm: React.FC<Props> = ({
           </Form.Item>
           <Form.Item label="Confirm Password">
             <Input.Password
+              autoComplete="confirm-password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Confirm Password"

@@ -15,8 +15,8 @@ const PORT = process.env.PORT || 5052;
 app.use(cors());
 app.use(express.json());
 app.use('/auth', authRouter);
-app.use('/block', blockRouter);
 app.use('/user', userRouter);
+app.use('/block', blockRouter);
 app.use('/avatar', avatarRouter);
 
 app.listen(PORT, () => {
