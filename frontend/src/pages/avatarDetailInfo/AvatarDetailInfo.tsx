@@ -20,7 +20,7 @@ export const AvatarDetailInfo: React.FC = () => {
   const location = useLocation() as Location<LocationState>;
   const avatar = location.state.foundAvatar;
   const navigate = useNavigate();
-  const id = useAppSelector((state) => state.user.id);
+  const id = useAppSelector((state) => state.user.user.id);
   const { showToast } = useToast();
   const { theme } = useContext(ThemeContext);
 

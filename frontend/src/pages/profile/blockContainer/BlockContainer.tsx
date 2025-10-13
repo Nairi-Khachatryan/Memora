@@ -13,7 +13,7 @@ import s from './Block.module.scss';
 
 export const BlockContainer: React.FC = () => {
   const navigate = useNavigate();
-  const id = useAppSelector((state) => state.user.id);
+  const id = useAppSelector((state) => state.user.user.id);
   const { theme } = useContext(ThemeContext);
 
   const { data: blocks = [], isLoading: blocksLoading } = useQuery<BlockType[]>(

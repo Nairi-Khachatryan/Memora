@@ -16,7 +16,7 @@ export const EditProfile = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { theme } = useContext(ThemeContext);
-  const userId = useAppSelector((state) => state.user.id);
+  const userId = useAppSelector((state) => state.user.user.id);
   const { showToast } = useToast();
 
   const onFinish = async (values: valuesProp) => {

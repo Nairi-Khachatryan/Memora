@@ -9,7 +9,7 @@ import { useState } from 'react';
 export const CreateBlock = () => {
   const navigate = useNavigate();
   const { showToast } = useToast();
-  const ownerId = useAppSelector((state) => state.user.id);
+  const ownerId = useAppSelector((state) => state.user.user.id);
 
   const [loading, setLoading] = useState(false);
 

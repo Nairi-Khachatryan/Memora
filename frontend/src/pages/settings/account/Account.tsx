@@ -4,11 +4,11 @@ import { useAppSelector } from '../../../app/hooks';
 import { ROUTES } from '../../../routes/routhPath';
 import { useToast } from '../../../hooks/useToast';
 import { useNavigate } from 'react-router-dom';
-import type React from 'react';
 import { useState } from 'react';
+import type React from 'react';
 
 export const Account: React.FC = () => {
-  const userId = useAppSelector((state) => state.user.id);
+  const userId = useAppSelector((state) => state.user.user.id);
   const [loading, setLoading] = useState(false);
   const { showToast } = useToast();
   const navigate = useNavigate();

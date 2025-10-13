@@ -12,7 +12,7 @@ export const CreateAvatar: React.FC = () => {
   const location = useLocation();
   const { showToast } = useToast();
   const [loading, setLoading] = useState(false);
-  const ownerId = useAppSelector((state) => state.user.id);
+  const ownerId = useAppSelector((state) => state.user.user.id);
 
   const handleSubmit = async (values: AvatarType) => {
     if (!ownerId) return;

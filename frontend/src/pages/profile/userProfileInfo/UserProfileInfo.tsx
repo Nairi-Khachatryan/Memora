@@ -11,7 +11,7 @@ import React, { useContext } from 'react';
 import s from './UserProfile.module.scss';
 
 export const UserProfileInfo: React.FC = () => {
-  const id = useAppSelector((state) => state.user.id);
+  const id = useAppSelector((state) => state.user.user.id);
   const { theme } = useContext(ThemeContext);
 
   const { data: user, isLoading: userLoading } = useQuery<UserType>({

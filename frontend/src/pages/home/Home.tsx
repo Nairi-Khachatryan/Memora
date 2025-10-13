@@ -6,16 +6,16 @@ import { Class } from '../../utils/createShortClassname';
 import { getAvatars } from '../../api/avatar/getAvatar';
 import { useQuery } from '@tanstack/react-query';
 import { useAppSelector } from '../../app/hooks';
+import { ROUTES } from '../../routes/routhPath';
 import type { AvatarType } from './Home.types';
+import { useNavigate } from 'react-router-dom';
 import { syrcleArray } from './helper';
 import { useContext } from 'react';
 import s from './Home.module.scss';
-import { ROUTES } from '../../routes/routhPath';
-import { useNavigate } from 'react-router-dom';
 
 export const Home: React.FC = () => {
   const { theme } = useContext(ThemeContext);
-  const id = useAppSelector((state) => state.user.id);
+  const id = useAppSelector((state) => state.user.user.id);
   const navigate = useNavigate();
 
   const { data: avatars = [], isLoading: avatarLoading } = useQuery<

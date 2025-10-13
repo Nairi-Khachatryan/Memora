@@ -12,7 +12,7 @@ export const PasswordTab: React.FC = () => {
   const [error, setError] = useState<string>('');
   const { showToast } = useToast();
 
-  const USER_ID = useAppSelector((state) => state.user.id);
+  const USER_ID = useAppSelector((state) => state.user.user.id);
 
   const handleChangePassword = async () => {
     setLoading(true);
