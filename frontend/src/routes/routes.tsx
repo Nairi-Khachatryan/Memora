@@ -1,5 +1,5 @@
 import { AvatarDetailInfo } from '../pages/avatarDetailInfo/AvatarDetailInfo';
-import { AboutOurProject } from '../pages/aboutOurProject/AboutourProject';
+import { AboutOurProject } from '../pages/aboutOurProject/AboutOurProject';
 import { BlockDetailInfo } from '../pages/blockDetailInfo/BlockDetailInfo';
 import { CreateAvatar } from '../pages/createAvatar/CreateAvatar';
 import { UpdateAvatar } from '../pages/updateAvatar/UpdateAvatar';

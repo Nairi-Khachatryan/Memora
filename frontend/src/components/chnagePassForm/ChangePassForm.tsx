@@ -1,6 +1,6 @@
-import React from 'react';
-import { Card, Form, Input, Button } from 'antd';
 import type { Props } from './ChangePassForm.types';
+import { Card, Form, Input, Button } from 'antd';
+import React from 'react';
 
 export const ChangePassForm: React.FC<Props> = ({
   error,

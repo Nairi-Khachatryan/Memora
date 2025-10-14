@@ -29,7 +29,12 @@ export const Home: React.FC = () => {
   return (
     <div className={Class(s, 'homeContainer', theme)}>
       <div className={s.homeHeader}>
-        <h1 onClick={() => navigate(ROUTES.ABOUT_OUR_PROJECT)}>Family Try</h1>
+        <h1
+          className={s.ourProjectLink}
+          onClick={() => navigate(ROUTES.ABOUT_OUR_PROJECT)}
+        >
+          Family Try
+        </h1>
       </div>
 
       <div className={s.tryContainer}>

@@ -5,8 +5,6 @@ import mongoose from 'mongoose';
 export const createAvatar = async (req: Request, res: Response) => {
   const { values } = req.body;
 
-  console.log(values, 'values');
-
   try {
     const avatar = new Avatar(values);
     await avatar.save();

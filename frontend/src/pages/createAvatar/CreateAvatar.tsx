@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import type { AvatarType } from './CreateAvatar.types';
 import { useAppSelector } from '../../app/hooks';
 import { useToast } from '../../hooks/useToast';
+import s from './CreateAvatar.module.scss';
 import React, { useState } from 'react';
 import { Card } from 'antd';
 
@@ -16,7 +17,6 @@ export const CreateAvatar: React.FC = () => {
 
   const handleSubmit = async (values: AvatarType) => {
     if (!ownerId) return;
-
 
     setLoading(true);
     const res = await createAvatar({
@@ -36,11 +36,10 @@ export const CreateAvatar: React.FC = () => {
   };
 
   return (
-    <Card
-      title="Create Avatar"
-      className="max-w-md mx-auto mt-6 rounded-xl shadow"
-    >
-      <AvatarForm loading={loading} onSubmit={handleSubmit} />
-    </Card>
+    <div className={s.cardWrapper}>
+      <Card className={s.Card} title="Create Avatar">
+        <AvatarForm loading={loading} onSubmit={handleSubmit} />
+      </Card>
+    </div>
   );
 };

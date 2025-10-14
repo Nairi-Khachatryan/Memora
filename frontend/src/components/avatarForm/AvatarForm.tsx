@@ -1,6 +1,7 @@
 import type { AvatarFormProps } from './Avatar.types';
 import { Form, Input, Button, Upload } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
+import s from './AvatarForm.module.scss';
 import React from 'react';
 
 export const AvatarForm: React.FC<AvatarFormProps> = ({
@@ -10,18 +11,20 @@ export const AvatarForm: React.FC<AvatarFormProps> = ({
   const [form] = Form.useForm();
   const topics = Form.useWatch('attribute', form) || [];
 
-
-
-  
-
   return (
-    <Form form={form} layout="vertical" onFinish={onSubmit}>
+    <Form
+      className={s.wrapper}
+      form={form}
+      layout="vertical"
+      onFinish={onSubmit}
+    >
       <Form.Item
         label="Avatar"
         name="image"
         valuePropName="fileList"
         getValueFromEvent={(e) => (Array.isArray(e) ? e : e?.fileList)}
         rules={[{ message: 'Please upload an image!' }]}
+        className={s.upload}
       >
         <Upload name="image" listType="picture" beforeUpload={() => false}>
           <Button icon={<UploadOutlined />}>Upload Image</Button>
@@ -52,7 +55,6 @@ export const AvatarForm: React.FC<AvatarFormProps> = ({
         <Input placeholder="Enter gender" />
       </Form.Item>
 
-      {/* Dynamic Topics */}
       <Form.List name="attribute">
         {(fields, { add, remove }) => (
           <>
@@ -60,34 +62,44 @@ export const AvatarForm: React.FC<AvatarFormProps> = ({
               const topic = topics?.[name]?.topic;
 
               return (
-                <div
-                  key={key}
-                  style={{
-                    border: '1px solid #d9d9d9',
-                    borderRadius: 8,
-                    padding: 16,
-                    marginBottom: 16,
-                  }}
-                >
+                <div key={key} className={s.dynamicField}>
                   <Form.Item {...rest} name={[name, 'topic']} label="Name">
                     <Input placeholder="Enter atributte name" />
                   </Form.Item>
 
                   {topic && (
                     <>
-                      <Form.Item name={[name, 'value']} label="Value">
+                      <Form.Item
+                        rules={[
+                          {
+                            required: true,
+                            message: 'This field is required.',
+                          },
+                        ]}
+                        name={[name, 'value']}
+                        label="Value"
+                      >
                         <Input placeholder="value" />
                       </Form.Item>
                     </>
                   )}
 
-                  <Button danger onClick={() => remove(name)}>
+                  <Button
+                    className={s.removeButton}
+                    danger
+                    onClick={() => remove(name)}
+                  >
                     Remove topic
                   </Button>
                 </div>
               );
             })}
-            <Button type="dashed" onClick={() => add()} block>
+            <Button
+              className={s.addButton}
+              type="dashed"
+              onClick={() => add()}
+              block
+            >
               + Add Topic
             </Button>
           </>
@@ -95,7 +107,13 @@ export const AvatarForm: React.FC<AvatarFormProps> = ({
       </Form.List>
 
       <Form.Item>
-        <Button loading={loading} type="primary" htmlType="submit" block>
+        <Button
+          className={s.submitButton}
+          loading={loading}
+          type="primary"
+          htmlType="submit"
+          block
+        >
           Submit
         </Button>
       </Form.Item>

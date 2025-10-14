@@ -1,8 +1,8 @@
 
-import React from 'react';
-import { Typography, Card, Space } from 'antd';
 import { ArcherContainer, ArcherElement } from 'react-archer';
+import { Typography, Card, Space } from 'antd';
 import s from './AboutOurProject.module.scss';
+import React from 'react';
 
 const { Title, Paragraph } = Typography;
 
@@ -66,7 +66,6 @@ export const AboutOurProject: React.FC = () => {
             </Card>
           </Space>
 
-          {/* Целевые элементы для стрелок */}
           <div style={{ display: 'flex', gap: '100px', marginTop: '150px' }}>
             <ArcherElement id="targetAvatar">
               <div style={{ padding: '10px', border: '1px solid blue' }}>

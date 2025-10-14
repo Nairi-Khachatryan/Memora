@@ -1,6 +1,5 @@
-import React from 'react';
-import { Spin } from 'antd';
 import s from './LoadingCircle.module.scss';
+import { Spin } from 'antd';
 
 export const LoadingCircle = () => {
   return (
