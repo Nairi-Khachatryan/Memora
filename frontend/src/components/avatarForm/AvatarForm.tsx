@@ -63,7 +63,7 @@ export const AvatarForm: React.FC<AvatarFormProps> = ({
 
               return (
                 <div key={key} className={s.dynamicField}>
-                  <Form.Item {...rest} name={[name, 'topic']} label="Name">
+                  <Form.Item {...rest} name={[name, 'topic']} label="label">
                     <Input placeholder="Enter atributte name" />
                   </Form.Item>
 
@@ -77,7 +77,7 @@ export const AvatarForm: React.FC<AvatarFormProps> = ({
                           },
                         ]}
                         name={[name, 'value']}
-                        label="Value"
+                        label="value"
                       >
                         <Input placeholder="value" />
                       </Form.Item>

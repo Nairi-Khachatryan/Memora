@@ -1,6 +1,7 @@
 import { updateAvatar } from '../../api/avatar/updateAvatar';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Input, Button, Card, Space } from 'antd';
+import type { UpdateAvatarInterface } from './types';
+import { Button, Card, Input, Space } from 'antd';
 import { useToast } from '../../hooks/useToast';
 import { useState } from 'react';
 import _ from 'lodash';
@@ -11,30 +12,51 @@ export const UpdateAvatar = () => {
   const { showToast } = useToast();
 
   const foundAvatar = location.state;
+  const { name, surname, role, email, phone, attribute } = location.state || {};
 
-  interface UpdateAvatar {
-    name: string;
-    surname: string;
-    phone: string;
-    role: string;
-    email: string;
-  }
-
-  const { name, surname, role, email, phone } = location.state || {};
-  const [updatedValue, setUpdatedValue] = useState<UpdateAvatar>({
+  const [updatedValue, setUpdatedValue] = useState<UpdateAvatarInterface>({
     name: name || '',
     surname: surname || '',
     role: role || '',
     email: email || '',
     phone: phone || '',
+    attribute: attribute || [],
   });
 
   const handleChange = (key: string, value: string) => {
     setUpdatedValue((prev) => ({ ...prev, [key]: value }));
   };
 
+  const handleAttributeChange = (
+    index: number,
+    field: 'topic' | 'value',
+    value: string
+  ) => {
+    const newAttr = [...(updatedValue.attribute || [])];
+    newAttr[index][field] = value;
+    handleChange('attribute', newAttr as any);
+  };
+
   const handleSubmit = async () => {
-    const { name, surname, email, role, phone, _id } = foundAvatar;
+    const { name, surname, email, role, phone, attribute } = updatedValue;
+
+    // Manual required validation
+    if (!name || !surname || !email || !role || !phone) {
+      return showToast({ type: 'error', message: 'All fields are required' });
+    }
+
+    if (Array.isArray(attribute)) {
+      for (const item of attribute) {
+        if (!item.topic || !item.value) {
+          return showToast({
+            type: 'error',
+            message: 'All attribute fields are required',
+          });
+        }
+      }
+    }
+
+    const { _id } = foundAvatar;
     const oldValue = { name, surname, phone, role, email };
 
     if (_.isEqual(updatedValue, oldValue)) {
@@ -87,6 +109,26 @@ export const UpdateAvatar = () => {
           value={updatedValue.phone}
           onChange={(e) => handleChange('phone', e.target.value)}
         />
+
+        {Array.isArray(updatedValue.attribute) &&
+          updatedValue.attribute.map((item: any, index: number) => (
+            <Space key={item._id} style={{ width: '100%' }}>
+              <Input
+                placeholder="Topic"
+                value={item.topic}
+                onChange={(e) =>
+                  handleAttributeChange(index, 'topic', e.target.value)
+                }
+              />
+              <Input
+                placeholder="Value"
+                value={item.value}
+                onChange={(e) =>
+                  handleAttributeChange(index, 'value', e.target.value)
+                }
+              />
+            </Space>
+          ))}
 
         <Button type="primary" block onClick={handleSubmit}>
           Update
