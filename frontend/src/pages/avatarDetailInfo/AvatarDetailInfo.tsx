@@ -26,9 +26,10 @@ export const AvatarDetailInfo: React.FC = () => {
 
   const foundAvatar = location.state.foundAvatar;
 
+  console.log(foundAvatar, 'found');
+
   const handleDeleteAvatar = async () => {
     const res = await deleteAvatar(id, foundAvatar.idx);
-    
 
     if (!res.success) {
       return showToast({ type: 'error', message: res.message });
@@ -79,6 +80,16 @@ export const AvatarDetailInfo: React.FC = () => {
             </Text>
           )}
         </div>
+
+        {avatar.attribute?.length > 0 && (
+          <div className={s.attributes}>
+            {avatar.attribute.map((attr, index) => (
+              <Text key={index}>
+                <strong>{attr.topic}:</strong> {attr.value}
+              </Text>
+            ))}
+          </div>
+        )}
 
         <Space className={s.buttons}>
           <Button onClick={() => navigate(-1)}>Back</Button>

@@ -8,6 +8,11 @@ export const AvatarForm: React.FC<AvatarFormProps> = ({
   onSubmit,
 }) => {
   const [form] = Form.useForm();
+  const topics = Form.useWatch('attribute', form) || [];
+
+
+
+  
 
   return (
     <Form form={form} layout="vertical" onFinish={onSubmit}>
@@ -46,6 +51,48 @@ export const AvatarForm: React.FC<AvatarFormProps> = ({
       <Form.Item label="Gender" name="gender">
         <Input placeholder="Enter gender" />
       </Form.Item>
+
+      {/* Dynamic Topics */}
+      <Form.List name="attribute">
+        {(fields, { add, remove }) => (
+          <>
+            {fields.map(({ key, name, ...rest }) => {
+              const topic = topics?.[name]?.topic;
+
+              return (
+                <div
+                  key={key}
+                  style={{
+                    border: '1px solid #d9d9d9',
+                    borderRadius: 8,
+                    padding: 16,
+                    marginBottom: 16,
+                  }}
+                >
+                  <Form.Item {...rest} name={[name, 'topic']} label="Name">
+                    <Input placeholder="Enter atributte name" />
+                  </Form.Item>
+
+                  {topic && (
+                    <>
+                      <Form.Item name={[name, 'value']} label="Value">
+                        <Input placeholder="value" />
+                      </Form.Item>
+                    </>
+                  )}
+
+                  <Button danger onClick={() => remove(name)}>
+                    Remove topic
+                  </Button>
+                </div>
+              );
+            })}
+            <Button type="dashed" onClick={() => add()} block>
+              + Add Topic
+            </Button>
+          </>
+        )}
+      </Form.List>
 
       <Form.Item>
         <Button loading={loading} type="primary" htmlType="submit" block>

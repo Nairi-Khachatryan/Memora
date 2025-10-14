@@ -7,4 +7,5 @@ export type AvatarType = {
   email?: string;
   idx: number;
   gender?: string;
+  attribute: Array<{ topic: string; value: string }>;
 };

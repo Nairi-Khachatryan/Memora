@@ -17,11 +17,13 @@ export const CreateAvatar: React.FC = () => {
   const handleSubmit = async (values: AvatarType) => {
     if (!ownerId) return;
 
+
     setLoading(true);
     const res = await createAvatar({
       ...values,
       ownerId,
       idx: location.state.idx,
+      attribute: values.attribute,
     });
 
     showToast({

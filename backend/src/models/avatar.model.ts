@@ -33,6 +33,12 @@ const avatarSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  attribute: [
+    {
+      topic: { type: String, required: true },
+      value: { type: String, required: true },
+    },
+  ],
 });
 
 export const Avatar = mongoose.model('Avatar', avatarSchema);
