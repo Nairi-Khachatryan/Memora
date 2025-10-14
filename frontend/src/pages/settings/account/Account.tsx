@@ -1,9 +1,11 @@
 import { deleteAccount } from '../../../api/user/deleteAccount';
+import { removeUser } from '../../../features/user/userSlice';
 import { Button, Card, message, Popconfirm } from 'antd';
 import { useAppSelector } from '../../../app/hooks';
 import { ROUTES } from '../../../routes/routhPath';
 import { useToast } from '../../../hooks/useToast';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import type React from 'react';
 
@@ -12,6 +14,7 @@ export const Account: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const { showToast } = useToast();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleDeleteAccount = async () => {
     setLoading(true);
@@ -23,6 +26,7 @@ export const Account: React.FC = () => {
     }
 
     message.success('Account Deleted');
+    dispatch(removeUser());
     navigate(ROUTES.SIGN_IN);
     setLoading(false);
   };
