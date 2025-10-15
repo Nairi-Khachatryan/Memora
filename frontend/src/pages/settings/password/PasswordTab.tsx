@@ -2,6 +2,7 @@ import { ChangePassForm } from '../../../components/chnagePassForm/ChangePassFor
 import { changePassword } from '../../../api/auth/changePassword';
 import { useAppSelector } from '../../../app/hooks';
 import { useToast } from '../../../hooks/useToast';
+import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 
 export const PasswordTab: React.FC = () => {
@@ -11,8 +12,13 @@ export const PasswordTab: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
   const { showToast } = useToast();
+  const navigate = useNavigate();
 
   const USER_ID = useAppSelector((state) => state.user.user.id);
+
+  function handleCancelChangePass() {
+    navigate(-1);
+  }
 
   const handleChangePassword = async () => {
     setLoading(true);
@@ -53,15 +59,16 @@ export const PasswordTab: React.FC = () => {
   return (
     <>
       <ChangePassForm
-        newPassword={newPassword}
         error={error}
         loading={loading}
+        newPassword={newPassword}
         oldPassword={oldPassword}
         setNewPassword={setNewPassword}
         setOldPassword={setOldPassword}
         confirmPassword={confirmPassword}
         setConfirmPassword={setConfirmPassword}
         handleChangePassword={handleChangePassword}
+        handleCancelChangePass={handleCancelChangePass}
       />
     </>
   );

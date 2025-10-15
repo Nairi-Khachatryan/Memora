@@ -6,8 +6,9 @@ export type Props = {
   oldPassword: string;
   newPassword: string;
   confirmPassword: string;
-  setConfirmPassword: React.Dispatch<React.SetStateAction<string>>;
-  setNewPassword: React.Dispatch<React.SetStateAction<string>>;
-  setOldPassword: React.Dispatch<React.SetStateAction<string>>;
+  handleCancelChangePass: () => void;
   handleChangePassword: () => Promise<void>;
+  setOldPassword: React.Dispatch<React.SetStateAction<string>>;
+  setNewPassword: React.Dispatch<React.SetStateAction<string>>;
+  setConfirmPassword: React.Dispatch<React.SetStateAction<string>>;
 };

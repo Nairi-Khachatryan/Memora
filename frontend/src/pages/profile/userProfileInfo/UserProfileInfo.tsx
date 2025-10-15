@@ -43,7 +43,7 @@ export const UserProfileInfo: React.FC = () => {
           size="middle"
         >
           <Descriptions.Item
-            style={{ color: theme === 'dark' ? 'white' : 'black' }}
+            style={{ color: theme === 'dark' ? 'white' : 'black', padding: 10 }}
             label="Name"
           >
             {user?.name}
@@ -53,7 +53,7 @@ export const UserProfileInfo: React.FC = () => {
             />
           </Descriptions.Item>
           <Descriptions.Item
-            style={{ color: theme === 'dark' ? 'white' : 'black' }}
+            style={{ color: theme === 'dark' ? 'white' : 'black', padding: 10 }}
             label="Surname"
           >
             {user?.surname}
@@ -63,7 +63,7 @@ export const UserProfileInfo: React.FC = () => {
             />
           </Descriptions.Item>
           <Descriptions.Item
-            style={{ color: theme === 'dark' ? 'white' : 'black' }}
+            style={{ color: theme === 'dark' ? 'white' : 'black', padding: 10 }}
             label="Phone"
           >
             {user?.phone}
@@ -73,7 +73,7 @@ export const UserProfileInfo: React.FC = () => {
             />
           </Descriptions.Item>
           <Descriptions.Item
-            style={{ color: theme === 'dark' ? 'white' : 'black' }}
+            style={{ color: theme === 'dark' ? 'white' : 'black', padding: 10 }}
             label="User ID"
           >
             {user?.id}
@@ -83,7 +83,7 @@ export const UserProfileInfo: React.FC = () => {
             />
           </Descriptions.Item>
           <Descriptions.Item
-            style={{ color: theme === 'dark' ? 'white' : 'black' }}
+            style={{ color: theme === 'dark' ? 'white' : 'black', padding: 10 }}
             label="Email"
           >
             {user?.email}

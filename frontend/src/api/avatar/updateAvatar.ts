@@ -1,6 +1,6 @@
 import { API_AVATAR } from '../../routes/paths';
 
-interface UpdateAvatarResponse {
+export interface UpdateAvatarResponse {
   success: boolean;
   message: string;
 }

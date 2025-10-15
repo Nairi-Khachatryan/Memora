@@ -12,6 +12,7 @@ export const ChangePassForm: React.FC<Props> = ({
   confirmPassword,
   setConfirmPassword,
   handleChangePassword,
+  handleCancelChangePass,
 }) => {
   return (
     <>
@@ -52,6 +53,7 @@ export const ChangePassForm: React.FC<Props> = ({
           >
             Save
           </Button>
+          <Button onClick={handleCancelChangePass}>Cancel</Button>
         </Form>
       </Card>
     </>

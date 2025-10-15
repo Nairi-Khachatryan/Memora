@@ -2,15 +2,17 @@ import { NotificationTab } from './notifications/NotificationTab';
 import { ThemeContext } from '../../context/theme/themeContext';
 import { Class } from '../../utils/createShortClassname';
 import { PasswordTab } from './password/PasswordTab';
+import { useNavigate } from 'react-router-dom';
 import { ThemeTab } from './theme/ThemeTab';
+import { Account } from './account/Account';
+import React, { useContext } from 'react';
+import { Button, Card, Tabs } from 'antd';
 import s from './Settings.module.scss';
 import type { TabsProps } from 'antd';
-import { useContext } from 'react';
-import { Card, Tabs } from 'antd';
-import { Account } from './account/Account';
 
-export const Settings = () => {
+export const Settings: React.FC = () => {
   const { theme, handleChangeTheme } = useContext(ThemeContext);
+  const navigate = useNavigate();
 
   const items: TabsProps['items'] = [
     {
@@ -39,9 +41,12 @@ export const Settings = () => {
 
   return (
     <div className={Class(s, 'settingsContainer', theme)}>
-      <Card title="Settings" style={{ borderRadius: 0 }}>
-        <Tabs defaultActiveKey="1" items={items} />
+      <Card className={s.cardContainer} title="Settings">
+        <Tabs className={s.tabs} defaultActiveKey="1" items={items} />
       </Card>
+      <Button onClick={() => navigate(-1)} className={s.backButton}>
+        Back
+      </Button>
     </div>
   );
 };

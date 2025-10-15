@@ -1,7 +1,7 @@
+import UpdateAvatarForm from '../../components/updateAvatarForm/UpdateAvatarForm';
 import { updateAvatar } from '../../api/avatar/updateAvatar';
 import { useLocation, useNavigate } from 'react-router-dom';
 import type { UpdateAvatarInterface } from './types';
-import { Button, Card, Input, Space } from 'antd';
 import { useToast } from '../../hooks/useToast';
 import { useState } from 'react';
 import _ from 'lodash';
@@ -14,16 +14,36 @@ export const UpdateAvatar = () => {
   const foundAvatar = location.state;
   const { name, surname, role, email, phone, attribute } = location.state || {};
 
-  const [updatedValue, setUpdatedValue] = useState<UpdateAvatarInterface>({
-    name: name || '',
-    surname: surname || '',
-    role: role || '',
-    email: email || '',
-    phone: phone || '',
-    attribute: attribute || [],
-  });
+  const oldValue = {
+    name: foundAvatar.name,
+    surname: foundAvatar.surname,
+    role: foundAvatar.role,
+    email: foundAvatar.email,
+    phone: foundAvatar.phone,
+    attribute: foundAvatar.attribute
+      ? foundAvatar.attribute.map((a: { topic: string; value: string }) => ({
+          ...a,
+        }))
+      : [],
+  };
 
-  const handleChange = (key: string, value: string) => {
+  const [updatedValue, setUpdatedValue] = useState<UpdateAvatarInterface>(
+    _.cloneDeep({
+      name: name || '',
+      surname: surname || '',
+      role: role || '',
+      email: email || '',
+      phone: phone || '',
+      attribute: attribute
+        ? attribute.map((a: { topic: string; value: string }) => ({ ...a }))
+        : [],
+    })
+  );
+
+  const handleChange = <K extends keyof UpdateAvatarInterface>(
+    key: string,
+    value: UpdateAvatarInterface[K]
+  ) => {
     setUpdatedValue((prev) => ({ ...prev, [key]: value }));
   };
 
@@ -33,14 +53,13 @@ export const UpdateAvatar = () => {
     value: string
   ) => {
     const newAttr = [...(updatedValue.attribute || [])];
-    newAttr[index][field] = value;
-    handleChange('attribute', newAttr as any);
+    newAttr[index] = { ...newAttr[index], [field]: value };
+    handleChange('attribute', newAttr);
   };
 
   const handleSubmit = async () => {
     const { name, surname, email, role, phone, attribute } = updatedValue;
 
-    // Manual required validation
     if (!name || !surname || !email || !role || !phone) {
       return showToast({ type: 'error', message: 'All fields are required' });
     }
@@ -57,9 +76,10 @@ export const UpdateAvatar = () => {
     }
 
     const { _id } = foundAvatar;
-    const oldValue = { name, surname, phone, role, email };
 
     if (_.isEqual(updatedValue, oldValue)) {
+      console.log('Old Value:', oldValue);
+      console.log('Updated Value:', updatedValue);
       return showToast({ type: 'error', message: 'Nothing to Update' });
     }
 
@@ -74,70 +94,11 @@ export const UpdateAvatar = () => {
   };
 
   return (
-    <Card
-      title="Update Avatar Info"
-      style={{ maxWidth: 400, margin: '40px auto', borderRadius: 8 }}
-    >
-      <Space direction="vertical" size="middle" style={{ width: '100%' }}>
-        <Input
-          placeholder="Name"
-          value={updatedValue.name}
-          onChange={(e) => handleChange('name', e.target.value)}
-        />
-
-        <Input
-          placeholder="Surname"
-          value={updatedValue.surname}
-          onChange={(e) => handleChange('surname', e.target.value)}
-        />
-
-        <Input
-          placeholder="Role"
-          value={updatedValue.role}
-          onChange={(e) => handleChange('role', e.target.value)}
-        />
-
-        <Input
-          placeholder="Email"
-          type="email"
-          value={updatedValue.email}
-          onChange={(e) => handleChange('email', e.target.value)}
-        />
-
-        <Input
-          placeholder="Phone"
-          value={updatedValue.phone}
-          onChange={(e) => handleChange('phone', e.target.value)}
-        />
-
-        {Array.isArray(updatedValue.attribute) &&
-          updatedValue.attribute.map((item: any, index: number) => (
-            <Space key={item._id} style={{ width: '100%' }}>
-              <Input
-                placeholder="Topic"
-                value={item.topic}
-                onChange={(e) =>
-                  handleAttributeChange(index, 'topic', e.target.value)
-                }
-              />
-              <Input
-                placeholder="Value"
-                value={item.value}
-                onChange={(e) =>
-                  handleAttributeChange(index, 'value', e.target.value)
-                }
-              />
-            </Space>
-          ))}
-
-        <Button type="primary" block onClick={handleSubmit}>
-          Update
-        </Button>
-
-        <Button type="primary" ghost block onClick={() => navigate(-1)}>
-          Back
-        </Button>
-      </Space>
-    </Card>
+    <UpdateAvatarForm
+      handleAttributeChange={handleAttributeChange}
+      handleChange={handleChange}
+      handleSubmit={handleSubmit}
+      updatedValue={updatedValue}
+    />
   );
 };
