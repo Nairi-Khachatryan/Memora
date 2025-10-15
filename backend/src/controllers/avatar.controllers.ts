@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import { Avatar } from '../models/avatar.model.ts';
+import { Avatar } from '../models/avatar.model.js';
 import mongoose from 'mongoose';
 
 export const createAvatar = async (req: Request, res: Response) => {

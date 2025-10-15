@@ -4,7 +4,7 @@ import {
   getAvatar,
   deleteAvatar,
   updateAvatar,
-} from '../controllers/avatar.controllers.ts';
+} from '../controllers/avatar.controllers.js';
 
 export const avatarRouter = express.Router();
 

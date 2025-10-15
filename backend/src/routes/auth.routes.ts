@@ -5,7 +5,7 @@ import {
   signUp,
   signIn,
   changePassword,
-} from '../controllers/auth.controllers.ts';
+} from '../controllers/auth.controllers.js';
 
 authRouter.post('/signUp', signUp);
 authRouter.post('/signIn', signIn);

@@ -1,7 +1,7 @@
-import { Avatar } from '../models/avatar.model.ts';
+import { Avatar } from '../models/avatar.model.js';
 import type { Request, Response } from 'express';
-import { Block } from '../models/block.model.ts';
-import { User } from '../models/user.model.ts';
+import { Block } from '../models/block.model.js';
+import { User } from '../models/user.model.js';
 import mongoose from 'mongoose';
 
 export const updateUserInfo = async (req: Request, res: Response) => {

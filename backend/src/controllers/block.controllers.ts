@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import { Block } from '../models/block.model.ts';
+import { Block } from '../models/block.model.js';
 import mongoose from 'mongoose';
 
 export const createBlock = async (req: Request, res: Response) => {

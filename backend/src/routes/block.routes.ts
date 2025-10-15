@@ -4,7 +4,7 @@ import {
   getBlock,
   updateBlock,
   deleteBlock,
-} from '../controllers/block.controllers.ts';
+} from '../controllers/block.controllers.js';
 
 export const blockRouter = express.Router();
 

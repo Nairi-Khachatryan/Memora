@@ -3,7 +3,7 @@ import {
   getMe,
   deleteAccount,
   updateUserInfo,
-} from '../controllers/user.controllers.ts';
+} from '../controllers/user.controllers.js';
 
 export const userRouter = express.Router();
 
