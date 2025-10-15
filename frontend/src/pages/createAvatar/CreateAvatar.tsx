@@ -23,7 +23,7 @@ export const CreateAvatar: React.FC = () => {
       ...values,
       ownerId,
       idx: location.state.idx,
-      attribute: values.attribute,
+      attribute: values.attribute || [],
     });
 
     showToast({

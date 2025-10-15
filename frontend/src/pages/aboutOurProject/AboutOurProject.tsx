@@ -1,12 +1,15 @@
-
+import { CircleItem } from '../../components/circleItem/CircleItem';
 import { ArcherContainer, ArcherElement } from 'react-archer';
+import { ROUTES } from '../../routes/routhPath';
 import { Typography, Card, Space } from 'antd';
+import { useNavigate } from 'react-router-dom';
 import s from './AboutOurProject.module.scss';
 import React from 'react';
 
 const { Title, Paragraph } = Typography;
 
 export const AboutOurProject: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <div className={s.aboutPage}>
       <ArcherContainer strokeColor="black" strokeWidth={2}>
@@ -68,15 +71,13 @@ export const AboutOurProject: React.FC = () => {
 
           <div style={{ display: 'flex', gap: '100px', marginTop: '150px' }}>
             <ArcherElement id="targetAvatar">
-              <div style={{ padding: '10px', border: '1px solid blue' }}>
-                Avatar Target
+              <div onClick={() => navigate(ROUTES.HOME_PATH)}>
+                <CircleItem idx={1} item="+" />
               </div>
             </ArcherElement>
 
             <ArcherElement id="targetBlock">
-              <div style={{ padding: '10px', border: '1px solid green' }}>
-                Block Target
-              </div>
+              <div className={s.blockType}>Block Target</div>
             </ArcherElement>
           </div>
         </div>
