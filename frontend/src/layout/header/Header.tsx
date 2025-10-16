@@ -9,7 +9,7 @@ import { ROUTES } from '../../routes/routhPath';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import { useContext } from 'react';
-import './Header.module.scss';
+import s from './Header.module.scss';
 
 export const Header = () => {
   const isAuth = useAuth();
@@ -24,7 +24,7 @@ export const Header = () => {
   }
 
   return (
-    <header>
+    <header className={s.header}>
       <div>
         {theme === 'light' ? <Logo src={logoLight} /> : <Logo src={logoDark} />}
       </div>
