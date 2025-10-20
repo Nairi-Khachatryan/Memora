@@ -1,10 +1,5 @@
-import React from 'react'
+import React from 'react';
 
-export const ToDo = () => {
-  return (
-    <div>
-      Todo
-    </div>
-  )
-}
-
+export const ToDo: React.FC = () => {
+  return <div>Todo</div>;
+};
