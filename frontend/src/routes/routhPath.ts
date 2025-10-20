@@ -1,8 +1,10 @@
 export const ROUTES = {
   HOME_PATH: '/',
+  TO_DO: '/to-do',
   SIGN_IN: '/sign-in',
   SIGN_UP: '/sign-up',
   PROFILE: '/profile',
+  NOT_FOUND_PAGE: '*',
   SETTINGS: '/settings',
   DETAIL_INFO: '/detail-info',
   EDIT_PROFILE: '/edit-profile',

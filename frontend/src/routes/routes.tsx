@@ -1,6 +1,7 @@
 import { AvatarDetailInfo } from '../pages/avatarDetailInfo/AvatarDetailInfo';
 import { AboutOurProject } from '../pages/aboutOurProject/AboutOurProject';
 import { BlockDetailInfo } from '../pages/blockDetailInfo/BlockDetailInfo';
+import { NotFoundPage } from '../components/notFoundPage/NotFoundPage';
 import { CreateAvatar } from '../pages/createAvatar/CreateAvatar';
 import { UpdateAvatar } from '../pages/updateAvatar/UpdateAvatar';
 import { EditProfile } from '../pages/editProfile/EditProfile';
@@ -14,6 +15,7 @@ import { AppLayout } from '../layout/AppLayout';
 import ProtectedRoute from './ProtectedRoute';
 import { Home } from '../pages/home/Home';
 import { ROUTES } from './routhPath';
+import { ToDo } from '../pages/toDo/ToDo';
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +38,10 @@ export const router = createBrowserRouter([
       {
         path: ROUTES.ABOUT_OUR_PROJECT,
         element: <AboutOurProject />,
+      },
+      {
+        path: ROUTES.NOT_FOUND_PAGE,
+        element: <NotFoundPage />,
       },
       {
         element: <ProtectedRoute />,
@@ -71,6 +77,10 @@ export const router = createBrowserRouter([
           {
             path: ROUTES.UPDATE_AVATAR,
             element: <UpdateAvatar />,
+          },
+          {
+            path: ROUTES.TO_DO,
+            element: <ToDo />,
           },
         ],
       },

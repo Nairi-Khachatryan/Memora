@@ -25,6 +25,13 @@ export const SettingsContainer: React.FC = () => {
           >
             Edit Profile
           </Button>
+
+          <Button
+            onClick={() => navigate(ROUTES.TO_DO)}
+            icon={<EditOutlined />}
+          >
+            To-Do
+          </Button>
         </Space>
       </Card>
     </>
