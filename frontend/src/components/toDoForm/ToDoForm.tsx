@@ -1,4 +1,4 @@
-import { ToDoList } from '../toDoList/toDoList';
+import { ToDoListItem } from '../toDoList/ToDoListItem';
 import React, { useState } from 'react';
 import s from './ToDoForm.module.scss';
 import { Input, Button } from 'antd';
@@ -40,7 +40,7 @@ export const ToDoForm: React.FC = () => {
 
       {toDos.length ? (
         toDos.map((toDo) => (
-          <ToDoList key={toDo.id} toDo={toDo} setToDoes={setToDoes} />
+          <ToDoListItem key={toDo.id} toDo={toDo} setToDoes={setToDoes} />
         ))
       ) : (
         <p className={s.noTasks}>No tasks yet</p>

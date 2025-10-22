@@ -13,7 +13,7 @@ interface Props {
   setToDoes: React.Dispatch<React.SetStateAction<ToDoType[]>>;
 }
 
-export const ToDoList: React.FC<Props> = ({ toDo, setToDoes }) => {
+export const ToDoListItem: React.FC<Props> = ({ toDo, setToDoes }) => {
   const handleDeleteToDo = (id: string) => {
     setToDoes((prev) => prev.filter((toDo) => toDo.id !== id));
   };
