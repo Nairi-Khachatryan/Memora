@@ -1,25 +1,18 @@
+import type { ToDoListItemProps } from './types';
 import s from './ToDoList.module.scss';
 import type React from 'react';
 import { Button } from 'antd';
 
-interface ToDoType {
-  id: string;
-  text: string;
-  isComplete: boolean;
-}
-
-interface Props {
-  toDo: ToDoType;
-  setToDoes: React.Dispatch<React.SetStateAction<ToDoType[]>>;
-}
-
-export const ToDoListItem: React.FC<Props> = ({ toDo, setToDoes }) => {
+export const ToDoListItem: React.FC<ToDoListItemProps> = ({
+  toDo,
+  setToDos,
+}) => {
   const handleDeleteToDo = (id: string) => {
-    setToDoes((prev) => prev.filter((toDo) => toDo.id !== id));
+    setToDos((prev) => prev.filter((toDo) => toDo.id !== id));
   };
 
   const handleComplete = (id: string) => {
-    setToDoes((prev) =>
+    setToDos((prev) =>
       prev.map((toDo) =>
         toDo.id === id ? { ...toDo, isComplete: !toDo.isComplete } : toDo
       )
