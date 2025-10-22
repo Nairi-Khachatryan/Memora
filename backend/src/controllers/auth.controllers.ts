@@ -5,16 +5,15 @@ import bcrypt from 'bcrypt';
 export const signUp = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
-  const candidate = await User.findOne({ email });
-
-  if (candidate) {
-    return res.status(409).json({
-      success: false,
-      message: `Account with this email (${email}) already exists`,
-    });
-  }
-
   try {
+    const candidate = await User.findOne({ email });
+
+    if (candidate) {
+      return res.status(409).json({
+        success: false,
+        message: `Account with this email (${email}) already exists`,
+      });
+    }
     const passwordHash = await bcrypt.hash(password, 10);
     const user = new User({
       email,
@@ -105,11 +104,9 @@ export const changePassword = async (req: Request, res: Response) => {
   } catch (error) {
     if (error instanceof Error) console.log(error.message);
 
-    return res
-      .status(500)
-      .json({
-        success: false,
-        message: 'Server error while changing password',
-      });
+    return res.status(500).json({
+      success: false,
+      message: 'Server error while changing password',
+    });
   }
 };

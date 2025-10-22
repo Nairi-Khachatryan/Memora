@@ -1,8 +1,5 @@
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5051';
 
-
-console.log(import.meta.env, 'env');
-
 export const API_AUTH = `${BASE_URL}/auth`;
 export const API_BLOCK = `${BASE_URL}/block`;
 export const API_AVATAR = `${BASE_URL}/avatar`;
