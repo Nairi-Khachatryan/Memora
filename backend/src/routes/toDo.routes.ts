@@ -1,5 +1,5 @@
 import {
-  getToDo,
+  getToDoes,
   createToDo,
   updateToDo,
   deleteToDo,
@@ -8,7 +8,7 @@ import express from 'express';
 
 export const toDoRouter = express.Router();
 
-toDoRouter.get('getToDo/:id', getToDo);
-toDoRouter.delete('deleteToDo/:id', deleteToDo);
-toDoRouter.post('updateToDo/:id', updateToDo);
-toDoRouter.post('createToDo', createToDo);
+toDoRouter.get('/getToDo/:id', getToDoes);
+toDoRouter.post('/createToDo', createToDo);
+toDoRouter.post('/updateToDo/:id', updateToDo);
+toDoRouter.delete('/deleteToDo/:id', deleteToDo);

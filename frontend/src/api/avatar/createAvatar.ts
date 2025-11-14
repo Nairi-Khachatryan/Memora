@@ -1,6 +1,5 @@
-import { API_AVATAR } from '../../routes/paths';
-// import type { AvatarType } from '../../types/avatarType';
 import type { AvatarType } from '../../pages/avatarDetailInfo/AvatarDetail.types';
+import { API_AVATAR } from '../../routes/paths';
 
 interface CreateAvatarRes {
   success: boolean;

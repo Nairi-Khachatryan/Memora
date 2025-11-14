@@ -1,28 +1,35 @@
+import { deleteToDo } from '../../../api/toDo/deleteToDo';
 import { useToast } from '../../../hooks/useToast';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import type { ToDoListItemProps } from './types';
 import s from './ToDoList.module.scss';
 import { useState } from 'react';
-import type React from 'react';
 import { Button } from 'antd';
+import type React from 'react';
 
-export const ToDoListItem: React.FC<ToDoListItemProps> = ({
-  toDo,
-  setToDos,
-}) => {
+export const ToDoListItem: React.FC<ToDoListItemProps> = ({ toDo }) => {
   const [editMode, setEditMode] = useState(false);
   const [editInputValue, setEditInputValue] = useState(toDo.text);
   const { showToast } = useToast();
+  const queryClient = useQueryClient();
+
+  // ✅ delete mutation
+  const { mutate: removeToDo } = useMutation({
+    mutationFn: deleteToDo,
+    onSuccess: (res) => {
+      if (!res.success) {
+        showToast({ type: 'error', message: res.message });
+        return;
+      }
+
+      showToast({ type: 'success', message: res.message });
+      // 🔥 Обновляем список
+      queryClient.invalidateQueries({ queryKey: ['toDoes'] });
+    },
+  });
 
   const handleDeleteToDo = (id: string) => {
-    setToDos((prev) => prev.filter((toDo) => toDo.id !== id));
-  };
-
-  const handleComplete = (id: string) => {
-    setToDos((prev) =>
-      prev.map((toDo) =>
-        toDo.id === id ? { ...toDo, isComplete: !toDo.isComplete } : toDo
-      )
-    );
+    removeToDo(id);
   };
 
   const handleEditToDo = (id: string) => {
@@ -32,9 +39,6 @@ export const ToDoListItem: React.FC<ToDoListItemProps> = ({
     if (oldValue === currentValue) {
       return showToast({ type: 'error', message: 'Nothing to update' });
     }
-
-    console.log(oldValue, currentValue);
-    console.log(id);
   };
 
   return (
@@ -48,7 +52,7 @@ export const ToDoListItem: React.FC<ToDoListItemProps> = ({
           <Button danger type="primary" onClick={() => setEditMode(false)}>
             Cancel
           </Button>
-          <Button onClick={() => handleEditToDo(toDo.id)} type="primary">
+          <Button onClick={() => handleEditToDo(toDo._id)} type="primary">
             Save
           </Button>
         </>
@@ -59,8 +63,7 @@ export const ToDoListItem: React.FC<ToDoListItemProps> = ({
               type="checkbox"
               className={s.checkbox}
               checked={toDo.isComplete}
-              onChange={() => toDo.isComplete}
-              onClick={() => handleComplete(toDo.id)}
+              readOnly
             />
             <h1 className={`${s.text} ${toDo.isComplete ? s.completed : ''}`}>
               {toDo.text}
@@ -68,7 +71,7 @@ export const ToDoListItem: React.FC<ToDoListItemProps> = ({
           </div>
           <div>
             <Button
-              onClick={() => handleDeleteToDo(toDo.id)}
+              onClick={() => handleDeleteToDo(toDo._id)}
               type="primary"
               danger
             >
